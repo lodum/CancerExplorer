@@ -19,20 +19,20 @@ This brings along:
 - limited information retrieval ( for development purposes only a test RDF repository can be queried) 
 - long list of issues (refresh your browser view after queries)
 
-		- Issue list:
+		- Issue list: https://github.com/lodum/CancerExplorer/issues
 
 
 
 
 ## Screenshot
-![Screenshot application][1]
+![CancerExplorer application][1]
 
 
 
-## Contact
+## Further information
 - Contact: http://lodum.de/contact/
 - Website: http://lodum.de/about/
 
 -----
 
-[1]: 
+[1]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/screenshot_overview.png 
