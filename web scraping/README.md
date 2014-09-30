@@ -19,7 +19,7 @@ or other saving work load reasons
 **Cons**
 - can be against some terms of use of an website
 - high programming workload
-- not stable -> if the website changes the application is broken or even worse can get wrong results 
+- not stable -> if the website changes, the application can brake or even more worse it can get wrong results 
 
 -----
 
