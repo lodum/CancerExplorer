@@ -12,7 +12,7 @@ using the chain linking of different variables that is encoded as linked data.
 
 The application is a result of an external semester contribution, which was mainly focused on the modelling part (domain ontology, information aggregation).  
 
-The version **(30.09.2014)** is in a verly early development step.
+The version **(30.09.2014)** is in a very early development step.
 
 This brings along:
 
