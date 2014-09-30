@@ -4,7 +4,7 @@
 ## Introduction
 The background information about these relationships is derived from monographies of The International Agency for Research on Cancer (IARC http://www.iarc.fr/).
 Hereby, the information exists as plain text and has to be worked out by analysing and structuring the textual information in order to transform it into 
-the domain ontology structure. The ontology creation was conducted by using the open-source ontology editor Protégé.
+the domain ontology structure. The ontology creation was conducted by using the free, open-source ontology editor Protégé (http://protege.stanford.edu/).
 
 
 ## Use case
