@@ -51,7 +51,7 @@
 
 
 <style>
-
+<!--Info from hover box>-->
 .info {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
@@ -61,6 +61,20 @@
     border-radius: 5px;
 }
 .info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+
+.info2 {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info2 h4 {
     margin: 0 0 5px;
     color: #777;
 }
@@ -162,7 +176,7 @@
 	</style>
 	
 
-<title>Cancer cause-effect Explorer</title>
+<title>CancerExplorer</title>
 
 
 </head>
@@ -189,7 +203,7 @@
 			
 			<li onclick="Sparql_panel_edit()"><a href="#">SPARQL Query</a></li>
             <li onclick="Query()"><a href="#">Explore cancer incidents</a></li>
-			<li onclick="mylocation();Querylocation();"><a href="#">Explore cause-effect relations</a></li>
+			<li onclick="Explore_cause_effect();"><a href="#">Explore cause-effect relations</a></li>
 			<li onclick="mylocation()"><a href="#">Get my location</a></li>
 			
 			
@@ -262,7 +276,7 @@
 	<button type="button" onclick="ini_sir()" class="btnStyle span3">Visualize SIR</button>
 	<button type="button" onclick="ini_cilower()" class="btnStyle span3">Visualize CI 95 Lower Level</button> 
 	<button type="button" onclick="ini_ciupper()" class="btnStyle span3">Visualize CI 95 Upper Level</button>
-	<button type="button" onclick="ini_carcinogen()" class="btnStyle span3">Example information for carcinogens -Please just choose a cancer type -Works currently for Lung and Bladder Cancer!</button>
+	
 </div>
 
 
@@ -301,6 +315,31 @@
 
 
 
+<div id="Cause_Effect_Panel"> 
+
+<br> <b><font size=4px>Get more information about cancer causes:  </b></font>
+	<br>
+	<div style="padding-top:15px">
+	<b><font size=3px>Choose a cancer type:</b></font>
+	</div>
+	<div style="border: thin solid #000000; border-bottom-width: 0px;">
+	</div>
+	<div style="padding-top:10px">
+		<input type="radio" id="sirbladdercancer" class="obsType" name="obsType" value="C67" checked="checked">&nbsp;Bladder cancer &nbsp;
+		<input type="radio" id="sirlungcancer" class="obsType" name="obsType" value="C34">&nbsp;Lung cancer &nbsp;
+		<input type="radio" id="sirleukemiacancer" class="obsType" name="obsType" value="C91-C95">&nbsp;Leukemia &nbsp;&nbsp;&nbsp;<br>
+		<input type="radio" id="sirnasalcancer" class="obsType" name="obsType" value="C00-C14">&nbsp;Nasal cavity and paranasal sinus &nbsp;		
+	</div>
+	<br>
+	<button type="button" onclick="ini_carcinogen()" class="btnStyle span3">Information about carcinogens of a type of cancer
+	- Please choose a cancer type </button>
+
+
+</div>
+
+
+
+
  
 
 </div>
@@ -317,6 +356,7 @@ $('#year_list').click(function(){
 var sir_cancer
 var sir_year
 var sir_gender
+var sir_cancer_add
 var check_choice="SIR";
 $(document).ready(function(){
 
@@ -324,7 +364,7 @@ sir_cancer = $("input:radio[name ='obsType']:checked").val()
 sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
 
-visualize_sir(sir_cancer,sir_year,sir_gender,check_choice);
+visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
 });
 
 }
@@ -338,6 +378,7 @@ $('#year_list').click(function(){
 var sir_cancer
 var sir_year
 var sir_gender
+var sir_cancer_add
 var check_choice="CIlower";
 $(document).ready(function(){
 
@@ -346,7 +387,7 @@ sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
 
 
-visualize_sir(sir_cancer,sir_year,sir_gender,check_choice);
+visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
 });
 
 }
@@ -361,6 +402,7 @@ $('#year_list').click(function(){
 var sir_cancer
 var sir_year
 var sir_gender
+var sir_cancer_add
 var check_choice="CIupper";
 $(document).ready(function(){
 
@@ -369,7 +411,7 @@ sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
 
 
-visualize_sir(sir_cancer,sir_year,sir_gender,check_choice);
+visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
 });
 
 }
@@ -390,21 +432,25 @@ $(document).ready(function(){
 sir_cancer = $("input:radio[name ='obsType']:checked").val()
 if (sir_cancer=="C67"){
 sir_cancer="Bladder";
+sir_cancer_add="Cancer";
 }
 if (sir_cancer=="C34"){
 sir_cancer="Lung";
+sir_cancer_add="Cancer";
 }
 if (sir_cancer=="C00-C14"){
 sir_cancer="Nasal_cavity_and_paranasal_sinus";
+sir_cancer_add="";
 }
 if (sir_cancer=="C91-C95"){
 sir_cancer="Leukemia";
+sir_cancer_add="";
 }
 sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
 
 
-visualize_sir(sir_cancer,sir_year,sir_gender,check_choice);
+visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
 });
 
 }
@@ -474,6 +520,9 @@ var sidebarLinks = L.control.sidebar('sidebarLinks', {
     position: 'right'
 });
 
+var Cause_Effect_Panel = L.control.sidebar('Cause_Effect_Panel', {
+    position: 'right'
+});
 
 	
 
@@ -489,16 +538,23 @@ var sidebarLinks = L.control.sidebar('sidebarLinks', {
 
 
 
-
+// Add sidebar controls to the map
 
 
 map.addControl(SPARQLPanel);
 map.addControl(SPARQLPanel_edit);
-
+map.addControl(Cause_Effect_Panel);
 
 map.addControl(sir_sidebar);
 map.addControl(sidebarLinks);
 
+
+
+// Sidebar control functions
+function Explore_cause_effect()
+{
+Cause_Effect_Panel.show();
+}
 
 
 function Sparql_panel()
@@ -559,8 +615,8 @@ L.geoJson(WLBoundaries, {style: style}).addTo(map);
 		};
 
 		info.update = function (props) {
-			this._div.innerHTML = '<h4>Westphalen Lippe</h4>' +  (props ?
-				'<b>NAME: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
+			this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
+				'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
 				: 'Hover over a state');
 		};
 
@@ -579,17 +635,7 @@ L.geoJson(WLBoundaries, {style: style}).addTo(map);
 			                  '#FFEDA0';
 		}
 		
-		function test() {
-		
-	alert(WLBoundaries.features[1].properties.Name);
-     
-  
-
-    }
-
-			
-			
-
+	
 
 		function style(feature) {
 			return {

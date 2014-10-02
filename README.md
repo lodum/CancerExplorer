@@ -1,7 +1,7 @@
 # CancerExplorer
 
 
-## Spatial Cause-Effect Relationships in Cancer Explorer
+## Spatial Cancer Cause-Effect Relationships Explorer
 
 The project deals with cancer related cause-effect relationships. Moreover, which aim is to create a
 web-based assistance system for the exploration of cause-effect relationships of selected cancer
@@ -19,7 +19,8 @@ This brings along:
 - Limited information retrieval ( for development purposes only a test RDF repository can be queried) 
 - Long list of issues (refresh your browser view after queries)
 
-		- Issue list: https://github.com/lodum/CancerExplorer/issues
+		- Issue list
+					https://github.com/lodum/CancerExplorer/issues
 
 
 

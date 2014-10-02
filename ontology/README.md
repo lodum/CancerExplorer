@@ -19,9 +19,9 @@ with classes, properties and instances cancer related relationships. Relations l
 carcinogen causes primarily a certain type of cancer and structures information like about emitter,
 transport ways, exponent locations and exponent groups.
 
+This ontology can be re-used fully or in parts to express cause-effect relationships or as a common ground for converting other cancer data sources. 
 
 ## Features
-This ontology can be re-used fully or in parts to express cause-effect relationships or as a common ground for converting other cancer data sources. 
 
 It represents information about:
 - Carcinogens

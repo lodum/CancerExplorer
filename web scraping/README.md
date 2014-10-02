@@ -3,8 +3,8 @@
 
 ## Use case
 
-e.g. no API or other interfaces are available for information retrieval e.g. pure HTML embedded information
-or other saving work load reasons 
+e.g. no API or other interfaces are available for information retrieval e.g. in the case of pure HTML embedded information
+or motivated by other saving workload reasons 
 
 
 
@@ -14,7 +14,7 @@ or other saving work load reasons
 **Pros**
 - can save workload
 - data can be streamed and further processed
-- sometimes the only way to retrieve big data sets
+- sometimes the only way to retrieve big data sets 
 
 **Cons**
 - can be against some terms of use of an website

@@ -1,7 +1,8 @@
 
 
 
-function visualize_sir(sir_cancer,sir_year,sir_gender,check_choice){
+function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice){
+
 
 	var endpoint="http://10.10.6.8:8080/openrdf-sesame/repositories/cancerdata";
 		//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
@@ -24,7 +25,8 @@ function visualize_sir(sir_cancer,sir_year,sir_gender,check_choice){
 }
 
 if (check_choice=="Carcinogen"){
-		request.query="PREFIX  rdfs:<http://www.w3.org/2000/01/rdf-schema#> Select ?a WHERE {?a a <http://www.example.org/Carcinogenes_"+sir_cancer+"Cancer> } "; //Limit 20
+
+		request.query="PREFIX  rdfs:<http://www.w3.org/2000/01/rdf-schema#> Select ?a WHERE {?a a <http://www.example.org/Carcinogenes_"+sir_cancer+sir_cancer_add+"> } "; //Limit 20
 }
 alert(request.query);
 
@@ -41,7 +43,8 @@ alert(request.query);
 //	};
 
 	//handles the ajax response
-	function callbackFunc(results) {		
+	function callbackFunc(results) {
+
 		//Clear result HTML div
 		$("#resultdiv").empty();	   
 		//result is a json object http://de.wikipedia.org/wiki/JavaScript_Object_Notation
@@ -128,6 +131,7 @@ map.removeLayer(WLBoundaries);
 
 
 
+
 //map.removeLayer(WL_boundary);
 
 var geojson_new = L.geoJson(WLBoundaries_new, {
@@ -150,18 +154,20 @@ L.tileLayer('http://{s}.tiles.mapbox.com/{id}/{z}/{x}/{y}.png', {
     attribution: 'SIR',
 	setOpacity:10,
 }).addTo(map);
-L.geoJson(WLBoundaries_new, {style: style_new}).addTo(map);
+geojsonlayer=L.geoJson(WLBoundaries_new, {style: style_new});
+geojsonlayer.addTo(map);
+
+
+
 
 function getColor(d) {
-			return d > 2 ? '#7b0a04' :
-			       d > 1 ? '#c6140c' :
-			       d > 0.7 ? '#c6840c' :
-			       d > 0.3  ? '#062e05' :
-			       d > 0.15   ? '#145612' :
-				   d > 0   ? '#ffffff' :
-			      
-			     
-			                  '#ffffff';
+			return d > 2.00 ? '#993404' :
+			       d > 1.00 ? '#d95f0e' :
+			       d > 0.70 ? '#fe9929' :
+			       d > 0.30  ? '#fec44f' :
+			       d > 0.15   ? '#fee391' :
+				   d > 0   ? '#ffffd4' :			     
+			                   '#ffffff';
 		}
 
 		
@@ -228,16 +234,18 @@ function resetHighlight2(e) {
 
 		var legend2 = L.control({position: 'bottomright'});
 
-		legend2.onAdd = function (map) {
-
+legend2.onAdd = function (map) {
+var grades2
+var labels2
 			var div2 = L.DomUtil.create('div2', 'info legend'),
-				grades2 = [0, 0.15, 0.3, 0.7, 1, 2],
-				labels2 = [],
-				from, to;
-
-			for (var i = 1; i < grades2.length; i++) {
-				from = grades2[i];
-				to = grades2[i + 1];
+			grades2 = [0, 0.15, 0.3, 0.7, 1, 2],
+			labels2 = [],
+			
+			from, to;
+	for (var i2 = 1; i2 < grades2.length; i2++) {
+				var from = grades2[i2];
+				var to = grades2[i2 + 1];
+				
 
 				labels2.push(
 					'<i style="background:' + getColor(from + 0) + '"></i> ' +
@@ -246,7 +254,7 @@ function resetHighlight2(e) {
 
 			div2.innerHTML = labels2.join('<br>');
 			return div2;
-		};
+};
 
 		legend2.addTo(map);
 
@@ -257,12 +265,96 @@ function resetHighlight2(e) {
 
 
 
-sir_cancer=0;
-sir_year=0;
-sir_gender=0;
 
-		
-		
+sir_cancer="";
+sir_year="";
+sir_gender="";
+sir_cancer_add="";
+
+function style2(feature2) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColor(feature2.properties.SIR)
+			};
+		}
+
+
+
+
+	
+		function highlightFeature2(e2) {
+			var layer2 = e2.target;
+
+			layer2.setStyle({
+				weight: 5,
+				color: '#666',
+				dashArray: '',
+				fillOpacity: 0.7
+			});
+
+			if (!L.Browser.ie && !L.Browser.opera) {
+				layer2.bringToFront();
+			}
+
+			info2.update(layer2.feature.properties);
+		}
+
+		var geojson2;
+
+		function resetHighlight2(e2) {
+			geojson2.resetStyle(e2.target);
+			info2.update();
+		}
+
+		function zoomToFeature(e2) {
+			map.fitBounds(e.target.getBounds());
+		}
+
+		function onEachFeature2(feature2, layer2) {
+			layer2.on({
+				mouseover: highlightFeature2,
+				mouseout: resetHighlight2,
+				click: zoomToFeature
+			});
+		}
+
+		geojson2 = L.geoJson(WLBoundaries_new, {
+			style: style2,
+			onEachFeature: onEachFeature2
+		}).addTo(map);
+
+		map.attributionControl.addAttribution('Text?');
+
+
+
+// Add Hover information box
+
+//Adding map interaction
+
+		// control that shows state info on hover
+		var info2 = L.control();
+
+		info2.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info2');
+			this.update();
+			return this._div;
+		};
+
+		info2.update = function (props2) {
+			this._div.innerHTML = '<h4> Region Westphalen Lippe</h4>' +  (props2 ?
+				'<b>Municipality: ' + props2.Name + '</b><br />SIR: ' + props2.SIR + ''
+				: 'Hover over a state');
+		};
+
+		info2.addTo(map);
+
+
+
+
 		
 		
 		
