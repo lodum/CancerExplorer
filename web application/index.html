@@ -49,6 +49,9 @@
 <!--Add functions for the sparql panel/>-->
 <script type="text/javascript" src="ibraries/sparqlpanel.js"></script>
 
+<!--Validation"/>-->
+<script type="text/javascript" src="libraries/validation.js"></script>
+
 
 <style>
 <!--Info from hover box>-->
@@ -272,7 +275,7 @@
 	</div>
 		
 	<br>
-	<button type="button" onclick="" class="btnStyle span3">Clear</button>
+	<button type="button" onclick="test()" class="btnStyle span3">Clear</button>
 	<button type="button" onclick="ini_sir()" class="btnStyle span3">Visualize SIR</button>
 	<button type="button" onclick="ini_cilower()" class="btnStyle span3">Visualize CI 95 Lower Level</button> 
 	<button type="button" onclick="ini_ciupper()" class="btnStyle span3">Visualize CI 95 Upper Level</button>
@@ -363,8 +366,9 @@ $(document).ready(function(){
 sir_cancer = $("input:radio[name ='obsType']:checked").val()
 sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
-
+if (sir_input_check()==true){
 visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
+}
 });
 
 }
@@ -379,15 +383,16 @@ var sir_cancer
 var sir_year
 var sir_gender
 var sir_cancer_add
-var check_choice="CIlower";
+var check_choice="CI_lower_level";
 $(document).ready(function(){
 
 sir_cancer = $("input:radio[name ='obsType']:checked").val()
 sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
 
-
+if (sir_input_check()==true){
 visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
+}
 });
 
 }
@@ -403,15 +408,16 @@ var sir_cancer
 var sir_year
 var sir_gender
 var sir_cancer_add
-var check_choice="CIupper";
+var check_choice="CI_upper_level";
 $(document).ready(function(){
 
 sir_cancer = $("input:radio[name ='obsType']:checked").val()
 sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
 
-
+if (sir_input_check()==true){
 visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
+}
 });
 
 }
@@ -449,8 +455,9 @@ sir_cancer_add="";
 sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
 
-
+if (sir_input_check()==true){
 visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
+}
 });
 
 }
@@ -579,7 +586,11 @@ SPARQLPanel_edit.show();
 
 //add Geojson to the map
 
-
+function test()
+{
+map.removeLayer(WL_boundary);
+map.removeLayer(geojsonadd);
+}
 
 		
 	
@@ -588,12 +599,13 @@ SPARQLPanel_edit.show();
 
 //Adding municipality borders
 
-L.tileLayer('http://{s}.tiles.mapbox.com/{id}/{z}/{x}/{y}.png', {
+var WL_boundary= L.tileLayer('http://{s}.tiles.mapbox.com/{id}/{z}/{x}/{y}.png', {
     id: 'WL_boundary',
     attribution: 'GKZ',
 	setOpacity:10,
-}).addTo(map);
-L.geoJson(WLBoundaries, {style: style}).addTo(map);
+})
+WL_boundary.addTo(map);
+var geojsonadd=L.geoJson(WLBoundaries, {style: style}).addTo(map);
 
 
 

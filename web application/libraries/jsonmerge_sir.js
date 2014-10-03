@@ -4,6 +4,9 @@
 function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice){
 
 
+
+// connect to endpoint and send sparql query
+
 	var endpoint="http://10.10.6.8:8080/openrdf-sesame/repositories/cancerdata";
 		//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
 		var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
@@ -16,12 +19,12 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 		request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?SIR ?GKZ WHERE {?Municipality  <http://www.example.org/def/"+sir_cancer+"_"+sir_year+"_"+sir_gender+"_SIR> ?SIR. ?Municipality <http://www.example.org/def/GKZ> ?GKZ.   } "; //Limit 20
 }
 
-	if (check_choice=="CIlower"){
-		request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CIlower ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_lowerlimit> ?CIlower   } "; //Limit 20
+	if (check_choice=="CI_lower_level"){
+		request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_lower_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_lowerlimit> ?CI_lower_level   } "; //Limit 20
 }
 
-	if (check_choice=="CIupper"){
-		request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CIupper ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_upperlimit> ?CIupper   } "; //Limit 20
+	if (check_choice=="CI_upper_level"){
+		request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_upper_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_upperlimit> ?CI_upper_level   } "; //Limit 20
 }
 
 if (check_choice=="Carcinogen"){
@@ -76,12 +79,12 @@ alert(request.query);
 		$("#resultdiv").html(htmlString);
 
 
+ 
 
 
+var WLBoundaries_new
 
-
-
-var WLBoundaries_new = WLBoundaries;
+WLBoundaries_new = WLBoundaries;
 //sparql();
 //alert(WLBoundaries_new.features[1].properties.GKZ); 
 //alert(results.results.bindings[1].c.value)
@@ -98,17 +101,17 @@ for(var n=0;n<results.results.bindings.length;n++){
 	WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].SIR.value; // value from variable ?c see sparql query
 	//alert(WLBoundaries_new.features[i].properties.SIR);
 	}
-	if(check_choice=="CIlower"){
-	WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CIlower.value; // value from variable ?c see sparql query
+	if(check_choice=="CI_lower_level"){
+	WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_lower_level.value; // value from variable ?c see sparql query
 	//alert(WLBoundaries_new.features[i].properties.SIR);
 	}
-	if(check_choice=="CIupper"){
-	WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CIupper.value; // value from variable ?c see sparql query
+	if(check_choice=="CI_upper_level"){
+	WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_upper_level.value; // value from variable ?c see sparql query
 	//alert(WLBoundaries_new.features[i].properties.SIR);
 	}
 	
 	if(check_choice=="Carcinogen"){
-	WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CIupper.value; // value from variable ?c see sparql query
+	WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_upper_level.value; // value from variable ?c see sparql query
 	//alert(WLBoundaries_new.features[i].properties.SIR);
 	}
 	
@@ -126,7 +129,11 @@ for(var n=0;n<results.results.bindings.length;n++){
 map.removeLayer(geojson);
 map.removeControl(info);
 map.removeControl(legend);
+
+map.removeLayer(WLBoundaries_new);
 map.removeLayer(WLBoundaries);
+
+
 
 
 
@@ -149,11 +156,22 @@ function style_new(feature) {
 				fillColor: getColor(feature.properties.SIR)
 			};
 		}
-L.tileLayer('http://{s}.tiles.mapbox.com/{id}/{z}/{x}/{y}.png', {
+var geotilelayer=L.tileLayer('http://{s}.tiles.mapbox.com/{id}/{z}/{x}/{y}.png', {
     id: 'WL_boundary_new',
     attribution: 'SIR',
 	setOpacity:10,
-}).addTo(map);
+})
+
+if (map.hasLayer (geotilelayer)){
+map.removeLayer(geotilelayer);
+geotilelayer.clearLayers();
+}
+geotilelayer.addTo(map)
+var geojsonlayer
+if (map.hasLayer (geojsonlayer)){
+geojsonlayer.clearLayers();
+map.removeLayer(geojsonlayer);
+}
 geojsonlayer=L.geoJson(WLBoundaries_new, {style: style_new});
 geojsonlayer.addTo(map);
 
@@ -304,14 +322,19 @@ function style2(feature2) {
 		}
 
 		var geojson2;
+if (map.hasLayer(geojson2)){
+map.removeLayer(geojson2);
 
+
+
+}
 		function resetHighlight2(e2) {
 			geojson2.resetStyle(e2.target);
 			info2.update();
 		}
 
 		function zoomToFeature(e2) {
-			map.fitBounds(e.target.getBounds());
+			map.fitBounds(e2.target.getBounds());
 		}
 
 		function onEachFeature2(feature2, layer2) {
@@ -346,7 +369,9 @@ function style2(feature2) {
 
 		info2.update = function (props2) {
 			this._div.innerHTML = '<h4> Region Westphalen Lippe</h4>' +  (props2 ?
-				'<b>Municipality: ' + props2.Name + '</b><br />SIR: ' + props2.SIR + ''
+			
+			
+				'<b>Municipality: ' + props2.Name + '</b><br />'+check_choice+': ' + props2.SIR + ''
 				: 'Hover over a state');
 		};
 
@@ -355,11 +380,16 @@ function style2(feature2) {
 
 
 
+
+
+
+
 		
 		
 		
 
-}
+
+};
 
 Sparql_panel();
 
