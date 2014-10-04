@@ -1,3 +1,5 @@
+
+//************************************************************************ regarding SIR/CI Visualization input
 // function to check if there is an input at the SIR/CI Panel
 function sir_input_check() {
 
@@ -30,9 +32,22 @@ return true}
 test_variable=0;
 }
 
+// function to empty the radio buttons
 
 function sir_clear() {
+
+$('input[name=obsType]').removeAttr('checked');
+$('input[name=obsType1]').removeAttr('checked');
+$('input[name=obsType2]').removeAttr('checked');
 }
 
+// Carcinogen information input check
+function inci_input_check() {
+if ($('input[name="obsType3"]:checked').length == 0){
+alert(" Please choose a cancer type");
+return false
+}else{
+return true}
+}
 
 

@@ -275,7 +275,7 @@
 	</div>
 		
 	<br>
-	<button type="button" onclick="test()" class="btnStyle span3">Clear</button>
+	<button type="button" onclick="sir_clear()" class="btnStyle span3">Clear</button>
 	<button type="button" onclick="ini_sir()" class="btnStyle span3">Visualize SIR</button>
 	<button type="button" onclick="ini_cilower()" class="btnStyle span3">Visualize CI 95 Lower Level</button> 
 	<button type="button" onclick="ini_ciupper()" class="btnStyle span3">Visualize CI 95 Upper Level</button>
@@ -328,14 +328,13 @@
 	<div style="border: thin solid #000000; border-bottom-width: 0px;">
 	</div>
 	<div style="padding-top:10px">
-		<input type="radio" id="sirbladdercancer" class="obsType" name="obsType" value="C67" checked="checked">&nbsp;Bladder cancer &nbsp;
-		<input type="radio" id="sirlungcancer" class="obsType" name="obsType" value="C34">&nbsp;Lung cancer &nbsp;
-		<input type="radio" id="sirleukemiacancer" class="obsType" name="obsType" value="C91-C95">&nbsp;Leukemia &nbsp;&nbsp;&nbsp;<br>
-		<input type="radio" id="sirnasalcancer" class="obsType" name="obsType" value="C00-C14">&nbsp;Nasal cavity and paranasal sinus &nbsp;		
+		<input type="radio" id="sirbladdercancer" class="obsType" name="obsType3" value="C67" checked="checked">&nbsp;Bladder cancer &nbsp;
+		<input type="radio" id="sirlungcancer" class="obsType" name="obsType3" value="C34">&nbsp;Lung cancer &nbsp;
+		<input type="radio" id="sirleukemiacancer" class="obsType" name="obsType3" value="C91-C95">&nbsp;Leukemia &nbsp;&nbsp;&nbsp;<br>
+		<input type="radio" id="sirnasalcancer" class="obsType" name="obsType3" value="C00-C14">&nbsp;Nasal cavity and paranasal sinus &nbsp;		
 	</div>
 	<br>
-	<button type="button" onclick="ini_carcinogen()" class="btnStyle span3">Information about carcinogens of a type of cancer
-	- Please choose a cancer type </button>
+	<button type="button" onclick="ini_carcinogen()" class="btnStyle span3">Information about carcinogens of a type of cancer- Please choose a cancer type </button>
 
 
 </div>
@@ -349,6 +348,11 @@
 </div>
  
 <script>
+var info = L.control();
+var secondquery=false;
+var querynumber=0;
+
+// Check the selections, submit parameter to the SPARQL/AJAX function
 
 function ini_sir () {
 
@@ -361,12 +365,15 @@ var sir_year
 var sir_gender
 var sir_cancer_add
 var check_choice="SIR";
+secondquery=true;
+querynumber=querynumber+1;
 $(document).ready(function(){
 
 sir_cancer = $("input:radio[name ='obsType']:checked").val()
 sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
 if (sir_input_check()==true){
+
 visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
 }
 });
@@ -389,7 +396,8 @@ $(document).ready(function(){
 sir_cancer = $("input:radio[name ='obsType']:checked").val()
 sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
-
+secondquery=true;
+querynumber=querynumber+1;
 if (sir_input_check()==true){
 visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
 }
@@ -410,7 +418,8 @@ var sir_gender
 var sir_cancer_add
 var check_choice="CI_upper_level";
 $(document).ready(function(){
-
+secondquery=true;
+querynumber=querynumber+1;
 sir_cancer = $("input:radio[name ='obsType']:checked").val()
 sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
@@ -435,7 +444,7 @@ var sir_gender
 var check_choice="Carcinogen";
 $(document).ready(function(){
 
-sir_cancer = $("input:radio[name ='obsType']:checked").val()
+sir_cancer = $("input:radio[name ='obsType3']:checked").val()
 if (sir_cancer=="C67"){
 sir_cancer="Bladder";
 sir_cancer_add="Cancer";
@@ -455,7 +464,7 @@ sir_cancer_add="";
 sir_year=$('input[name="obsType1"]:checked').val();
 sir_gender=$('input[name="obsType2"]:checked').val();
 
-if (sir_input_check()==true){
+if (inci_input_check()==true){
 visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
 }
 });
@@ -506,7 +515,7 @@ map.addControl(zoomControl);
  
 			
 
-
+// sidebars
 
 var sir_sidebar = L.control.sidebar('sir_sidebar', {
     position: 'right'
@@ -561,12 +570,16 @@ map.addControl(sidebarLinks);
 function Explore_cause_effect()
 {
 Cause_Effect_Panel.show();
+SPARQLPanel.hide();
+sir_sidebar.hide();
+SPARQLPanel_edit.hide();
 }
 
 
 function Sparql_panel()
 {
 SPARQLPanel.show();
+Cause_Effect_Panel.hide();
 
 }
 
@@ -574,11 +587,16 @@ SPARQLPanel.show();
 function Query()
 {
 sir_sidebar.show();
+Cause_Effect_Panel.hide();
+SPARQLPanel.hide();
+SPARQLPanel_edit.hide();
 }
 
 function Sparql_panel_edit()
 {
-
+sir_sidebar.hide();
+Cause_Effect_Panel.hide();
+SPARQLPanel.hide();
 SPARQLPanel_edit.show();
 
 }
@@ -618,12 +636,15 @@ var geojsonadd=L.geoJson(WLBoundaries, {style: style}).addTo(map);
 //Adding map interaction
 
 		// control that shows state info on hover
-		var info = L.control();
+		//var info = L.control();
 
 		info.onAdd = function (map) {
+		// while: otherwise producing node error after removing L.control
+		while(secondquery==false){
 			this._div = L.DomUtil.create('div', 'info');
 			this.update();
 			return this._div;
+		}
 		};
 
 		info.update = function (props) {
@@ -728,8 +749,12 @@ var geojsonadd=L.geoJson(WLBoundaries, {style: style}).addTo(map);
 
 		legend.addTo(map);
 
-		
+/*		
+if (secondquery==true){
 
+    info.removeFrom(map)
+    
+}*/
 
 
 

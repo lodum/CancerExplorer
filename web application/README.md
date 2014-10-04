@@ -8,7 +8,7 @@
 The project deals with cancer related cause-effect relationships. Moreover, which aim is to create a
 web-based assistance system for the exploration of cause-effect relationships of selected cancer
 types in a predefined geographic region.
-The application is a result of an external semester contribution, which was mainly focused on the modelling part (domain ontology, information aggregation).
+The work is a result of an external semester contribution, which was mainly focused on the modelling part (domain ontology, information aggregation).
 
 
 ### Purpose
