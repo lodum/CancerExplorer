@@ -1,8 +1,39 @@
 // function to visualize locations of emitters
 var markersLayer = new L.LayerGroup();
 
+var emitter_name3
+var emitter_N2O
+var emitter_emission
+var emitter_CO2
+var emitter_CH4
+var emitter_NH3
+var emitter_HCL
+var emitter_HF
+var emitter_CO
+var emitter_NMVOC
+var emitter_SO2
+var emitter_NO2
+var emitter_As
+var emitter_Pb
+var emitter_Cr
+var emitter_Cu
+var emitter_Cd
+var emitter_Ni
+var emitter_V
+var emitter_Zn
+var emitter_DUF
+var emitter_BAP
+var emitter_BENZ
+var emitter_PAK
+var emitter_PM10
+var emitter_Staub
+var emitter_RUSS
+var emitter_Street
+var emitter_ZipCodeCity 
+
 function visualize_emitter (results){
 
+map.removeLayer(SIRLayer);
 	var markers = [];
 
 	var marker;
@@ -22,65 +53,65 @@ function visualize_emitter (results){
 	for(var i2=0;i2<results.results.bindings.length;i2++){
 		if(results.results.bindings[i2].a.value==emitter_name){
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/EmissionProcess"){
-			var emitter_emission=results.results.bindings[i2].c.value; }
+			emitter_emission=results.results.bindings[i2].c.value; }
 
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Name"){
-			var emitter_name3=results.results.bindings[i2].c.value; }
+			emitter_name3=results.results.bindings[i2].c.value; }
 
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/N2O"){
-			var emitter_N2O=results.results.bindings[i2].c.value;}
+			emitter_N2O=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/CO2"){
-			var emitter_CO2=results.results.bindings[i2].c.value;}
+			emitter_CO2=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/CH4"){
-			var emitter_CH4=results.results.bindings[i2].c.value;}
+			emitter_CH4=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/NH3"){
-			var emitter_NH3=results.results.bindings[i2].c.value;}
+			emitter_NH3=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/HCL"){
-			var emitter_HCL=results.results.bindings[i2].c.value;}
+			emitter_HCL=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/HF"){
-			var emitter_HF=results.results.bindings[i2].c.value;}
+			emitter_HF=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/CO"){
-			var emitter_CO=results.results.bindings[i2].c.value;}
+			emitter_CO=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/NMVOC"){	
-			var emitter_NMVOC=results.results.bindings[i2].c.value;}
+			emitter_NMVOC=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/SO2"){
-			var emitter_SO2=results.results.bindings[i2].c.value;}
+			emitter_SO2=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/NO2"){
-			var emitter_NO2=results.results.bindings[i2].c.value;}
+			emitter_NO2=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/As"){
-			var emitter_As=results.results.bindings[i2].c.value;}
+			emitter_As=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Pb"){
-			var emitter_Pb=results.results.bindings[i2].c.value;}
+			emitter_Pb=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Cr"){
-			var emitter_Cr=results.results.bindings[i2].c.value;}
+			emitter_Cr=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Cu"){
-			var emitter_Cu=results.results.bindings[i2].c.value;}
+			emitter_Cu=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Cd"){
-			var emitter_Cd=results.results.bindings[i2].c.value;}
+			emitter_Cd=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Ni"){
-			var emitter_Ni=results.results.bindings[i2].c.value;}
+			emitter_Ni=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/V"){
-			var emitter_V=results.results.bindings[i2].c.value;}
+			emitter_V=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Zn"){
-			var emitter_Zn=results.results.bindings[i2].c.value;}
+			emitter_Zn=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/DUF"){
-			var emitter_DUF=results.results.bindings[i2].c.value;}
+			emitter_DUF=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/BAP"){
-			var emitter_BAP=results.results.bindings[i2].c.value;}
+			emitter_BAP=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/BENZ"){
-			var emitter_BENZ=results.results.bindings[i2].c.value;}
+			emitter_BENZ=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/PAK"){
-			var emitter_PAK=results.results.bindings[i2].c.value;}
+			emitter_PAK=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/PM10"){
-			var emitter_PM10=results.results.bindings[i2].c.value;}
+			emitter_PM10=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Staub"){
-			var emitter_Staub=results.results.bindings[i2].c.value;}
+			emitter_Staub=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/RUSS"){
-			var emitter_RUSS=results.results.bindings[i2].c.value;}
+			emitter_RUSS=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Street"){
-			var emitter_Street=results.results.bindings[i2].c.value;}
+			emitter_Street=results.results.bindings[i2].c.value;}
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/ZipCodeCity"){
-			var emitter_ZipCodeCity=results.results.bindings[i2].c.value;
+			emitter_ZipCodeCity=results.results.bindings[i2].c.value;
 		}
 
 
@@ -89,12 +120,12 @@ function visualize_emitter (results){
 
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Long"){
 			var emitter_long=results.results.bindings[i2].c.value;
-
-			marker = L.marker([parseFloat(emitter_lat), parseFloat(emitter_long)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'blue'})});
-			marker.bindPopup("<b>"+emitter_name3+"</b><br>Emission Process:</br>"+emitter_emission+'</br><a name='+emitter_name3+','+emitter_N2O+','+emitter_emission+','+emitter_CO2+','+emitter_CH4+','+emitter_NH3+','+emitter_HCL+','+emitter_HF+','+emitter_CO+','+emitter_NMVOC+','+emitter_SO2+','+emitter_NO2+','+emitter_As+','+emitter_Pb+','+emitter_Cr+','+emitter_Cu+','+emitter_Cd+','+emitter_Ni+','+emitter_V+','+emitter_Zn+','+emitter_DUF+','+emitter_BAP+','+emitter_BENZ+','+emitter_PAK+','+emitter_PM10+','+emitter_Staub+','+emitter_RUSS+','+emitter_Street+','+emitter_ZipCodeCity+' onclick="emitter_detail_show(name)">See details</a>');
+      
+			emitter_name = L.marker([parseFloat(emitter_lat), parseFloat(emitter_long)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'blue'})});
+			emitter_name.bindPopup("<b>"+emitter_name3+"</b><br>Emission Process:</br>"+emitter_emission+'</br><a name='+emitter_name3+','+emitter_N2O+','+emitter_emission+','+emitter_CO2+','+emitter_CH4+','+emitter_NH3+','+emitter_HCL+','+emitter_HF+','+emitter_CO+','+emitter_NMVOC+','+emitter_SO2+','+emitter_NO2+','+emitter_As+','+emitter_Pb+','+emitter_Cr+','+emitter_Cu+','+emitter_Cd+','+emitter_Ni+','+emitter_V+','+emitter_Zn+','+emitter_DUF+','+emitter_BAP+','+emitter_BENZ+','+emitter_PAK+','+emitter_PM10+','+emitter_Staub+','+emitter_RUSS+','+emitter_Street+','+emitter_ZipCodeCity+'  onclick="MyFunction(name,emitter_name3,emitter_N2O,emitter_emission,emitter_CO2,emitter_CH4,emitter_NH3,emitter_HCL,emitter_HF,emitter_CO,emitter_NMVOC,emitter_SO2,emitter_NO2,emitter_As,emitter_Pb,emitter_Cr,emitter_Cu,emitter_Cd,emitter_Ni,emitter_V,emitter_Zn,emitter_DUF,emitter_BAP,emitter_BENZ,emitter_PAK,emitter_PM10,emitter_Staub,emitter_RUSS,emitter_Street,emitter_ZipCodeCity )">See details</a>');
 
 			// add the markers to a layer 
-			markersLayer.addLayer(marker);
+			markersLayer.addLayer(emitter_name);
 	 
 	}}}
 	// visualize layer with the markers

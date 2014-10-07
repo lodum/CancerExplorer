@@ -1,9 +1,9 @@
-
+var SIRLayer = new L.LayerGroup();
 
 // function to visualize chloropleth SIR/CI map
 function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice)
 {
-
+map.removeLayer(geojson);
 	//check multiple queries
 	if (querynumber==1){
 	if (secondquery==true){
@@ -151,37 +151,25 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 					fillColor: getColor(feature.properties.SIR)
 				};
 			}
-			
-	var geojson_new = L.geoJson(WLBoundaries_new, {
-				style: style_new,
-				onEachFeature: onEachFeature
-			}).addTo(map);
 
-			
-	var geotilelayer=L.tileLayer('http://{s}.tiles.mapbox.com/{id}/{z}/{x}/{y}.png', {
-		id: 'WL_boundary_new',
-		attribution: 'SIR',
-		setOpacity:10,
-	})
 
-	if (map.hasLayer (geotilelayer)){
-		map.removeLayer(geotilelayer);
-		geotilelayer.clearLayers();
-	}
-	geotilelayer.addTo(map)
-	var geojsonlayer
+
+//	var geojsonlayer
+//	geojsonlayer=L.geoJson(WLBoundaries_new, {style: style_new});
+//	geojsonlayer.addTo(map);	
+
+/*
 	if (map.hasLayer (geojsonlayer)){
 		geojsonlayer.clearLayers();
 		map.removeLayer(geojsonlayer);
 	}
-	geojsonlayer=L.geoJson(WLBoundaries_new, {style: style_new});
 
 			if (map.hasLayer(geojson)){
 			map.removeLayer(geojson);
-			}
+			}*/
 
 
-	geojsonlayer.addTo(map);
+
 
 
 
@@ -197,10 +185,10 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 			}
 
 			
-	//Adding map interaction
+	//Legend
 
 
-			var legend2 = L.control({position: 'bottomright'});
+	var legend2 = L.control({position: 'bottomright'});
 
 	legend2.onAdd = function (map) {
 	var grades2
@@ -252,7 +240,7 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 			}
 
 
-
+var geojson2;
 
 		
 			function highlightFeature2(e2) {
@@ -272,13 +260,10 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 				info.update(layer2.feature.properties);
 			}
 
-			var geojson2;
-	if (map.hasLayer(geojson2)){
+/*	
+	if (map.hasLayer(geojson2)==true){
 		map.removeLayer(geojson2);
-
-
-
-	}
+	}*/
 			function resetHighlight2(e2) {
 				geojson2.resetStyle(e2.target);
 				info.update();
@@ -295,12 +280,14 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 					click: zoomToFeature
 				});
 			}
-
+         
 			geojson2 = L.geoJson(WLBoundaries_new, {
 				style: style2,
 				onEachFeature: onEachFeature2
-			}).addTo(map);
-
+			});
+		
+			SIRLayer.addLayer(geojson2);
+		SIRLayer.addTo(map);
 			map.attributionControl.addAttribution('Text?');
 
 

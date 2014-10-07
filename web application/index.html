@@ -401,79 +401,79 @@
 			  <br>  
 			  <table>
 				  <tr>
-					<td><b>Type:</b></td>
+					<td><b>N2O</b></td>
 					<td><div id="N2O"> </div></td>
 				  </tr><tr>
-					<td><b>Price:[ ? ]</b></td>
+					<td><b>CO2</b></td>
 					<td><div id="CO2"> </div></td>
 				  </tr><tr>
-					<td><b>Size:[ m² ]</b></td>
+					<td><b>CH4</b></td>
 					<td><div id="CH4"> </div></td>
 				  </tr><tr>
-					<td><b>Rooms:</b></td>
+					<td><b>NH3</b></td>
 					<td><div id="NH3"> </div></td>
 				  </tr><tr>
-					<td><b>Fellow lodger:</b></td>
+					<td><b>HCL</b></td>
 					<td><div id="HCL"> </div></td>					
 				  </tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>HF</b></td>
 					<td><div id="HF"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>CO</b></td>
 					<td><div id="CO"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>NMVOC</b></td>
 					<td><div id="NMVOC"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>SO2</b></td>
 					<td><div id="SO2"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>NO2</b></td>
 					<td><div id="NO2"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>As</b></td>
 					<td><div id="As"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>Pb</b></td>
 					<td><div id="Pb"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>Cr</b></td>
 					<td><div id="Cr"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>Cu</b></td>
 					<td><div id="Cu"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>Cd</b></td>
 					<td><div id="Cd"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>Ni</b></td>
 					<td><div id="Ni"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>V</b></td>
 					<td><div id="V"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>Zn</b></td>
 					<td><div id="Zn"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>DUF</b></td>
 					<td><div id="DUF"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>BAP</b></td>
 					<td><div id="BAP"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>BENZ</b></td>
 					<td><div id="BENZ"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>PAK</b></td>
 					<td><div id="PAK"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>PM10</b></td>
 					<td><div id="PM10"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>Staub</b></td>
 					<td><div id="Staub"> </div></td>
 					</tr><tr>
-					<td><b>Available:</b></td>
+					<td><b>RUSS</b></td>
 					<td><div id="RUSS"> </div></td>
 				  </tr>
 				</table>
@@ -508,7 +508,8 @@
 	//variables for multiple query control
 	var secondquery=false;
 	var querynumber=0;
-
+	var clear_sir=false;
+	
 	//Check the selections, submit parameter to the SPARQL/AJAX function
 
 	function ini_sir () {
@@ -783,40 +784,40 @@
 		clear_emitter_locations();
 	}
 
-
-	function emitter_detail_show(name)
+// Has to be improved - update bug
+	function MyFunction (name,emitter_name3,emitter_N2O,emitter_emission,emitter_CO2,emitter_CH4,emitter_NH3,emitter_HCL,emitter_HF,emitter_CO,emitter_NMVOC,emitter_SO2,emitter_NO2,emitter_As,emitter_Pb,emitter_Cr,emitter_Cu,emitter_Cd,emitter_Ni,emitter_V,emitter_Zn,emitter_DUF,emitter_BAP,emitter_BENZ,emitter_PAK,emitter_PM10,emitter_Staub,emitter_RUSS,emitter_Street,emitter_ZipCodeCity)
 	{
-		var array = name.split(',')
-
-		document.getElementById("street").innerHTML=array[27];
-		document.getElementById("name").innerHTML=array[0];
-		document.getElementById("zip").innerHTML=array[28];
-		document.getElementById("emissionprocess").innerHTML=array[2];
-		document.getElementById("N2O").innerHTML=array[1];
-		document.getElementById("CO2").innerHTML=array[3];
-		document.getElementById("CH4").innerHTML=array[4];
-		document.getElementById("NH3").innerHTML=array[5];
-		document.getElementById("HCL").innerHTML=array[6];
-		document.getElementById("HF").innerHTML=array[7];
-		document.getElementById("CO").innerHTML=array[8];
-		document.getElementById("NMVOC").innerHTML=array[9];
-		document.getElementById("SO2").innerHTML=array[10];
-		document.getElementById("NO2").innerHTML=array[11];
-		document.getElementById("As").innerHTML=array[12];
-		document.getElementById("Pb").innerHTML=array[13];
-		document.getElementById("Cr").innerHTML=array[14];
-		document.getElementById("Cu").innerHTML=array[15];
-		document.getElementById("Cd").innerHTML=array[16];
-		document.getElementById("Ni").innerHTML=array[17];
-		document.getElementById("V").innerHTML=array[18];
-		document.getElementById("Zn").innerHTML=array[19];
-		document.getElementById("DUF").innerHTML=array[20];
-		document.getElementById("BAP").innerHTML=array[21];
-		document.getElementById("BENZ").innerHTML=array[22];
-		document.getElementById("PAK").innerHTML=array[23];
-		document.getElementById("PM10").innerHTML=array[24];
-		document.getElementById("Staub").innerHTML=array[25];
-		document.getElementById("RUSS").innerHTML=array[26];
+	
+		//alert(name);
+		document.getElementById("street").innerHTML=emitter_Street;
+		document.getElementById("name").innerHTML=emitter_name3;
+		document.getElementById("zip").innerHTML=emitter_ZipCodeCity;
+		document.getElementById("emissionprocess").innerHTML=emitter_emission;
+		document.getElementById("N2O").innerHTML=emitter_N2O;
+		document.getElementById("CO2").innerHTML=emitter_CO2;
+		document.getElementById("CH4").innerHTML=emitter_CH4;
+		document.getElementById("NH3").innerHTML=emitter_NH3;
+		document.getElementById("HCL").innerHTML=emitter_HCL;
+		document.getElementById("HF").innerHTML=emitter_HF;
+		document.getElementById("CO").innerHTML=emitter_CO;
+		document.getElementById("NMVOC").innerHTML=emitter_NMVOC;
+		document.getElementById("SO2").innerHTML=emitter_SO2;
+		document.getElementById("NO2").innerHTML=emitter_NO2;
+		document.getElementById("As").innerHTML=emitter_As;
+		document.getElementById("Pb").innerHTML=emitter_Pb;
+		document.getElementById("Cr").innerHTML=emitter_Cr;
+		document.getElementById("Cu").innerHTML=emitter_Cu;
+		document.getElementById("Cd").innerHTML=emitter_Cd;
+		document.getElementById("Ni").innerHTML=emitter_Ni;
+		document.getElementById("V").innerHTML=emitter_V;
+		document.getElementById("Zn").innerHTML=emitter_Zn;
+		document.getElementById("DUF").innerHTML=emitter_DUF;
+		document.getElementById("BAP").innerHTML=emitter_BAP;
+		document.getElementById("BENZ").innerHTML=emitter_BENZ;
+		document.getElementById("PAK").innerHTML=emitter_PAK;
+		document.getElementById("PM10").innerHTML=emitter_PM10;
+		document.getElementById("Staub").innerHTML=emitter_Staub;
+		document.getElementById("RUSS").innerHTML=emitter_RUSS;
 
 
 		emitter_detail.show();
