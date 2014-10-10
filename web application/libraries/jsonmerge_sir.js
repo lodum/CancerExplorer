@@ -1,5 +1,5 @@
 var SIRLayer = new L.LayerGroup();
-
+var info_check
 // function to visualize chloropleth SIR/CI map
 function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice)
 {
@@ -8,6 +8,7 @@ map.removeLayer(geojson);
 	if (querynumber==1){
 	if (secondquery==true){
 	 info.removeFrom(map)
+	 info_check=false;
 	}
 	}
 	// connect to endpoint and send sparql query
@@ -247,8 +248,8 @@ var geojson2;
 				var layer2 = e2.target;
 
 				layer2.setStyle({
-					weight: 5,
-					color: '#666',
+					weight: 3,
+					color: '#2E64FE',
 					dashArray: '',
 					fillOpacity: 0.7
 				});
@@ -316,8 +317,10 @@ var geojson2;
 					: 'Hover over a state');
 			};
 
+			//if (querynumber==1){
 			if (querynumber==1){
 			info.addTo(map);
+			info.check=true;
 			}
 			
 
