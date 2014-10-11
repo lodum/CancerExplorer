@@ -35,7 +35,9 @@
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
 		<link rel="stylesheet" href="dist/leaflet.awesome-markers.css">
 		
-		
+	 <!-- Include the loading control -->
+		<link rel="stylesheet" href="libraries/Leaflet.loading/Control.Loading.css" />
+		<script src="libraries/Leaflet.loading/Control.Loading.js"></script>	
 
 		
 	<!-- created style sheets and scripts-->
@@ -500,7 +502,8 @@
 	var secondquery=false;
 	var querynumber=0;
 	var clear_sir=false;
-	
+	var legend2
+	var check_detail_view
 	
 	//Check the selections, submit parameter to the SPARQL/AJAX function
 
@@ -511,6 +514,7 @@
 		var sir_gender
 		var sir_cancer_add
 		var check_choice="SIR";
+		
 
 		$('#year_list').click(function(){
 			alert($("input[name='obstype1']:checked").val());
@@ -600,20 +604,20 @@
 
 		sir_cancer = $("input:radio[name ='obsType3']:checked").val()
 		if (sir_cancer=="C67"){
-		sir_cancer="Bladder";
-		sir_cancer_add="Cancer";
+			sir_cancer="Bladder";
+			sir_cancer_add="Cancer";
 		}
 		if (sir_cancer=="C34"){
-		sir_cancer="Lung";
-		sir_cancer_add="Cancer";
+			sir_cancer="Lung";
+			sir_cancer_add="Cancer";
 		}
 		if (sir_cancer=="C00-C14"){
-		sir_cancer="Nasal_cavity_and_paranasal_sinus";
-		sir_cancer_add="";
+			sir_cancer="Nasal_cavity_and_paranasal_sinus";
+			sir_cancer_add="";
 		}
 		if (sir_cancer=="C91-C95"){
-		sir_cancer="Leukemia";
-		sir_cancer_add="";
+			sir_cancer="Leukemia";
+			sir_cancer_add="";
 		}
 		sir_year=$('input[name="obsType1"]:checked').val();
 		sir_gender=$('input[name="obsType2"]:checked').val();
@@ -630,6 +634,8 @@
 
 	function ini_emitter () {
 
+	
+		
 
 		var order=0;
 		var sir_cancer
@@ -643,8 +649,20 @@
 			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
 			order++;
 		});
-
-
+       if (sir_check=true){
+	   
+			info.update = function (props) {
+					this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
+						'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
+						: 'Click a marker for more information');
+			};	
+			info.update();
+	   }
+	  
+	   if(info_check==false){
+			info.addTo(map);
+			info_check=true;
+		}
 	}
 
 
@@ -686,14 +704,21 @@
 				});
 				
 				
+				
+	// Loading status
+	  var loadingControl = L.Control.loading({
+		separate: true
+		});
+	map.addControl(loadingControl);
+				
 	// Add our zoom control manually where we want to
 
 	var zoomControl = L.control.zoom({
 		position: 'topright'
 		});
 	map.addControl(zoomControl);
-
-	 
+	
+	
 				
 
 	// sidebars
@@ -777,10 +802,14 @@
 	}
 	
 	////////////////////////////////////////////////////
+
+
+
+
 	
 	function visualize_emitter (results){
 
-map.removeLayer(SIRLayer);
+	map.removeLayer(SIRLayer);
 	var markers = [];
 	var marker;
 	
@@ -886,17 +915,22 @@ map.removeLayer(SIRLayer);
 	//remove Layers
 	map.removeLayer(WL_boundary);
 	map.removeLayer(geojsonadd);
-	//info.removeFrom(map);
-	//geojson.clearLayers();	
-	map.removeLayer(geojson);		
+		
+	map.removeLayer(geojson);
+	// clear Legend
+		div2.innerHTML ="";
+		
+		
 	// set view to Münster
 	map.setView([51.95442, 8.10009], 10);
 
-
+	// to add an info box.
+		check_detail_view=true;
+		
 	}
 	
-		
 
+		
 	
 }
 
@@ -970,23 +1004,26 @@ map.removeLayer(SIRLayer);
 	//var info = L.control();
 
 		info.onAdd = function (map) {
-			
-		// while: otherwise producing node error after removing L.control
 			while(secondquery==false){
+		// while: otherwise producing node error after removing L.control
+			
 				this._div = L.DomUtil.create('div', 'info');
 				this.update();
 				return this._div;
 			}
 			};
-
+			if(secondquery==false){
 			info.update = function (props) {
 				this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
 					'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
 					: 'Hover over a state');
+					
 			};
-
+}
+			info_check=false;
+			if(info_check==false){
 			info.addTo(map);
-            info_check=true;
+            info_check=true;}
 
 			// get color depending on population density value
 			function getColor(d) {
@@ -1079,7 +1116,7 @@ map.removeLayer(SIRLayer);
 				return div;
 			};
 
-			legend.addTo(map);
+			//legend.addTo(map);
 
 
 	////////////////////////////////////////////////////	Base&Overlay Layers ///////////////////////////////////////////////////////

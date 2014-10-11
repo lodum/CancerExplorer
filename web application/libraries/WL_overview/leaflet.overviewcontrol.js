@@ -1,7 +1,7 @@
 L.Control.OverviewControl = L.Control.extend({
         options: {
                 position: 'topleft',
-                title: 'Shows you an overview of municipalities of Westfalen-Lippe'
+                title: 'Shows you an overview of municipalities of Westphalen-Lippe'
                 //forceSeparateButton: false,
                
 				

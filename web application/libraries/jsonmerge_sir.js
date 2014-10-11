@@ -1,141 +1,161 @@
 var SIRLayer = new L.LayerGroup();
 var info_check
+
+var legend_check
+var sir_check
+var div2 = L.DomUtil.create('div2', 'info legend');
+info_div = L.DomUtil.create('div', 'info');
+
+
 // function to visualize chloropleth SIR/CI map
+
 function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice)
 {
-map.removeLayer(geojson);
-	//check multiple queries
-	if (querynumber==1){
-	if (secondquery==true){
-	 info.removeFrom(map)
-	 info_check=false;
-	}
-	}
-	// connect to endpoint and send sparql query
 
-		var endpoint="http://10.10.6.8:8080/openrdf-sesame/repositories/cancerdata";
-			//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
-			var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
-			var request = { accept : 'application/sparql-results+json' };
-
-			
-			//get sparql query from textarea
-			//request.query=$("#sparqlQuery").val();
-			if (check_choice=="SIR"){
-			request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?SIR ?GKZ WHERE {?Municipality  <http://www.example.org/def/"+sir_cancer+"_"+sir_year+"_"+sir_gender+"_SIR> ?SIR. ?Municipality <http://www.example.org/def/GKZ> ?GKZ.   } "; //Limit 20
-	}
-
-		if (check_choice=="CI_lower_level"){
-			request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_lower_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_lowerlimit> ?CI_lower_level   } "; //Limit 20
-	}
-
-		if (check_choice=="CI_upper_level"){
-			request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_upper_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_upperlimit> ?CI_upper_level   } "; //Limit 20
-	}
-
-	if (check_choice=="Carcinogen"){
-
-			request.query="PREFIX  rdfs:<http://www.w3.org/2000/01/rdf-schema#> Select ?a WHERE {?a a <http://www.example.org/Carcinogenes_"+sir_cancer+sir_cancer_add+"> } "; //Limit 20
-	}
-
-	if (check_choice=="Emitter"){
-
-			request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?a ?b ?c WHERE {?a qb:dataSet <http://www.example.org/dataset/Muenster_IndustryEmitterDataset>. ?a ?b ?c}"; //Limit 20
-	}
-	//alert(request.query);
-
-	//?a <http://www.example.org/def/GKZ> ?c
-			//sent request
-			$.ajax({
-				dataType: "jsonp",
-				//some sparql endpoints do only support "sparql-results+json" instead of simply "json"
-				beforeSend: function(xhrObj){xhrObj.setRequestHeader("Accept","application/sparql-results+json");},
-				data: request,
-				url: queryUrl,
-				success: callbackFunc
-			});
-
-
-	//handles the ajax response
-		function callbackFunc(results) {
-		if (check_choice=="Emitter"){
-	 visualize_emitter(results);
-	 }
-		//alert(results.results.bindings[0].a.value);
-	//Clear result HTML div
-			$("#resultdiv").empty();	   
-			//result is a json object http://de.wikipedia.org/wiki/JavaScript_Object_Notation
-			htmlString="<table class=\"table table-striped\">";
-
-	// Special case carcinogen information		
-		
-		if (check_choice=="Emitter"){
-		
-			htmlString+="<button type='button' onclick='get_overview()' class='btnStyle span3'>Close detail view and go back to overview</button>";
+	map.removeLayer(geojson);
+		//check multiple queries
+		if (querynumber==1){
+			if (secondquery==true){
+				 info.removeFrom(map)
+				 info_check=false;
+			}
 		}
-		if (check_choice=="Carcinogen"){	
-			
-			htmlString+="Here you see <b>carcinogens</b> that are likely to cause <b> "+sir_cancer+" Cancer</b>";
-		}	
-			//write table head
-			htmlString+="<tr>";
-				$.each(results.head.vars, function(index2, value2) { 
-					htmlString+="<th>?"+value2+"</th>";
-				 });
-			htmlString+="</tr>";
-			//write table body
-			$.each(results.results.bindings, function(index1, value1) { 
-				htmlString+="<tr>";
-				$.each(results.head.vars, function(index2, value2) { 
-					htmlString+="<td>"+value1[value2].value+"</td>";
-					
-					//console.log(value1[value2].value)
-				 });
-				htmlString+="</tr>";
+		// connect to endpoint and send sparql query
+
+				var endpoint="http://10.10.6.8:8080/openrdf-sesame/repositories/cancerdata";
+				//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
+				var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
+				var request = { accept : 'application/sparql-results+json' };
+
 				
-			});
-
-			htmlString+="</table>";
-			$("#resultdiv").html(htmlString);
-
-
-	// functionalities which are not necessary for carcinogen information
-	if (check_choice!="Carcinogen"){
-	if (check_choice!="Emitter"){
-	var WLBoundaries_new
-	WLBoundaries_new = WLBoundaries;
-	//sparql();
-	//alert(WLBoundaries_new.features[1].properties.GKZ); 
-	//alert(results.results.bindings[1].c.value)
-	//global variable from sparql.js with the result set of the defined query
-
-	// Merge information from the WLBoundaries geojson and the new queried result set.
-	for(var i=0;i<WLBoundaries_new.features.length;i++){
-
-
-	for(var n=0;n<results.results.bindings.length;n++){
-
-		if(WLBoundaries_new.features[i].properties.GKZ == results.results.bindings[n].GKZ.value){
-		if(check_choice=="SIR"){
-		WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].SIR.value; // value from variable ?c see sparql query
-		
+				//get sparql query from textarea
+				//request.query=$("#sparqlQuery").val();
+				if (check_choice=="SIR"){
+					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?SIR ?GKZ WHERE {?Municipality  <http://www.example.org/def/"+sir_cancer+"_"+sir_year+"_"+sir_gender+"_SIR> ?SIR. ?Municipality <http://www.example.org/def/GKZ> ?GKZ.   } "; //Limit 20
 		}
-		if(check_choice=="CI_lower_level"){
-		WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_lower_level.value; // value from variable ?c see sparql query
-		
+
+				if (check_choice=="CI_lower_level"){
+					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_lower_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_lowerlimit> ?CI_lower_level   } "; //Limit 20
 		}
-		if(check_choice=="CI_upper_level"){
-		WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_upper_level.value; // value from variable ?c see sparql query
-		
+
+				if (check_choice=="CI_upper_level"){
+					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_upper_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_upperlimit> ?CI_upper_level   } "; //Limit 20
+		}
+
+				if (check_choice=="Carcinogen"){
+					request.query="PREFIX  rdfs:<http://www.w3.org/2000/01/rdf-schema#> Select ?a WHERE {?a a <http://www.example.org/Carcinogenes_"+sir_cancer+sir_cancer_add+"> } "; //Limit 20
+		}
+
+				if (check_choice=="Emitter"){
+
+					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?a ?b ?c WHERE {?a qb:dataSet <http://www.example.org/dataset/Muenster_IndustryEmitterDataset>. ?a ?b ?c}"; //Limit 20
 		}
 		
-		if(check_choice=="Carcinogen"){
-		WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_upper_level.value; // value from variable ?c see sparql query
-		
-		}
+				//sent request
+				$.ajax({
+					dataType: "jsonp",
+					//some sparql endpoints do only support "sparql-results+json" instead of simply "json"
+					beforeSend: function(xhrObj){xhrObj.setRequestHeader("Accept","application/sparql-results+json");},
+					data: request,
+					url: queryUrl,
+					success: callbackFunc
+				});
+
+
+		//handles the ajax response
+			function callbackFunc(results) {
+			if (check_choice=="Emitter"){
 			
-	}
-	}
+			
+		 visualize_emitter(results);
+		 
+		 info.update = function (props) {
+					this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
+						'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
+						: 'Click a marker for more information');
+			};	
+			info.update();
+		 }
+			
+		//Clear result HTML div
+				$("#resultdiv").empty();	   
+				//result is a json object http://de.wikipedia.org/wiki/JavaScript_Object_Notation
+				htmlString="<table class=\"table table-striped\">";
+
+		// Special case carcinogen information		
+			
+			if (check_choice=="Emitter"){
+			
+				htmlString+="<button type='button' onclick='get_overview()' class='btnStyle span3'>Close detail view and go back to overview</button>";
+			}
+			
+			if (check_choice=="Carcinogen"){	
+				
+				htmlString+="Here you see <b>carcinogens</b> that are likely to cause <b> "+sir_cancer+" Cancer</b>";
+			}	
+				//write table head
+				htmlString+="<tr>";
+					$.each(results.head.vars, function(index2, value2) { 
+						htmlString+="<th>?"+value2+"</th>";
+					 });
+				htmlString+="</tr>";
+				//write table body
+				$.each(results.results.bindings, function(index1, value1) { 
+					htmlString+="<tr>";
+					$.each(results.head.vars, function(index2, value2) { 
+						htmlString+="<td>"+value1[value2].value+"</td>";
+						
+						//console.log(value1[value2].value)
+					 });
+					htmlString+="</tr>";
+					
+				});
+
+				htmlString+="</table>";
+				$("#resultdiv").html(htmlString);
+
+
+		// functionalities which are not necessary for carcinogen information
+		if (check_choice!="Carcinogen"){
+			if (check_choice!="Emitter"){
+				var WLBoundaries_new
+				WLBoundaries_new = WLBoundaries;
+		//sparql();
+		//alert(WLBoundaries_new.features[1].properties.GKZ); 
+		//alert(results.results.bindings[1].c.value)
+		
+		//global variable from sparql.js with the result set of the defined query
+
+		// Merge information from the WLBoundaries geojson and the new queried result set.
+				for(var i=0;i<WLBoundaries_new.features.length;i++){
+
+
+				for(var n=0;n<results.results.bindings.length;n++){
+
+				if(WLBoundaries_new.features[i].properties.GKZ == results.results.bindings[n].GKZ.value){
+					if(check_choice=="SIR"){
+						sir_check=true;
+						WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].SIR.value; // value from variable ?c see sparql query
+			
+					}
+					
+				if(check_choice=="CI_lower_level"){
+					WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_lower_level.value; // value from variable ?c see sparql query
+					sir_check=true;
+				}
+				
+				if(check_choice=="CI_upper_level"){
+					WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_upper_level.value; // value from variable ?c see sparql query
+					sir_check=true;
+				}
+			
+				if(check_choice=="Carcinogen"){
+					WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_upper_level.value; // value from variable ?c see sparql query
+		
+				}
+				
+			}
+		}
 	};
 
 
@@ -151,26 +171,7 @@ map.removeLayer(geojson);
 					fillOpacity: 0.7,
 					fillColor: getColor(feature.properties.SIR)
 				};
-			}
-
-
-
-//	var geojsonlayer
-//	geojsonlayer=L.geoJson(WLBoundaries_new, {style: style_new});
-//	geojsonlayer.addTo(map);	
-
-/*
-	if (map.hasLayer (geojsonlayer)){
-		geojsonlayer.clearLayers();
-		map.removeLayer(geojsonlayer);
 	}
-
-			if (map.hasLayer(geojson)){
-			map.removeLayer(geojson);
-			}*/
-
-
-
 
 
 
@@ -183,7 +184,7 @@ map.removeLayer(geojson);
 					   d > 0.30 ? '#fee391' :
 					   d > 0.00 ? '#ffffd4' :			     
 								  '#ffffff';
-			}
+	}
 
 			
 	//Legend
@@ -194,7 +195,7 @@ map.removeLayer(geojson);
 	legend2.onAdd = function (map) {
 	var grades2
 	var labels2
-				var div2 = L.DomUtil.create('div2', 'info legend'),
+				div2 = L.DomUtil.create('div2', 'info legend'),
 				grades2 = [0, 0.30, 0.50, 0.70, 1.00, 2.00],
 				labels2 = [],
 				
@@ -208,19 +209,19 @@ map.removeLayer(geojson);
 						'<i style="background:' + getColor(from + 0 ) + '"></i> ' +
 						from + (to ? '&ndash;' + to : '+'));
 				}
-
+				legend_check=true;
 				div2.innerHTML = labels2.join('<br>');
 				return div2;
 	};
+	
 	// if already exists
+	
 	if (querynumber==1){
 			legend2.addTo(map);
 	}
-
-
-
-
-
+	if (legend_check==false){
+	legend2.addTo(map);
+	}
 
 
 
@@ -261,10 +262,8 @@ var geojson2;
 				info.update(layer2.feature.properties);
 			}
 
-/*	
-	if (map.hasLayer(geojson2)==true){
-		map.removeLayer(geojson2);
-	}*/
+
+			
 			function resetHighlight2(e2) {
 				geojson2.resetStyle(e2.target);
 				info.update();
@@ -304,11 +303,13 @@ var geojson2;
 			//var info = L.control();
 
 			info.onAdd = function (map) {
+			while(secondquery==true){
 				this._div = L.DomUtil.create('div', 'info');
 				this.update();
 				return this._div;
+		}
 			};
-
+		if(secondquery==true){
 			info.update = function (props) {
 				this._div.innerHTML = '<h4> Region Westphalen Lippe</h4>' +  (props ?
 				
@@ -316,11 +317,13 @@ var geojson2;
 					'<b>Municipality: ' + props.Name + '</b><br />'+check_choice+': ' + props.SIR + ''
 					: 'Hover over a state');
 			};
-
+	}
 			//if (querynumber==1){
 			if (querynumber==1){
-			info.addTo(map);
-			info.check=true;
+				if(info_check==false){
+					info.addTo(map);
+					info.check=true;
+				}
 			}
 			
 
