@@ -35,10 +35,24 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 		}
 
 				if (check_choice=="CI_lower_level"){
+				if (sir_cancer=="C00-C14"){
+				sir_cancer="C00C14"
+				}
+				if (sir_cancer=="C91-C95"){
+				sir_cancer="C91C95"
+				}
+				
 					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_lower_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_lowerlimit> ?CI_lower_level   } "; //Limit 20
 		}
 
 				if (check_choice=="CI_upper_level"){
+				
+				if (sir_cancer=="C00-C14"){
+				sir_cancer="C00C14"
+				}
+				if (sir_cancer=="C91-C95"){
+				sir_cancer="C91C95"
+				}
 					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_upper_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_upperlimit> ?CI_upper_level   } "; //Limit 20
 		}
 
@@ -50,7 +64,7 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 
 					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?a ?b ?c WHERE {?a qb:dataSet <http://www.example.org/dataset/Muenster_IndustryEmitterDataset>. ?a ?b ?c}"; //Limit 20
 		}
-		
+	
 				//sent request
 				$.ajax({
 					dataType: "jsonp",

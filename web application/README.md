@@ -17,22 +17,29 @@ using the chain linking of different variables that is encoded as linked data.
 
   
 ### Status
-The version **(30.09.2014)** is in a very early development step.
+This is an early development step version.
 
 This brings along:
 
-- Limited information retrieval ( for development purposes only a test RDF repository can be queried) 
+- First insight of possibilities of the CancerExplorer
+- Limited information retrieval (for development purposes only a test RDF repository can be queried) 
 - Long list of issues (refresh your browser view after queries)
 
-		Issue list
-					https://github.com/lodum/CancerExplorer/issues
+Issue list:
+
+(https://github.com/lodum/CancerExplorer/issues)
 
 
 
 
 ## Screenshot
+Overview:
+
 ![CancerExplorer application][1]
 
+Detail view:
+
+![CancerExplorer application][2]
 
 
 ## Further information
@@ -42,3 +49,4 @@ This brings along:
 -----
 
 [1]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/screenshot_overview.png 
+[2]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/screenshot_overview2.png 
