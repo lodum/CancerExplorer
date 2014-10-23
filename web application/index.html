@@ -253,7 +253,7 @@
 	 <!-- sir sidebar -->
 
 	 <div id="sir_sidebar"> 
-		<br> <b><font size=4px>Create a certain Standardized Incidence Ratio (SIR) visualization:  </b></font>
+		<br> <b><font size=4px>Create a certain Example Standardized Incidence Ratio (SIR) visualization:  </b></font>
 		<br>
 		<div style="padding-top:15px">
 		<b><font size=3px>Choose a cancer type:</b></font>
@@ -296,10 +296,10 @@
 		</div>
 			
 		<br>
-		<button type="button" onclick="sir_clear()" class="btnStyle span3">Clear</button>
-		<button type="button" onclick="ini_sir()" class="btnStyle span3">Visualize SIR</button>
-		<button type="button" onclick="ini_cilower()" class="btnStyle span3">Visualize CI 95 Lower Level</button> 
-		<button type="button" onclick="ini_ciupper()" class="btnStyle span3">Visualize CI 95 Upper Level</button>
+		<button type="button" onclick="sir_clear()" class="btnStyle span3">Clear Selection</button>
+		<button type="button" onclick="ini_sir()" class="btnStyle span3">Visualize Example SIR</button>
+		<button type="button" onclick="ini_cilower()" class="btnStyle span3">Visualize Example CI95 Lower Level</button> 
+		<button type="button" onclick="ini_ciupper()" class="btnStyle span3">Visualize Example CI95 Upper Level</button>
 		
 		</div>
 
@@ -485,6 +485,11 @@
 					<td><div id="RUSS"> </div></td>
 				  </tr>
 				</table>
+				<br>
+				<b>Source:</b><br>
+				<b>Landesamt für Natur, Umwelt und Verbraucherschutz<br>
+				   © Land NRW, Recklinghausen, http://www.lanuv.nrw.de</b><br>
+				
 			  </fieldset>
 			</form>
 
@@ -658,11 +663,11 @@
 			};	
 			info.update();
 	   }
-	  
+	/*  
 	   if(info_check==false){
 			info.addTo(map);
 			info_check=true;
-		}
+		}   */
 	}
 
 
@@ -1020,7 +1025,7 @@
 					
 			};
 }
-			info_check=false;
+			//info_check=false;
 			if(info_check==false){
 			info.addTo(map);
             info_check=true;}

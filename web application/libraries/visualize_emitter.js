@@ -87,7 +87,7 @@ function get_overview (){
 			
 
 	}
-	// Add municipality geometry layer and set map view
+// Add municipality geometry layer and set map view
 	geojson.addTo(map);			
 	map.setView([51.95442, 7.62709], 7);
 

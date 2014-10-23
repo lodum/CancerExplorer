@@ -1,7 +1,8 @@
 var SIRLayer = new L.LayerGroup();
 var info_check
-
+info_check=false;
 var legend_check
+legend_check=false;
 var sir_check
 var div2 = L.DomUtil.create('div2', 'info legend');
 info_div = L.DomUtil.create('div', 'info');
@@ -16,8 +17,10 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 		//check multiple queries
 		if (querynumber==1){
 			if (secondquery==true){
+			if (info_check==true){
 				 info.removeFrom(map)
 				 info_check=false;
+			}
 			}
 		}
 		// connect to endpoint and send sparql query
@@ -209,6 +212,8 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 	legend2.onAdd = function (map) {
 	var grades2
 	var labels2
+	
+	
 				div2 = L.DomUtil.create('div2', 'info legend'),
 				grades2 = [0, 0.30, 0.50, 0.70, 1.00, 2.00],
 				labels2 = [],
@@ -230,8 +235,11 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 	
 	// if already exists
 	
-	if (querynumber==1){
+	if (querynumber>=1){
+	if (legend_check==false){
 			legend2.addTo(map);
+			legend_check==true;
+	}
 	}
 	if (legend_check==false){
 	legend2.addTo(map);

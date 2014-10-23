@@ -1,7 +1,7 @@
 # CancerExplorer
 
 
-## Spatial Cause-Effect Relationships Explorer
+## Linked Data-Based Spatial Cause-Effect Relationships Explorer
 
 
 ### Introduction
@@ -12,16 +12,19 @@ The work is a result of an external semester contribution, which was mainly focu
 
 
 ### Purpose
-The application should present possible causes for high cancer incidence rates in a spatial context. It does so, by
+The application presents possible causes for high cancer incidence rates in a spatial context. It does so, by
 using the chain linking of different variables that is encoded as linked data.
 
   
 ### Status
 This is an early development step version.
 
+Presented statistical epidemiological values (SIR and CI values):
+Because of data publishing discussions at the moment for demonstration purpose only random example values are integrated.
+
 This brings along:
 
-- First insight of possibilities of the CancerExplorer
+- First insights of possibilities of the CancerExplorer
 - Limited information retrieval (for development purposes only a test RDF repository can be queried) 
 - Long list of issues (refresh your browser view after queries)
 
