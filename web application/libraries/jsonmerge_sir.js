@@ -10,7 +10,7 @@ info_div = L.DomUtil.create('div', 'info');
 
 // function to visualize chloropleth SIR/CI map
 
-function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice)
+function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name)
 {
 
 	map.removeLayer(geojson);
@@ -247,10 +247,7 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 
 
 
-	sir_cancer="";
-	sir_year="";
-	sir_gender="";
-	sir_cancer_add="";
+	
 
 	function style2(feature2) {
 				return {
@@ -282,6 +279,7 @@ var geojson2;
 				}
 
 				info.update(layer2.feature.properties);
+				info2.update(layer2.feature.properties);
 			}
 
 
@@ -289,10 +287,12 @@ var geojson2;
 			function resetHighlight2(e2) {
 				geojson2.resetStyle(e2.target);
 				info.update();
+				info2.update();
 			}
 
 			function zoomToFeature(e2) {
 				map.fitBounds(e2.target.getBounds());
+				map2.fitBounds(e.target.getBounds());
 			}
 
 			function onEachFeature2(feature2, layer2) {
@@ -311,7 +311,7 @@ var geojson2;
 			SIRLayer.addLayer(geojson2);
 		SIRLayer.addTo(map);
 			map.attributionControl.addAttribution('Text?');
-
+			map2.attributionControl.addAttribution('Text?');
 
 
 	// Add Hover information box
@@ -323,6 +323,9 @@ var geojson2;
 
 
 			//var info = L.control();
+			
+		
+			
 
 			info.onAdd = function (map) {
 			while(secondquery==true){
@@ -336,7 +339,7 @@ var geojson2;
 				this._div.innerHTML = '<h4> Region Westphalen Lippe</h4>' +  (props ?
 				
 				
-					'<b>Municipality: ' + props.Name + '</b><br />'+check_choice+': ' + props.SIR + ''
+					'<b>Municipality: ' + props.Name + '</b><br /> Cancer Type:'+cancer_type_name+'<br>'+check_choice+': ' + props.SIR + ''
 					: 'Hover over a state');
 			};
 	}
@@ -352,9 +355,15 @@ var geojson2;
 	}
 
 	}
+	
+	
+	
 
 	};
 
 	Sparql_panel();
-
+	sir_cancer="";
+	sir_year="";
+	sir_gender="";
+	sir_cancer_add="";	
 };

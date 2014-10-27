@@ -20,11 +20,16 @@
 		<link rel="stylesheet" href="libraries/WL_overview/leaflet.overviewcontrol.css" />
 		<link rel="stylesheet" href="libraries/L.Control.Sidebar.css" />
 		
+		
+		
+		<link rel="stylesheet" href="libraries/ExplorerModus/leaflet.explorermodus.css" />
+		
 		<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
 		<script src="libraries/Leaflet.draw/dist/leaflet.draw.js" type="text/javascript"></script>
 		<script src="libraries/MiniMap/src/Control.MiniMap.js" type="text/javascript"></script>
 		<script src="libraries/Measure/leaflet.measurecontrol.js" type="text/javascript"></script>
 		<script src="libraries/WL_overview/leaflet.overviewcontrol.js" type="text/javascript"></script>
+		<script src="libraries/ExplorerModus/leaflet.explorermodus.js" type="text/javascript"></script>
 		<script type='text/javascript' src="libraries/GeometryUtil/dist/leaflet.geometryutil.js"></script>
 		<script type='text/javascript' src="libraries/leaflet.almostover.js"></script>
 		
@@ -70,8 +75,12 @@
 		<link rel="stylesheet" href="libraries/Leaflet.markercluster/dist/MarkerCluster.css" />
 		<link rel="stylesheet" href="Leaflet.markercluster/dist/MarkerCluster.Default.css" />
 		<script src="Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
-
-
+	
+	<!--Explorer Modus Functions/>-->
+	<script type="text/javascript" src="libraries/explorer.js"></script>
+	<script src="libraries/L.Map.Sync.js"></script>
+	
+	<script src="libraries/explorer_airquality.js"></script>
 
 
 	<style>
@@ -106,14 +115,17 @@
 
 		#map { 
 					position: absolute;
-					top:0;
+					<!--top:0;-->
+					height:auto;
 					left: 0;
 					right: 0;
-					bottom:0;
+					<!--bottom:10;-->
 				}
 				.leaflet-control.enabled a {
 					background-color: yellow;
 				}
+				
+		
 
 	</style>
 	 <style type="text/css">
@@ -228,6 +240,7 @@
 				<li onclick="Sparql_panel_edit()"><a href="#">SPARQL Query</a></li>
 				<li onclick="Query()"><a href="#">Explore cancer incidents</a></li>
 				<li onclick="Explore_cause_effect();"><a href="#">Explore cause-effect relations</a></li>
+				<!---->
 				<li onclick="mylocation()"><a href="#">Get my location</a></li>
 				
 				
@@ -239,10 +252,10 @@
 		  </div>
 		</div>
 
-	<!-- Main div structure on page-->
-		<div class="container">
+	<!-- Main div structure on page style="position:absolute;left:25px; top:51px; width: 40%; height: 80%;"-->
+		
 
-		<div id="map" style="position:absolute;left:25px; top:51px; width: 96%; height: 80%;" >
+		<div id="map" style="position:absolute;left:25px; top:51px; width: 80%; height: 80%;" >
 		
 	 
 	  
@@ -499,16 +512,140 @@
 
 	 
 	</div>
-	</div>
 	 
+	
+	<div id="map2" style="position:absolute;left:600px; top:51px; width: 0%; height: 0%;">
+	</div>
+	
+	
+	
+	
+	
+	<div id="control" style="position:absolute;left:1150px; top:51px; width: 12%; height: 0%;" hidden="true" background="white">
+	
+	
+	
+	<button type="button" onclick="explorer_sidebar()" class="btnStyle span3">Explore Air Quality Data</button>
+	
+	
+	<font color=white size=1px><b>Source: Landesamt für Natur, Umwelt und Verbraucherschutz<br>
+				   © Land NRW, Recklinghausen, http://www.lanuv.nrw.de</b><br> 
+				   <br>
+				   <br>
+				   <b>Emissions from operator of the facility's emissions declaration 2008.</b><br>
+				   <b>Measurements in kg/a, Dioxine/Furane as I-TE in mg/a. </b><br>
+				   
+				   
+				   
+				   </font>
+	
+	
+	<form action="index.html">
+    <input type="submit" class="btnStyle span3" value="Leave Explorer Modus">
+	</form>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div id="explorer_sidebar"> 
+		<div id="resultdiv_map2"></div>
+	<div style="padding-top:15px">
+		<b><font size=3px color=black>Choose an air emission value to explore:</b></font>
+		</div>
+		<div style="border: thin solid #000000; border-bottom-width: 0px;">
+		</div>
+		
+		<font size=2px color=black>First, choose an emission branch</font>
+		<select class="form-control" name="list_branch" id="list_branch">
+		<option value="start">Please Select</option>
+		<option value="Industry">Industry</option>
+		<option value="Traffic">Traffic</option>
+		<option value="SmallCombustionPlant">Small Combustion Plant</option>
+		<option value="Agriculture">Agriculture</option>
+		<option value="Total">Total</option>
+		</select>
+	
+		
+		<br>
+		
+		<font size=2px color=black>Choose an emitted substance</font>
+		<select class="form-control" name="list_substance" id="list_substance">
+		<option value="start">Please Select</option>
+		<option value="N2O">N2O</option>
+		<option value="CO2">CO2</option>
+		<option value="CH4">CH4</option>
+		<option value="NH3">NH3</option>
+		<option value="HCL">HCL</option>
+		<option value="HF">HF</option>
+		<option value="CO">CO</option>
+		<option value="NMVOC">NMVOC</option>
+		<option value="SO2">SO2</option>
+		<option value="NO2">NO2</option>
+		<option value="As">As</option>
+		<option value="Pb">Pb</option>
+		<option value="Cr">Cr</option>
+		<option value="Cu">Cu</option>
+		<option value="Cd">Cd</option>
+		<option value="Ni">Ni</option>
+		<option value="V">V</option>
+		<option value="Zn">Zn</option>
+		<option value="DUF">DUF</option>
+		<option value="BAP">BAP</option>
+		<option value="BENZ">BENZ</option>
+		<option value="PAK">PAK</option>
+		<option value="PM10">PM10</option>
+		<option value="Staub">Staub</option>
+		<option value="RUSS">RUSS</option>
+		</select>
+	<br>
+	<br>
+	<br>
+	<br>
+	<button type="button" onclick="explorer_airquality()" class="btnStyle span3">Visualize</button>
+	
+	
+	<!-- empty html div-element ... placeholder for results (text/canvas/map etc)-->
+	
+		<br/>
+	  </div>
+	
+	
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<script>
+	
+	
+	
+	
+	
+	
+	//document.getElementById("map2").hidden = true;
 	var info = L.control();
+	var info2 = L.control();
 	//variables for multiple query control
 	var secondquery=false;
 	var querynumber=0;
 	var clear_sir=false;
 	var legend2
 	var check_detail_view
+	var layer
 	
 	//Check the selections, submit parameter to the SPARQL/AJAX function
 
@@ -519,6 +656,7 @@
 		var sir_gender
 		var sir_cancer_add
 		var check_choice="SIR";
+		var cancer_type_name
 		
 
 		$('#year_list').click(function(){
@@ -532,8 +670,46 @@
 		sir_cancer = $("input:radio[name ='obsType']:checked").val()
 		sir_year=$('input[name="obsType1"]:checked').val();
 		sir_gender=$('input[name="obsType2"]:checked').val();
+		
+		
+		if (sir_cancer=="C67"){
+			
+			cancer_type_name="Bladder Cancer";
+			
+		}
+		if (sir_cancer=="C34"){
+			
+			cancer_type_name="Lung Cancer";
+			
+		}
+		if (sir_cancer=="C00-C14"){
+			
+			cancer_type_name="Nasal_cavity_and_paranasal_sinus Cancer";
+			
+		}
+		if (sir_cancer=="C91-C95"){
+			
+			cancer_type_name="Leukemia";
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		if (sir_input_check()==true){
-			visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
+			visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name);
 		}
 		});
 
@@ -546,6 +722,7 @@
 		var sir_gender
 		var sir_cancer_add
 		var check_choice="CI_lower_level";
+		var cancer_type_name
 
 		$('#year_list').click(function(){
 			alert($("input[name='obstype1']:checked").val());
@@ -561,7 +738,7 @@
 		querynumber=querynumber+1;
 		
 		if (sir_input_check()==true){
-			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
+			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name);
 		}
 		});
 
@@ -574,6 +751,7 @@
 		var sir_year
 		var sir_gender
 		var sir_cancer_add
+		var cancer_type_name
 		var check_choice="CI_upper_level";
 
 		$('#year_list').click(function(){
@@ -588,7 +766,7 @@
 		sir_gender=$('input[name="obsType2"]:checked').val();
 
 		if (sir_input_check()==true){
-			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
+			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name);
 		}
 		});
 
@@ -610,25 +788,29 @@
 		sir_cancer = $("input:radio[name ='obsType3']:checked").val()
 		if (sir_cancer=="C67"){
 			sir_cancer="Bladder";
+			cancer_type_name="Bladder Cancer";
 			sir_cancer_add="Cancer";
 		}
 		if (sir_cancer=="C34"){
 			sir_cancer="Lung";
+			cancer_type_name="Lung Cancer";
 			sir_cancer_add="Cancer";
 		}
 		if (sir_cancer=="C00-C14"){
 			sir_cancer="Nasal_cavity_and_paranasal_sinus";
+			cancer_type_name="Nasal_cavity_and_paranasal_sinus Cancer";
 			sir_cancer_add="";
 		}
 		if (sir_cancer=="C91-C95"){
 			sir_cancer="Leukemia";
+			cancer_type_name="Leukemia";
 			sir_cancer_add="";
 		}
 		sir_year=$('input[name="obsType1"]:checked').val();
 		sir_gender=$('input[name="obsType2"]:checked').val();
 
 		if (inci_input_check()==true){
-			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
+			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name);
 		}
 		});
 
@@ -647,11 +829,12 @@
 		var sir_year
 		var sir_gender
 		var sir_cancer_add
+		var cancer_type_name
 		var check_choice="Emitter";
 
 		$(document).ready(function(){
 
-			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice);
+			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name);
 			order++;
 		});
        if (sir_check=true){
@@ -697,6 +880,35 @@
 			fillOpacity: 0.7
 		};
 	}
+	
+	
+	function style3(feature) {
+	
+			/*
+			if (layer != undefined){
+			alert(layer.feature.properties.Name);
+			if (layer.feature.properties.Name == feature.properties.Name) {
+		    return {
+			fillColor: getColor(feature.properties.GKZ),
+			weight: 2,
+			opacity: 1,
+			color: 'red',
+			dashArray: '3',
+			fillOpacity: 0.7
+			};}}
+			else{              */
+			return {
+			fillColor: getColor(feature.properties.GKZ),
+			weight: 2,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7
+			
+			
+		};
+		//}
+	}
 
 
 
@@ -707,14 +919,22 @@
 				zoom: 7,
 				zoomcontrol:true
 				});
+	
+	var map2 = new L.Map('map2', {
+				//crs: L.CRS.EPSG3857,
+				center: [51.95442, 7.62709],
+				zoom: 7,
+				zoomcontrol:true
+				});
 				
-				
+			
 				
 	// Loading status
 	  var loadingControl = L.Control.loading({
 		separate: true
 		});
 	map.addControl(loadingControl);
+	map2.addControl(loadingControl);
 				
 	// Add our zoom control manually where we want to
 
@@ -722,6 +942,7 @@
 		position: 'topright'
 		});
 	map.addControl(zoomControl);
+	map2.addControl(zoomControl);
 	
 	
 				
@@ -754,6 +975,10 @@
 	var Cause_Effect_Panel = L.control.sidebar('Cause_Effect_Panel', {
 		position: 'right'
 	});
+	
+	var Explorer_Panel = L.control.sidebar('explorer_sidebar', {
+		position: 'right'
+	});
 
 		
 
@@ -767,6 +992,9 @@
 	map.addControl(sir_sidebar);
 	map.addControl(sidebarLinks);
 	map.addControl(emitter_detail);
+	
+	
+	map2.addControl(Explorer_Panel);
 
 
 	// Sidebar control functions
@@ -805,6 +1033,17 @@
 		SPARQLPanel_edit.show();
 		clear_emitter_locations();
 	}
+	
+	
+	function explorer_sidebar()
+	{
+		
+		Explorer_Panel.show();
+		
+	}
+	
+	
+	
 	
 	////////////////////////////////////////////////////
 
@@ -913,7 +1152,7 @@
 	 
 	}}}
 	
-	// visualize layer containing markser
+	// visualize layer containing marker
 			
 			markersLayer.addTo(map);
 
@@ -997,10 +1236,21 @@
 		attribution: 'GKZ',
 		setOpacity:10,	
 	})
+	
+	var WL_boundary2= L.tileLayer('http://{s}.tiles.mapbox.com/{id}/{z}/{x}/{y}.png', {
+		id: 'WL_boundary2',
+		attribution: 'GKZ',
+		setOpacity:10,	
+	})
+	
+	
+var WLBoundaries2=WLBoundaries;
 
 	WL_boundary.addTo(map);
+	WL_boundary2.addTo(map2);
 
 	var geojsonadd=L.geoJson(WLBoundaries, {style: style}).addTo(map);
+	var geojsonadd2=L.geoJson(WLBoundaries2, {style: style}).addTo(map2);
 
 
 
@@ -1017,6 +1267,17 @@
 				return this._div;
 			}
 			};
+		
+		info2.onAdd = function (map2) {
+			while(secondquery==false){
+		//while: otherwise producing node error after removing L.control
+			
+				this._div2 = L.DomUtil.create('div2', 'info2');
+				this.update();
+				return this._div2;
+			}
+			};
+	
 			if(secondquery==false){
 			info.update = function (props) {
 				this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
@@ -1024,10 +1285,22 @@
 					: 'Hover over a state');
 					
 			};
+			
+			
+			info2.update = function (props) {
+				this._div2.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
+					'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
+					: 'Hover over a state');
+					
+			};
+			
+			
+			
 }
 			//info_check=false;
 			if(info_check==false){
 			info.addTo(map);
+			info2.addTo(map2);
             info_check=true;}
 
 			// get color depending on population density value
@@ -1054,9 +1327,10 @@
 					fillColor: getColor(feature.properties.GKZ)
 				};
 			}
-
+var hover_selection
 			function highlightFeature(e) {
-				var layer = e.target;
+				layer = e.target;
+				
 
 				layer.setStyle({
 					weight: 3,
@@ -1067,20 +1341,45 @@
 
 				if (!L.Browser.ie && !L.Browser.opera) {
 					layer.bringToFront();
+					
 				}
-
+                
+				/*
+					L.geoJson(WLBoundaries2, {
+style: function(feature) {
+    switch (feature.properties.Name) {
+        case layer.feature.properties.Name: return {color: '#2E64FE'};
+        
+    }
+}
+}).addTo(map);*/
+				
+				
+				
+				/*geojson2.setStyle({
+					weight: 3,
+					color: '#2E64FE',
+					dashArray: '',
+					fillOpacity: 0.7
+				});*/
+				
+				hover_selection=layer.feature.properties.Name
 				info.update(layer.feature.properties);
+				info2.update(layer.feature.properties);
 			}
 
 			var geojson;
 
 			function resetHighlight(e) {
 				geojson.resetStyle(e.target);
+				geojson2.resetStyle(e.target);
 				info.update();
+				info2.update();
 			}
 
 			function zoomToFeature(e) {
 				map.fitBounds(e.target.getBounds());
+				map2.fitBounds(e.target.getBounds());
 			}
 
 			function onEachFeature(feature, layer) {
@@ -1095,8 +1394,15 @@
 				style: style,
 				onEachFeature: onEachFeature
 			}).addTo(map);
+			
+			
+			var geojson2 = L.geoJson(WLBoundaries2, {
+				style: style3,
+				onEachFeature: onEachFeature
+			}).addTo(map2);
 
 			map.attributionControl.addAttribution('Text?');
+			map2.attributionControl.addAttribution('Text?');
 
 
 			var legend = L.control({position: 'bottomright'});
@@ -1128,8 +1434,11 @@
 			
 	//OSM maps one as overlay and one base layer 
 	var osmUrl='http://a.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	var osmUrl2='http://a.tile.openstreetmap.org/{z}/{x}/{y}.png';
 	var osmAttrib='Map data &copy; OpenStreetMap contributors';
+	var osmAttrib2='Map data &copy; OpenStreetMap contributors';
 	var layerOSM=L.tileLayer(osmUrl, {minZoom: 0, maxZoom: 18, attribution: osmAttrib});
+	var layerOSM2=L.tileLayer(osmUrl2, {minZoom: 0, maxZoom: 18, attribution: osmAttrib2});
 	var layerOSMtransparent=L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '&copy<a href="www.openstretmap.org/copyright ">OpenStreetMap</a> contributors',
 		opacity:0.5,
@@ -1178,6 +1487,10 @@
 			
 	//The map which is visualized when you get on the website.
 	layerOSM.addTo(map);
+	layerOSM2.addTo(map2);
+	
+	
+
 
 	//Map control: Layer switcher
 	var baseMaps={ "OSM": layerOSM,
@@ -1191,6 +1504,7 @@
 					  };
 
 	var control=L.control.layers(baseMaps,overlapMaps,{position:'bottomleft'}).addTo(map);
+	var control2=L.control.layers(baseMaps,overlapMaps,{position:'bottomleft'}).addTo(map2);
 
 	// Controls
 
@@ -1203,7 +1517,10 @@
 	
 	//overview Control- to get to the municipality view of Westfalen-Lippe 
 		L.Control.overviewControl().addTo(map);
+		L.Control.overviewControl().addTo(map2);
 		
+	// add explorer control
+	L.Control.explorerModus().addTo(map);
 		
 	//getlocation-- intialise a marker of your current position
 	//map.locate({setView: true, maxZoom: 16});
