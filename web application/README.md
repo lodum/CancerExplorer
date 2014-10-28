@@ -24,13 +24,14 @@ using the chain linking of different variables that is encoded as linked data.
 This is an early development step version.
 
 Presented statistical epidemiological values (SIR and CI values):
-Because of data publishing discussions at the moment for demonstration purpose only random example values are integrated.
+For demonstration purpose only random example values are integrated. The values are generated randomly for each new query.
+
 
 This brings along:
 
 - First insights of possibilities of the CancerExplorer
 - Limited information retrieval (for development purposes only a test RDF repository can be queried) 
-- Long list of issues (refresh your browser view after queries)
+- Long list of issues (refresh your browser view after broken queries)
 
 Issue list:
 

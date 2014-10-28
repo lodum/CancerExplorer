@@ -6,6 +6,8 @@ legend_check=false;
 var sir_check
 var div2 = L.DomUtil.create('div2', 'info legend');
 info_div = L.DomUtil.create('div', 'info');
+var minimum=0;
+var maximum=230;
 
 
 // function to visualize chloropleth SIR/CI map
@@ -146,23 +148,24 @@ function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choi
 		// Merge information from the WLBoundaries geojson and the new queried result set.
 				for(var i=0;i<WLBoundaries_new.features.length;i++){
 
-
+				var randomnumber= (Math.floor(Math.random()*maximum+1)+minimum);
 				for(var n=0;n<results.results.bindings.length;n++){
 
 				if(WLBoundaries_new.features[i].properties.GKZ == results.results.bindings[n].GKZ.value){
 					if(check_choice=="SIR"){
 						sir_check=true;
-						WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].SIR.value; // value from variable ?c see sparql query
+						// Math random to generate 
+						WLBoundaries_new.features[i].properties.SIR= results.results.bindings[randomnumber].SIR.value; // value from variable ?c see sparql query
 			
 					}
 					
 				if(check_choice=="CI_lower_level"){
-					WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_lower_level.value; // value from variable ?c see sparql query
+					WLBoundaries_new.features[i].properties.SIR= results.results.bindings[randomnumber].CI_lower_level.value; // value from variable ?c see sparql query
 					sir_check=true;
 				}
 				
 				if(check_choice=="CI_upper_level"){
-					WLBoundaries_new.features[i].properties.SIR= results.results.bindings[n].CI_upper_level.value; // value from variable ?c see sparql query
+					WLBoundaries_new.features[i].properties.SIR= results.results.bindings[randomnumber].CI_upper_level.value; // value from variable ?c see sparql query
 					sir_check=true;
 				}
 			
