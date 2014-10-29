@@ -312,7 +312,7 @@ var geojson2;
 			});
 		
 			SIRLayer.addLayer(geojson2);
-		SIRLayer.addTo(map);
+			SIRLayer.addTo(map);
 			map.attributionControl.addAttribution('Text?');
 			map2.attributionControl.addAttribution('Text?');
 

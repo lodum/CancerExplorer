@@ -1680,7 +1680,7 @@ var geojson_aqd;
 
 
 	
-			function highlightFeature2(e2) {
+			function highlightFeature3(e2) {
 				var layer2 = e2.target;
 
 				layer2.setStyle({
@@ -1693,28 +1693,28 @@ var geojson_aqd;
 				if (!L.Browser.ie && !L.Browser.opera) {
 					layer2.bringToFront();
 				}
-
+				info.update(layer2.feature.properties);
 				info2.update(layer2.feature.properties);
 			}
 
 
 			
-			function resetHighlight2(e2) {
+			function resetHighlight3(e2) {
 				geojson_aqd.resetStyle(e2.target);
 				info2.update();
 				info.update();
 			}
 
-			function zoomToFeature(e2) {
+			function zoomToFeature3(e2) {
 				map2.fitBounds(e2.target.getBounds());
 				map.fitBounds(e.target.getBounds());
 			}
 
-			function onEachFeature2(feature2, layer2) {
+			function onEachFeature3(feature2, layer2) {
 				layer2.on({
-					mouseover: highlightFeature2,
-					mouseout: resetHighlight2,
-					click: zoomToFeature
+					mouseover: highlightFeature3,
+					mouseout: resetHighlight3,
+					click: zoomToFeature3
 				});
 			}
 
@@ -1723,7 +1723,7 @@ var geojson_aqd;
 
 	geojson_aqd = L.geoJson(WLBoundaries_aqd, {
 				style: style_new,
-				onEachFeature: onEachFeature
+				onEachFeature: onEachFeature3
 			});
 	
 			AQDLayer.addLayer(geojson_aqd);
@@ -1731,17 +1731,17 @@ var geojson_aqd;
 			geojson_aqd.addTo(map2);
 			map2.attributionControl.addAttribution('Text?');
 	
-info.update(layer.feature.properties);
-info2.update(layer.feature.properties);
+//info.update(layer.feature.properties);
+//info2.update(layer2.feature.properties);
 //alert(secondquery);
 info2.onAdd = function (map2) {
-			while(secondquery==false){
+			//while(secondquery==false){
 				this._div = L.DomUtil.create('div', 'info');
 				this.update();
 				return this._div;
-		}
+		//}
 			};
-		if(secondquery==false){
+		//if(secondquery==false){
 			info2.update = function (props) {
 				this._div2.innerHTML = '<h4> Region Westphalen Lippe</h4>' +  (props ?
 				
@@ -1749,7 +1749,7 @@ info2.onAdd = function (map2) {
 					'<b>Municipality: ' + props.Name + '</b><br />'+substance_selection2+' '+branch_selection+' Value: ' + props.Values + ''
 					: 'Hover over a state');
 			};
-	}
+	//}
 
 
 

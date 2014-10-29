@@ -120,6 +120,8 @@
 					left: 0;
 					right: 0;
 					<!--bottom:10;-->
+					[b]left: 50%;[/b]
+					[b]margin-left: -500px;[/b] /* negative Hälfte von width:1000px */
 				}
 				.leaflet-control.enabled a {
 					background-color: yellow;
@@ -128,39 +130,32 @@
 		
 
 	</style>
-	 <style type="text/css">
-			#qsizemin {
-				width: 60px;
-			}
-			#qpricemin {
-				width: 60px;
-			}
-			#qminlodger {
-				width: 60px;
-			}
-			#qsizemax {
-				width: 60px;
-			}
-			#qpricemax {
-				width: 60px;
-			}
-			#qmaxlodger {
-				width: 60px;
-			}
-			#qminroom {
-				width: 60px;
-			}
-			#qzip {
-				width: 60px;
-			}
-			#qmaxroom {
-				width: 60px;
-			}
-	</style>
+	
 	<style>
-			#map {
-				width: 800px;
-				height: 500px;
+		/*	#map {
+				float:left;
+				
+				width: 100%;
+				height: 700px;
+			}
+			*/
+			#map2 {
+				
+				min-width:38%;
+				margin-left:2%;
+				
+			}
+			
+			.clear {
+			clear: both;
+			}
+			
+			
+			#control {
+				float:right;
+				margin-top:0px;
+				width: 20%;
+				height: 50%
 			}
 
 			.info {
@@ -208,6 +203,16 @@
 			width: 100%;
 			font-weight: bold;
 		}
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
 			
 	</style>
 		
@@ -255,7 +260,7 @@
 	<!-- Main div structure on page style="position:absolute;left:25px; top:51px; width: 40%; height: 80%;"-->
 		
 
-		<div id="map" style="position:absolute;left:25px; top:51px; width: 80%; height: 80%;" >
+		<div id="map" style="position:absolute;left:25px; top:51px; width: 97%; height: 80%;" >
 		
 	 
 	  
@@ -512,16 +517,16 @@
 
 	 
 	</div>
-	 
+	 <div class="clear"></div>
 	
-	<div id="map2" style="position:absolute;left:600px; top:51px; width: 0%; height: 0%;">
+	<div id="map2" style="float:left; margin-left:45%; top:51px; width: 0%; height: 0%;">
 	</div>
 	
 	
 	
 	
 	
-	<div id="control" style="position:absolute;left:1150px; top:51px; width: 12%; height: 0%;" hidden="true" background="white">
+	<div id="control" style=" float:right; margin-top:60px; margin-right:20px;  width: 10%; height: 0%;" hidden="true" background="white">
 	
 	
 	
@@ -566,7 +571,7 @@
 		<option value="Traffic">Traffic</option>
 		<option value="SmallCombustionPlant">Small Combustion Plant</option>
 		<option value="Agriculture">Agriculture</option>
-		<option value="Total">Total</option>
+		<option value="Total">All emission branches</option>
 		</select>
 	
 		

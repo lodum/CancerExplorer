@@ -1,8 +1,10 @@
 function explorer_modus (){
 
-document.getElementById("map").style.width = "40% ";
+document.getElementById("map").style.width = "42%";
+document.getElementById("map").style.float = "left";
 //document.getElementById("container_main").style.width = "40% ";
-document.getElementById("map2").style.width = "40% ";
+//document.getElementById("map2").style.width = "40% ";
+document.getElementById("map2").style.width = "42% ";
 document.getElementById("map2").style.height = "80% ";
 
 
