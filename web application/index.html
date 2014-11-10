@@ -81,6 +81,7 @@
 	<script src="libraries/L.Map.Sync.js"></script>
 	
 	<script src="libraries/explorer_airquality.js"></script>
+	<script src="libraries/aqd_sparql.js"></script>
 
 
 	<style>
@@ -552,12 +553,12 @@
 	
 	
 	
-	
-	
-	
+	<div id="aqd_results_sidebar"> 
+		<div id="resultdiv_map2"></div>
+	</div>
 	
 	<div id="explorer_sidebar"> 
-		<div id="resultdiv_map2"></div>
+		
 	<div style="padding-top:15px">
 		<b><font size=3px color=black>Choose an air emission value to explore:</b></font>
 		</div>
@@ -966,6 +967,10 @@
 	var SPARQLPanel = L.control.sidebar('SPARQLPanel', {
 		position: 'right'
 	});
+	
+	var AQDResultsPanel = L.control.sidebar('aqd_results_sidebar', {
+		position: 'right'
+	});
 
 
 	var SPARQLPanel_edit = L.control.sidebar('SPARQLPanel_edit', {
@@ -998,9 +1003,9 @@
 	map.addControl(sidebarLinks);
 	map.addControl(emitter_detail);
 	
-	
+	map2.addControl(AQDResultsPanel);
 	map2.addControl(Explorer_Panel);
-
+	
 
 	// Sidebar control functions
 	function Explore_cause_effect()

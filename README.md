@@ -24,7 +24,8 @@ using the chain linking of different variables that is encoded as linked data.
 This is an early development step version.
 
 Presented statistical epidemiological values (SIR and CI values):
-For demonstration purpose only random example values are integrated. The values are generated randomly for each new query.
+For demonstration purpose only random example values are integrated.
+Random values of the municipalities are uploaded. In addition, this values are distributed randomly among all municipalities for each new query.
 
 
 This brings along:
