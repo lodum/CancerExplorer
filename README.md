@@ -25,7 +25,7 @@ This is an early development step version.
 
 Presented statistical epidemiological values (SIR and CI values):
 For demonstration purpose only random example values are integrated.
-Random values of the municipalities are uploaded. In addition, this values are distributed randomly among all municipalities for each new query.
+Random values of the municipalities are uploaded. In addition, these values are distributed randomly among all municipalities for each new query.
 
 
 This brings along:
@@ -55,7 +55,7 @@ It is possible to receive detailed information about emitter and their emissions
 Explorer view:
 The view helps to explore epidemiological and environmental data in a parallel way.
 This interactive visual representations allows the user to detect patterns and structures in the
-data that are difficult to realise in a non-visual way
+data that would be difficult to realise in a non-visual way
 
 ![CancerExplorer application][3]
 
