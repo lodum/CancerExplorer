@@ -82,6 +82,7 @@
 	
 	<script src="libraries/explorer_airquality.js"></script>
 	<script src="libraries/aqd_sparql.js"></script>
+	<script src="libraries/button.js"></script>
 
 
 	<style>
@@ -315,10 +316,10 @@
 		</div>
 			
 		<br>
-		<button type="button" onclick="sir_clear()" class="btnStyle span3">Clear Selection</button>
-		<button type="button" onclick="ini_sir()" class="btnStyle span3">Visualize Example SIR</button>
-		<button type="button" onclick="ini_cilower()" class="btnStyle span3">Visualize Example CI95 Lower Level</button> 
-		<button type="button" onclick="ini_ciupper()" class="btnStyle span3">Visualize Example CI95 Upper Level</button>
+		<button id="ClearSelection" type="button" onclick="sir_clear()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Clear Selection</button>
+		<button id="Visualize1" type="button" onclick="ini_sir()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Visualize Example SIR</button>
+		<button id="Visualize2" type="button" onclick="ini_cilower()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Visualize Example CI95 Lower Level</button> 
+		<button id="Visualize3" type="button" onclick="ini_ciupper()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Visualize Example CI95 Upper Level</button>
 		
 		</div>
 
@@ -366,7 +367,7 @@
 				<br>
 				<br>
 				<form action="background.html">
-				<input type="submit" class="btnStyle span3" value="Get Background Information">
+				<input type="submit" class="btnStyle span3" value="Get Background Information" data-color="#00aff0" data-hover="#0cbbfc" id="Background">
 				</form>
 				<br>
 				<div style="padding-top:15px">
@@ -377,7 +378,7 @@
 				<br>
 				<b><font size=2px>Show examples for biggest emitter of air transported substances in Münster (only a small emitter_contenting set at the moment</b></font>
 				<br>
-				<button type="button" onclick="ini_emitter()" class="btnStyle span3">Example Emitter Münster </button>
+				<button type="button" onclick="ini_emitter()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc" id="Emitter">Example Emitter Münster </button>
 
 
 		</div>
@@ -1560,6 +1561,7 @@ style: function(feature) {
 		alert(e.message);
 	}
 
+	
 	</script>
 	</div>
 	</div>

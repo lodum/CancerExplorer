@@ -1,4 +1,4 @@
-# C`ancer`E`xplorer`
+# `C`ancer`E`xplorer
 
 * * *
 ## Linked Data-Based Spatial Cause-Effect Relationships Explorer
@@ -25,6 +25,9 @@ using the chain linking of different variables that is encoded as linked data.
 
 * * *  
 ### Status
+
+**Status quo:**
+
 This is an early development step version.
 
 Presented statistical epidemiological values (SIR and CI values):
@@ -39,8 +42,11 @@ This brings along:
 - Long list of issues (refresh your browser view after broken queries)
 
 Issue list:
-
 (https://github.com/lodum/CancerExplorer/issues)
+
+**Future:**
+
+It is planned that the project is going to be further developed during Friedrich Müller's master thesis.
 
 
 

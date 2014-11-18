@@ -79,6 +79,14 @@
 				
 				<script src="libraries/explorer_airquality.js"></script>
 				<script src="libraries/aqd_sparql.js"></script>
+				
+				
+				
+								<!--Explorer Modus Functions/>-->
+							<script src="libraries/jquery-ui-1.11.2/jquery-ui.min.js"></script>
+							<link rel="stylesheet" href="libraries/jquery-ui-1.11.2/jquery-ui.css"/>
+				
+				
 
 				<style type="text/css">
 				
@@ -98,7 +106,7 @@
 				a {font-size: 20px}
 					
 				</style>
-				
+								
 			<script>
 			/*
 			 $(function() {
@@ -135,21 +143,15 @@
 				<div style="background-color:#2E2E2E;" align="center">
 					<span style="font-weight:bold; color:white">
 						<div style="padding-top:10px">
-									<input type="radio" id="sirbladdercancer_bg" class="BGType3" name="BGType3" value="C67" checked="checked">&nbsp;Bladder cancer &nbsp;
-									<input type="radio" id="sirlungcancer_bg" class="BGType3" name="BGType3" value="C34">&nbsp;Lung cancer &nbsp;
-									<input type="radio" id="sirleukemiacancer_bg" class="BGType3" name="BGType3" value="C91-C95">&nbsp;Leukemia &nbsp;&nbsp;&nbsp;
-									<input type="radio" id="sirnasalcancer_bg" class="BGType3" name="BGType3" value="C00-C14">&nbsp;Nasal cavity and paranasal sinus &nbsp;	
+		
+									<input type="radio" id="sirbladdercancer_bg" onclick="background_information2();" class="BGType3" name="BGType3" value="C67" checked="checked">&nbsp;Bladder cancer &nbsp;
+									<input type="radio" id="sirlungcancer_bg" onclick="background_information2();" class="BGType3" name="BGType3" value="C34">&nbsp;Lung cancer &nbsp;
+									<input type="radio" id="sirleukemiacancer_bg" onclick="background_information2();" class="BGType3" name="BGType3" value="C91-C95">&nbsp;Leukemia &nbsp;&nbsp;&nbsp;
+									<input type="radio" id="sirnasalcancer_bg" onclick="background_information2();" class="BGType3" name="BGType3" value="C00-C14">&nbsp;Nasal cavity and paranasal sinus &nbsp;	
+						
 									<br>
 									<br>	
 						</div>
-						<input type="button" id="Btn_bg" value="Show carcinogens" onclick="background_information();" style="background-color: #4D90FE; 
-							background-image: -moz-linear-gradient(center top , #4D90FE, #4787ED); 
-							border: 1px solid #3079ED; 
-							color: #FFFFFF;
-							padding: 4px;
-							margin-top: 4px;
-							margin-bottom: 4px;
-							width:30%"  /> 
 					</span>
 				</div>
 				<hr>	
@@ -191,7 +193,7 @@
 				<hr>
 					<span style="font-weight:bold; color:white">
 						<div style="padding-top:10px;;font-size:15px;" align="left">
-								<font color="#4D90F">STEP 3)</font> Here you can see the different attributes of your selected carcinogen(Hover over the headlines to get background information)
+								<font color="#4D90F">STEP 3)</font> Here you can see the different attributes of your selected carcinogen (Hover over the headlines to get background information)
 						</div>
 					</span>				
 								
@@ -349,7 +351,7 @@ including organic and inorganic compounds, minerals, isotopes, alloys and nonstr
 				<hr>     
 				<div  align="left">
 					<span style="font-weight:bold; color:white;font-size:15px" >
-				i: Presented information is derived from the monographs of International Agency for Research on Cancer (IARC).
+				Presented information is derived from the monographs of International Agency for Research on Cancer (IARC).
 				To get more information visit    <a href="http://www.iarc.fr/">IARC</a>
 					</span>			
 				</div>
@@ -363,7 +365,7 @@ including organic and inorganic compounds, minerals, isotopes, alloys and nonstr
 						<br/>
 				</div>
 				<form action="index.html">	
-					<input type="submit" class="btnStyle span3" value="Go to map view [X]" style="background-color: #4D90FE; 
+					<input id="Exit" type="submit" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc" value="Go to map view [X]" style="background-color: #4D90FE; 
 								background-image: -moz-linear-gradient(center top , #4D90FE, #4787ED); 
 								border: 1px solid #3079ED; 
 								color: #FFFFFF;
@@ -378,7 +380,28 @@ including organic and inorganic compounds, minerals, isotopes, alloys and nonstr
 		
 		
 	<script>
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+ 
+
+	
+$(function() {
+    $("#Exit").mouseenter(function() {
+        var bg = $(this).attr('data-hover');
+        $(this).css( "background", bg );
+    });
+
+    $("#Exit").mouseleave(function() {
+        var bg = $(this).attr('data-color');
+        $(this).css( "background", bg );
+    });
+});
+
+
+	
+	
+	
+	
 	function emission_info(){
 		emission_info2();
 	}
