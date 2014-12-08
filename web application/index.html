@@ -83,6 +83,9 @@
 	<script src="libraries/explorer_airquality.js"></script>
 	<script src="libraries/aqd_sparql.js"></script>
 	<script src="libraries/button.js"></script>
+	<script src="libraries/visualize_industrial accidents.js"></script>
+	
+	<script src="libraries/soildata_sparql2.js"></script>
 
 
 	<style>
@@ -205,17 +208,7 @@
 			width: 100%;
 			font-weight: bold;
 		}
-		
-		
-		
-
-		
-		
-		
-		
-		
-		
-			
+					
 	</style>
 		
 
@@ -238,7 +231,7 @@
 				<span class="icon-bar"></span>
 			  </button>
 			  <!--<div style="position:absolute;left:30%;top:20%;"><button type="button" onclick="Query()">Query</button></div>-->
-			  <a class="navbar-brand" href="#">Cancer Explorer</a>
+			  <a class="navbar-brand" href="#"><font color="white">C</font>ancer<font color="white">E</font>xplorer</a>
 			</div>
 			<div class="collapse navbar-collapse">
 			  <ul class="nav navbar-nav">
@@ -276,7 +269,7 @@
 		<br> <b><font size=4px>Create a certain Example Standardized Incidence Ratio (SIR) visualization:  </b></font>
 		<br>
 		<div style="padding-top:15px">
-		<b><font size=3px>Choose a cancer type:</b></font>
+			<b><font size=3px>Choose a cancer type:</b></font>
 		</div>
 		<div style="border: thin solid #000000; border-bottom-width: 0px;">
 		</div>
@@ -290,7 +283,7 @@
 		<br>
 		
 		<div style="padding-top:15px">
-		<b><font size=3px>Choose a year:</b></font>
+			<b><font size=3px>Choose a year:</b></font>
 		</div>
 		<div style="border: thin solid #000000; border-bottom-width: 0px;">
 		</div>
@@ -304,45 +297,37 @@
 		</div>
 			
 		<div style="padding-top:15px">
-		<b><font size=3px>Choose a gender:</b></font>
+			<b><font size=3px>Choose a gender:</b></font>
 		</div>
 		<div style="border: thin solid #000000; border-bottom-width: 0px;">
 		</div>
 		<div style="padding-top:10px">
 			<input type="radio" id="sirfemale" name="obsType2" value="w">&nbsp;female
-			<input type="radio" id="sirmale" name="obsType2" value="m">&nbsp;male &nbsp;&nbsp;
-			
-			
+			<input type="radio" id="sirmale" name="obsType2" value="m">&nbsp;male &nbsp;&nbsp;		
 		</div>
 			
 		<br>
-		<button id="ClearSelection" type="button" onclick="sir_clear()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Clear Selection</button>
-		<button id="Visualize1" type="button" onclick="ini_sir()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Visualize Example SIR</button>
-		<button id="Visualize2" type="button" onclick="ini_cilower()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Visualize Example CI95 Lower Level</button> 
-		<button id="Visualize3" type="button" onclick="ini_ciupper()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Visualize Example CI95 Upper Level</button>
-		
+			<button id="ClearSelection" type="button" onclick="sir_clear()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Clear Selection</button>
+			<button id="Visualize1" type="button" onclick="ini_sir()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Visualize Example SIR</button>
+			<button id="Visualize2" type="button" onclick="ini_cilower()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Visualize Example CI95 Lower Level</button> 
+			<button id="Visualize3" type="button" onclick="ini_ciupper()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Visualize Example CI95 Upper Level</button>	
 		</div>
 
 
-	 <div id="SPARQLPanel">
-		
-
-		<!-- empty html div-element ... placeholder for results (text/canvas/map etc)-->
-		<div id="resultdiv"></div>
-		<br/>
-	  </div>
+		<div id="SPARQLPanel">
+			<!-- empty html div-element ... placeholder for results (text/canvas/map etc)-->
+			<div id="resultdiv"></div>
+			<br/>
+		</div>
 	  
 		<div id="SPARQLPanel_edit">
-		<textarea id="sparqlQuery" rows="5" cols="40" class="field span12">Select ?a ?b ?c WHERE {?a ?b ?c} Limit 10</textarea><br/>
-		<button type="submit" class="btn btn-primary" onclick="SPedit()">Submit Query</button><br/><br/>
+			<textarea id="sparqlQuery" rows="5" cols="40" class="field span12">Select ?a ?b ?c WHERE {?a ?b ?c} Limit 10</textarea><br/>
+			<button type="submit" class="btn btn-primary" onclick="SPedit()">Submit Query</button><br/><br/>
 
-		<!-- empty html div-element ... placeholder for results (text/canvas/map etc)-->
-		<div id="resultdiv_edit"></div>
-		<br/>	
-
-		
-	  </div>
-
+			<!-- empty html div-element ... placeholder for results (text/canvas/map etc)-->
+			<div id="resultdiv_edit"></div>
+				<br/>	
+		</div>
 
 
 	<!-- Definition of link sidebar-->
@@ -364,26 +349,31 @@
 			<br> <b><font size=4px>Get more information about cancer causes:  </b></font>
 			<div style="border: thin solid #000000; border-bottom-width: 0px;">
 				</div>
-				<br>
-				<br>
 				<form action="background.html">
 				<input type="submit" class="btnStyle span3" value="Get Background Information" data-color="#00aff0" data-hover="#0cbbfc" id="Background">
 				</form>
 				<br>
 				<div style="padding-top:15px">
-				<b><font size=4px>Further information examples:  </b></font>
+					<b><font size=4px>Further information examples:  </b></font>
 				</div>
 				<div style="border: thin solid #000000; border-bottom-width: 0px;">
 				</div>
 				<br>
-				<b><font size=2px>Show examples for biggest emitter of air transported substances in Münster (only a small emitter_contenting set at the moment</b></font>
+				<b><font size=2px>Show examples for biggest emitter of air transported substances in Münster</b></font>
 				<br>
-				<button type="button" onclick="ini_emitter()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc" id="Emitter">Example Emitter Münster </button>
-
-
+				<button type="button" onclick="ini_emitter()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc" id="Emitter">Example emitter Münster </button>
+				<b><font size=2px>Shows a example set for industrial accidents</b></font>
+				<button type="button" onclick="ini_accident()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc" id="Accident">Example industrial accident data </button>
+<!--
+		<button id="ExploreSoildata" type="button" onclick="ini_soildata()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Explore Soil Data</button>
+<!--
+		<font size=2px color=white>Choose a municipality for soildata exploration</font>
+		<select class="form-control" name="list_soildata" id="list_soildata" onchange="visualize_soildatamarker ();">
+		<option value="start">Please Select</option>
+		</select>
+-->
+		<br>
 		</div>
-
-
 
 
 
@@ -396,12 +386,12 @@
 				<table>
 				  <tr>
 					<td><b>Name:</b></td>
-					<td><div id="name"> </div></td>
+					<td><div id="name_emit"> </div></td>
 					<td><b>Zip & City:</b></td>
-					<td><div id="zip"> </div></td>
+					<td><div id="zip_emit"> </div></td>
 				  </tr><tr>
 					<td><b>Street:</b></td>
-					<td><div id="street"> </div></td>
+					<td><div id="street_emit"> </div></td>
 				  </tr>
 				  </br>
 				  <tr>
@@ -512,37 +502,119 @@
 
 	 
 	</div>
+	
+	
+	<div id="Accident_detail"> 
+
+			<h3>Industrial accident details:</h3>
+			<form>
+			  <fieldset>
+				<legend>Address</legend>
+				<table>
+				  <tr>
+					<td><b>Name:</b></td>
+					<td><div id="name_acc"> </div></td>
+				  </tr><tr>
+					<td><b>Street:</b></td>
+					<td><div id="street_acc"> </div></td>
+				  </tr>
+				  <tr>
+					<td><b>Zipcode:</b></td>
+					<td><div id="zip_acc"> </div></td>
+					<td><b>Municipality:</b></td>
+					<td><div id="municipality"> </div></td>
+				  </tr>
+				  </table>
+				  </br>
+				  <hr>
+				  <legend>Incident details</legend>
+				  <table>
+				  <tr>
+					<td><b>Type:</b></td>
+					<td><div id="type"> </div></td>
+				  </tr>
+				  <tr bgcolor="#D8D8D8">
+					<td><b>Faulty part:</b></td>
+					<td><div id="faultypart"> </div></td>
+				  </tr>
+				  <tr>
+					<td><b>Operation process:</b></td>
+					<td><div id="operationprocess"> </div></td>
+				  </tr>
+				  <tr bgcolor="#D8D8D8">
+					<td><b>Cause:</b></td>
+					<td><div id="cause"> </div></td>
+				  </tr>
+				  <tr>
+					<td><b>Cause status:</b></td>
+					<td><div id="causestatus"> </div></td>
+				  </tr>
+				  <tr bgcolor="#D8D8D8">
+					<td><b>Environmental pollution status:</b></td>
+					<td><div id="eps"> </div></td>
+				  </tr>
+				  <tr>
+					<td><b>Status of diverse disturbences:</b></td>
+					<td><div id="sdd"> </div></td>
+				  </tr>
+				  <tr bgcolor="#D8D8D8">
+					<td><b>Year:</b></td>
+					<td><div id="year"> </div></td>
+				  </tr>
+				  <!--**
+				   <tr>
+					<td><b>Status of diverse disturbences:</b></td>
+					<td><div id="accident_substance"> </div></td>
+				  </tr>
+				   <tr bgcolor="#D8D8D8">
+					<td><b>Status of diverse disturbences:</b></td>
+					<td><div id="value_kg"> </div></td>
+				  </tr>
+				  <tr>
+					<td><b>Status of diverse disturbences:</b></td>
+					<td><div id="value_text"> </div></td>
+				  </tr>
+				  <tr bgcolor="#D8D8D8">
+					<td><b>Status of diverse disturbences:</b></td>
+					<td><div id="value_description"> </div></td>
+				  </tr>
+				  -->
+				</table>
+			  </fieldset>
+				<br>
+				<button id="Accidentdetail" type="button" onclick="accident_detail_func();" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Get involved substance information</button>
+				<b>Source:</b><br>
+				<b>"Zentralen Melde- und Auswertestelle für Störfälle und Störungen in verfahrenstechnischen Anlagen" (ZEMA)<br>
+				   infosys/ZEMA, http://www.infosis.uba.de/index.php/de/zema/index.html</b><br>
+				
+			  </fieldset>
+			</form>
+		</div>
+	</div>
+
+	
+	
 	 <div class="clear"></div>
 	
 	<div id="map2" style="float:left; margin-left:45%; top:51px; width: 0%; height: 0%;">
 	</div>
 	
 	
-	
-	
-	
-	<div id="control" style=" float:right; margin-top:60px; margin-right:20px;  width: 10%; height: 0%;" hidden="true" background="white">
-	
-	
-	
-	<button type="button" onclick="explorer_sidebar()" class="btnStyle span3">Explore Air Quality Data</button>
-	
-	
-	<font color=white size=1px><b>Source: Landesamt für Natur, Umwelt und Verbraucherschutz<br>
-				   © Land NRW, Recklinghausen, http://www.lanuv.nrw.de</b><br> 
-				   <br>
-				   <br>
-				   <b>Emissions from operator of the facility's emissions declaration 2008.</b><br>
-				   <b>Measurements in kg/a, Dioxine/Furane as I-TE in mg/a. </b><br>
-				   
-				   
-				   
-				   </font>
-	
-	
-	<form action="index.html">
-    <input type="submit" class="btnStyle span3" value="Leave Explorer Modus">
-	</form>
+	<div id="control" style=" float:right; margin-top:60px; margin-right:25px;  width: 10%; height: 0%;" hidden="true" background="white">
+		 <font size=2px color="white"><b>Air Quality Data:</b></font>
+		<button id="ExploreAirQuality" type="button" onclick="explorer_sidebar()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Air Quality Data</button>
+		<hr>
+		<font size=2px color="white"><b> Soil Data: </b></font><br>
+		<font size=2px color="white">Choose a municipality for soildata exploration</font>
+		<select class="form-control" name="list_soildata" id="list_soildata" onchange="visualize_soildatamarker ();">
+			<option value="start">Please Select</option>
+		</select>
+		
+		<button id="Soildatadeleter" type="button" onclick="delete_soildata()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Delete Soil Data</button>
+			
+		<form action="index.html">
+			<input  id="LeaveExplorer" type="submit" class="btnStyle span3" value="Leave Explorer View" data-color="#00aff0" data-hover="#0cbbfc">
+		</form>
 	</div>
 	
 	
@@ -555,85 +627,95 @@
 		
 	<div style="padding-top:15px">
 		<b><font size=3px color=black>Choose an air emission value to explore:</b></font>
-		</div>
-		<div style="border: thin solid #000000; border-bottom-width: 0px;">
-		</div>
+	</div>
+	<div style="border: thin solid #000000; border-bottom-width: 0px;">
+	</div>
 		
 		<font size=2px color=black>First, choose an emission branch</font>
 		<select class="form-control" name="list_branch" id="list_branch">
-		<option value="start">Please Select</option>
-		<option value="Industry">Industry</option>
-		<option value="Traffic">Traffic</option>
-		<option value="SmallCombustionPlant">Small Combustion Plant</option>
-		<option value="Agriculture">Agriculture</option>
-		<option value="Total">All emission branches</option>
+			<option value="start">Please Select</option>
+			<option value="Industry">Industry</option>
+			<option value="Traffic">Traffic</option>
+			<option value="SmallCombustionPlant">Small Combustion Plant</option>
+			<option value="Agriculture">Agriculture</option>
+			<option value="Total">All emission branches</option>
 		</select>
-	
-		
 		<br>
-		
 		<font size=2px color=black>Choose an emitted substance</font>
 		<select class="form-control" name="list_substance" id="list_substance">
-		<option value="start">Please Select</option>
-		<option value="N2O">N2O</option>
-		<option value="CO2">CO2</option>
-		<option value="CH4">CH4</option>
-		<option value="NH3">NH3</option>
-		<option value="HCL">HCL</option>
-		<option value="HF">HF</option>
-		<option value="CO">CO</option>
-		<option value="NMVOC">NMVOC</option>
-		<option value="SO2">SO2</option>
-		<option value="NO2">NO2</option>
-		<option value="As">As</option>
-		<option value="Pb">Pb</option>
-		<option value="Cr">Cr</option>
-		<option value="Cu">Cu</option>
-		<option value="Cd">Cd</option>
-		<option value="Ni">Ni</option>
-		<option value="V">V</option>
-		<option value="Zn">Zn</option>
-		<option value="DUF">DUF</option>
-		<option value="BAP">BAP</option>
-		<option value="BENZ">BENZ</option>
-		<option value="PAK">PAK</option>
-		<option value="PM10">PM10</option>
-		<option value="Staub">Staub</option>
-		<option value="RUSS">RUSS</option>
+			<option value="start">Please Select</option>
+			<option value="N2O">N2O</option>
+			<option value="CO2">CO2</option>
+			<option value="CH4">CH4</option>
+			<option value="NH3">NH3</option>
+			<option value="HCL">HCL</option>
+			<option value="HF">HF</option>
+			<option value="CO">CO</option>
+			<option value="NMVOC">NMVOC</option>
+			<option value="SO2">SO2</option>
+			<option value="NO2">NO2</option>
+			<option value="As">As</option>
+			<option value="Pb">Pb</option>
+			<option value="Cr">Cr</option>
+			<option value="Cu">Cu</option>
+			<option value="Cd">Cd</option>
+			<option value="Ni">Ni</option>
+			<option value="V">V</option>
+			<option value="Zn">Zn</option>
+			<option value="DUF">DUF</option>
+			<option value="BAP">BAP</option>
+			<option value="BENZ">BENZ</option>
+			<option value="PAK">PAK</option>
+			<option value="PM10">PM10</option>
+			<option value="Staub">Staub</option>
+			<option value="RUSS">RUSS</option>
 		</select>
 	<br>
-	<br>
-	<br>
-	<br>
 	<button type="button" onclick="explorer_airquality()" class="btnStyle span3">Visualize</button>
+	<hr>
+	<font color=black size=1px><b>Source: Landesamt für Natur, Umwelt und Verbraucherschutz<br>
+				   © Land NRW, Recklinghausen, http://www.lanuv.nrw.de</b><br> 
+				   <b>Emissions from operator of the facility's emissions declaration 2008.</b><br>
+				   <b>Measurements in kg/a, Dioxine/Furane as I-TE in mg/a. </b><br>   
+				   </font>
+	<br/>
+	</div>
+	</div>
 	
-	
-	<!-- empty html div-element ... placeholder for results (text/canvas/map etc)-->
-	
-		<br/>
-	  </div>
-	
-	
+	<div id="SoildataPanel">
 	</div>
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	<script>
 	
+	var soildata_municipality
 	
+	function visualize_soildatamarker () {
+		soildata_municipality=document.getElementById('list_soildata').value;
+		
+		for(var i = 0; i < municipalities.length; i++) {
+			if(municipalities[i]==soildata_municipality){
+				soildata_municipality=GKZ[i];
+			
+			}
+		}
+		ini_soildata();
+	}
 	
-	
+	// Example Dataset
+	var GKZ=["5554004","5554008","5554012","5512000","5513000","5554016","5554020","5554024","5554032","5515000"];
+	var municipalities = ["Ahaus","Bocholt","Borken","Bottrop","Gelsenkirchen","Gescher","Gronau","Heek","Isselburg","Münster"];
+	//var GKZ=["5111000","5112000","5113000","5114000","5116000","5117000","5119000","5120000","5122000","5124000","5154004","5154008","5154012","5154016","5154020","5154024","5154028","5154032","5154036","5154040","5154044","5154048","5154052","5154056","5154060","5154064","5158004","5158008","5158012","5158016","5158020","5158024","5158026","5158028","5158032","5158036","5162004","5162008","5162012","5162016","5162020","5162022","5162024","5162028","5166004","5166008","5166012","5166016","5166020","5166024","5166028","5166032","5166036","5170004","5170008","5170012","5170016","5170020","5170024","5170028","5170032","5170036","5170040","5170044","5170048","5170052","5314000","5315000","5316000","5334002","5334004","5334008","5334012","5334016","5334020","5334024","5334028","5334032","5334036","5358004","5358008","5358012","5358016","5358020","5358024","5358028","5358032","5358036","5358040","5358044","5358048","5358052","5358056","5358060","5362004","5362008","5362012","5362016","5362020","5362024","5362028","5362032","5362036","5362040","5366004","5366008","5366012","5366016","5366020","5366024","5366028","5366032","5366036","5366040","5366044","5370004","5370008","5370012","5370016","5370020","5370024","5370028","5370032","5370036","5370040","5374004","5374008","5374012","5374016","5374020","5374024","5374028","5374032","5374036","5374040","5374044","5374048","5374052","5378004","5378008","5378012","5378016","5378020","5378024","5378028","5378032","5382004","5382008","5382012","5382016","5382020","5382024","5382028","5382032","5382036","5382040","5382044","5382048","5382052","5382056","5382060","5382064","5382068","5382072","5382076","5512000","5513000","5515000","5554004","5554008","5554012","5554016","5554020","5554024","5554028","5554032","5554036","5554040","5554044","5554048","5554052","5554056","5554060","5554064","5554068","5558004","5558008","5558012","5558016","5558020","5558024","5558028","5558032","5558036","5558040","5558044","5562004","5562008","5562012","5562014","5562016","5562020","5562024","5562028","5562032","5562036","5566004","5566008","5566012","5566016","5566020","5566024","5566028","5566032","5566036","5566040","5566044","5566048","5566052","5566056","5566060","5566064","5566068","5566072","5566076","5566080","5566084","5566088","5566092","5566096","5570004","5570008","5570012","5570016","5570020","5570024","5570028","5570032","5570036","5570040","5570044","5570048","5570052","5711000","5754004","5754008","5754012","5754016","5754020","5754024","5754028","5754032","5754036","5754040","5754044","5754048","5754052","5758004","5758008","5758012","5758016","5758020","5758024","5758028","5758032","5758036","5762004","5762008","5762012","5762016","5762020","5762024","5762028","5762032","5762036","5762040","5766004","5766008","5766012","5766016","5766020","5766024","5766028","5766032","5766036","5766040","5766044","5766048","5766052","5766056","5766060","5766064","5770004","5770008","5770012","5770016","5770020","5770024","5770028","5770032","5770036","5770040","5770044","5774004","5774008","5774012","5774016","5774020","5774024","5774028","5774032","5774036","5774040","5911000","5913000","5914000","5915000","5916000","5954004","5954008","5954012","5954016","5954020","5954024","5954028","5954032","5954036","5958004","5958008","5958012","5958016","5958020","5958024","5958028","5958032","5958036","5958040","5958044","5958048","5962004","5962008","5962012","5962016","5962020","5962024","5962028","5962032","5962036","5962040","5962044","5962048","5962052","5962056","5962060","5966004","5966008","5966012","5966016","5966020","5966024","5966028","5970004","5970008","5970012","5970016","5970020","5970024","5970028","5970032","5970036","5970040","5970044","5974004","5974008","5974012","5974016","5974020","5974024","5974028","5974032","5974036","5974040","5974044","5974048","5974052","5974056","5978004","5978008","5978012","5978016","5978020","5978024","5978028","5978032","5978036","5978040"];
+	//var municipalities = ["Düsseldorf","Duisburg","Essen","Krefeld","Mönchengladbach","Mülheim","Oberhausen","Remscheid","Solingen","Wuppertal","Bedburg-Hau","Emmerich","Geldern","Goch","Issum","Kalkar","Kerken","Kevelaer","Kleve","Kranenburg","Rees","Rheurdt","Straelen","Uedem","Wachtendonk","Weeze","Erkrath","Haan","Heiligenhaus","Hilden","Langenfeld","Mettmann","Monheim","Ratingen","Velbert","Wülfrath","Dormagen","Grevenbroich","Jüchen","Kaarst","Korschenbroich","Meerbusch","Neuss","Rommerskirchen","Brüggen","Grefrath","Kempen","Nettetal","Niederkrüchten","Schwalmtal","Tönisvorst","Viersen","Willich","Alpen","Dinslaken","Hamminkeln","Hünxe","Kamp-Lintfort","Moers","Neukirchen-Vluyn","Rheinberg","Schermbeck","Sonsbeck","Voerde","Wesel","Xanten","Bonn","Köln","Leverkusen","Aachen","Alsdorf","Baesweiler","Eschweiler","Herzogenrath","Monschau","Roetgen","Simmerath","Stolberg","Würselen","Aldenhoven","Düren","Heimbach","Hürtgenwald","Inden","Jülich","Kreuzau","Langerwehe","Linnich","Merzenich","Nideggen","Niederzier","Nörvenich","Titz","Vettweiß","Bedburg","Bergheim","Brühl","Elsdorf","Erftstadt","Frechen","Hürth","Kerpen","Pulheim","Wesseling","Bad Münstereifel","Blankenheim","Dahlem","Euskirchen","Hellenthal","Kall","Mechernich","Nettersheim","Schleiden","Weilerswist","Zülpich","Erkelenz","Gangelt","Geilenkirchen","Heinsberg","Hückelhoven","Selfkant","Übach-Palenberg","Waldfeucht","Wassenberg","Wegberg","Bergneustadt","Engelskirchen","Gummersbach","Hückeswagen","Lindlar","Marienheide","Morsbach","Nümbrecht","Radevormwald","Reichshof","Waldbröl","Wiehl","Wipperfürth","Bergisch Gladbach","Burscheid","Kürten","Leichlingen","Odenthal","Overath","Rösrath","Wermelskirchen","Alfter","Bad Honnef","Bornheim","Eitorf","Hennef","Königswinter","Lohmar","Meckenheim","Much","Neunkirchen-Seelscheid","Niederkassel","Rheinbach","Ruppichteroth","Sankt Augustin","Siegburg","Swisttal","Troisdorf","Wachtberg","Windeck","Bottrop","Gelsenkirchen","Münster","Ahaus","Bocholt","Borken","Gescher","Gronau","Heek","Heiden","Isselburg","Legden","Raesfeld","Reken","Rhede","Schöppingen","Stadtlohn","Südlohn","Velen","Vreden","Ascheberg","Billerbeck","Coesfeld","Dülmen","Havixbeck","Lüdinghausen","Nordkirchen","Nottuln","Olfen","Rosendahl","Senden","Castrop-Rauxel","Datteln","Dorsten","Gladbeck","Haltern","Herten","Marl","Oer-Erkenschwick","Recklinghausen","Waltrop","Altenberge","Emsdetten","Greven","Hörstel","Hopsten","Horstmar","Ibbenbüren","Ladbergen","Laer","Lengerich","Lienen","Lotte","Metelen","Mettingen","Neuenkirchen","Nordwalde","Ochtrup","Recke","Rheine","Saerbeck","Steinfurt","Tecklenburg","Westerkappeln","Wettringen","Ahlen","Beckum","Beelen","Drensteinfurt","Ennigerloh","Everswinkel","Oelde","Ostbevern","Sassenberg","Sendenhorst","Telgte","Wadersloh","Warendorf","Bielefeld","Borgholzhausen","Gütersloh","Halle","Harsewinkel","Herzebrock-Clarholz","Langenberg","Rheda-Wiedenbrück","Rietberg","Schloß Holte-Stukenbrock","Steinhagen","Verl","Versmold","Werther","Bünde","Enger","Herford","Hiddenhausen","Kirchlengern","Löhne","Rödinghausen","Spenge","Vlotho","Bad Driburg","Beverungen","Borgentreich","Brakel","Höxter","Marienmünster","Nieheim","Steinheim","Warburg","Willebadessen","Augustdorf","Bad Salzuflen","Barntrup","Blomberg","Detmold","Dörentrup","Extertal","Horn-Bad Meinberg","Kalletal","Lage","Lemgo","Leopoldshöhe","Lügde","Oerlinghausen","Schieder-Schwalenberg","Schlangen","Bad Oeynhausen","Espelkamp","Hille","Hüllhorst","Lübbecke","Minden","Petershagen","Porta Westfalica","Preußisch Oldendorf","Rahden","Stemwede","Altenbeken","Bad Lippspringe","Borchen","Büren","Delbrück","Hövelhof","Lichtenau","Paderborn","Salzkotten","Wünnenberg","Bochum","Dortmund","Hagen","Hamm","Herne","Breckerfeld","Ennepetal","Gevelsberg","Hattingen","Herdecke","Schwelm","Sprockhövel","Wetter","Witten","Arnsberg","Bestwig","Brilon","Eslohe","Hallenberg","Marsberg","Medebach","Meschede","Olsberg","Schmallenberg","Sundern","Winterberg","Altena","Balve","Halver","Hemer","Herscheid","Iserlohn","Kierspe","Lüdenscheid","Meinerzhagen","Menden","Nachrodt-Wiblingwerde","Neuenrade","Plettenberg","Schalksmühle","Werdohl","Attendorn","Drolshagen","Finnentrop","Kirchhundem","Lennestadt","Olpe","Wenden","Bad Berleburg","Burbach","Erndtebrück","Freudenberg","Hilchenbach","Kreuztal","Bad Laasphe","Netphen","Neunkirchen","Siegen","Wilnsdorf","Anröchte","Bad Sassendorf","Ense","Erwitte","Geseke","Lippetal","Lippstadt","Möhnesee","Rüthen","Soest","Warstein","Welver","Werl","Wickede","Bergkamen","Bönen","Fröndenberg","Holzwickede","Kamen","Lünen","Schwerte","Selm","Unna","Werne"];     
+	var sel = document.getElementById('list_soildata');
+	for(var i = 0; i < municipalities.length; i++) {
+		var opt = document.createElement('option');
+		opt.innerHTML = municipalities[i];
+		opt.value = municipalities[i];
+		opt.name=GKZ[i];
+		sel.appendChild(opt);
+	}
 	
 	
 	//document.getElementById("map2").hidden = true;
@@ -693,21 +775,7 @@
 			
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		if (sir_input_check()==true){
 			visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name);
 		}
@@ -819,10 +887,35 @@
 
 	//to represent emitter locations
 
-	function ini_emitter () {
+	function ini_accident () {
 
+		var order2=0;
+		var sir_cancer
+		var sir_year
+		var sir_gender
+		var sir_cancer_add
+		var cancer_type_name
+		var check_choice="Accident";
+
+		$(document).ready(function(){
+
+			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name);
+			order2++;
+		});
+       if (sir_check=true){
+	   
+			info.update = function (props) {
+					this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
+						'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
+						: 'Click a marker for more information');
+			};	
+			info.update();
+	   }
+
+	}
 	
-		
+	
+	function ini_emitter () {
 
 		var order=0;
 		var sir_cancer
@@ -854,6 +947,28 @@
 	}
 
 
+	
+	
+	function ini_soildata () {
+
+	
+		
+
+		
+		var sir_cancer
+		var sir_year
+		var sir_gender
+		var sir_cancer_add
+		var cancer_type_name
+		var check_choice="Soildata";
+
+		$(document).ready(function(){
+
+			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name);
+			
+		});
+      
+	}
 
 
 
@@ -884,19 +999,7 @@
 	
 	function style3(feature) {
 	
-			/*
-			if (layer != undefined){
-			alert(layer.feature.properties.Name);
-			if (layer.feature.properties.Name == feature.properties.Name) {
-		    return {
-			fillColor: getColor(feature.properties.GKZ),
-			weight: 2,
-			opacity: 1,
-			color: 'red',
-			dashArray: '3',
-			fillOpacity: 0.7
-			};}}
-			else{              */
+
 			return {
 			fillColor: getColor(feature.properties.GKZ),
 			weight: 2,
@@ -949,11 +1052,21 @@
 
 	// sidebars
 
+	
+	
+	var SoildataPanel = L.control.sidebar('SoildataPanel', {
+		position: 'right'
+	});
+	
 	var sir_sidebar = L.control.sidebar('sir_sidebar', {
 		position: 'right'
 	});
 
 	var emitter_detail = L.control.sidebar('Emitter_detail', {
+		position: 'left'
+	});
+	
+		var accident_detail = L.control.sidebar('Accident_detail', {
 		position: 'left'
 	});
 
@@ -996,10 +1109,11 @@
 	map.addControl(sir_sidebar);
 	map.addControl(sidebarLinks);
 	map.addControl(emitter_detail);
+	map.addControl(accident_detail);
 	
 	map2.addControl(AQDResultsPanel);
 	map2.addControl(Explorer_Panel);
-	
+	map2.addControl(SoildataPanel);
 
 	// Sidebar control functions
 	function Explore_cause_effect()
@@ -1009,6 +1123,7 @@
 		sir_sidebar.hide();
 		SPARQLPanel_edit.hide();
 		clear_emitter_locations();
+		clear_accident_locations();
 	}
 
 
@@ -1017,11 +1132,13 @@
 		SPARQLPanel.show();
 		Cause_Effect_Panel.hide();
 		clear_emitter_locations();
+		clear_accident_locations();
 	}
 
 
 	function Query()
 	{
+	     clear_accident_locations();
 		clear_emitter_locations();
 		sir_sidebar.show();
 		Cause_Effect_Panel.hide();
@@ -1036,6 +1153,7 @@
 		SPARQLPanel.hide();
 		SPARQLPanel_edit.show();
 		clear_emitter_locations();
+		clear_accident_locations();
 	}
 	
 	
@@ -1043,7 +1161,10 @@
 	{
 		
 		Explorer_Panel.show();
-		
+		if (typeof(soildata_marker)=="undefined"){
+	}else{
+	map2.removeLayer(soildata_marker);
+	}
 	}
 	
 	
@@ -1052,9 +1173,6 @@
 	////////////////////////////////////////////////////
 
 
-
-
-	
 	function visualize_emitter (results){
 
 	map.removeLayer(SIRLayer);
@@ -1143,22 +1261,18 @@
 		if(results.results.bindings[i2].b.value=="http://www.example.org/def/Long"){
 			var emitter_long=results.results.bindings[i2].c.value;
 			var emitter_content;
-            emitter_content=emitter_name3+"xxxxx"+emitter_N2O+"xxxxx"+emitter_emission+"xxxxx"+emitter_CO2+"xxxxx"+emitter_CH4+"xxxxx"+emitter_NH3+"xxxxx"+emitter_HCL+"xxxxx"+emitter_HF+"xxxxx"+emitter_CO+"xxxxx"+emitter_NMVOC+"xxxxx"+emitter_SO2+"xxxxx"+emitter_NO2+"xxxxx"+emitter_As+"xxxxx"+emitter_Pb+"xxxxx"+emitter_Cr+"xxxxx"+emitter_Cu+"xxxxx"+emitter_Cd+"xxxxx"+emitter_Ni+"xxxxx"+emitter_V+"xxxxx"+emitter_Zn+"xxxxx"+emitter_DUF+"xxxxx"+emitter_BAP+"xxxxx"+emitter_BENZ+"xxxxx"+emitter_PAK+"xxxxx"+emitter_PM10+"xxxxx"+emitter_Staub+"xxxxx"+emitter_RUSS+"xxxxx"+emitter_Street+"xxxxx"+emitter_ZipCodeCity;
-			emitter_content=emitter_content.replace(/ /g,'_');
-			emitter_name = L.marker([parseFloat(emitter_lat), parseFloat(emitter_long)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'blue'})});
-			
-			emitter_name.bindPopup("<b>"+emitter_name3+"</b><br>Emission Process:</br>"+emitter_emission+'</br><a name='+emitter_content+'   onclick="Emitter_detail_sidebar(name)">See details</a>');
-            
-			
+             emitter_content=emitter_name3+"xxxxx"+emitter_N2O+"xxxxx"+emitter_emission+"xxxxx"+emitter_CO2+"xxxxx"+emitter_CH4+"xxxxx"+emitter_NH3+"xxxxx"+emitter_HCL+"xxxxx"+emitter_HF+"xxxxx"+emitter_CO+"xxxxx"+emitter_NMVOC+"xxxxx"+emitter_SO2+"xxxxx"+emitter_NO2+"xxxxx"+emitter_As+"xxxxx"+emitter_Pb+"xxxxx"+emitter_Cr+"xxxxx"+emitter_Cu+"xxxxx"+emitter_Cd+"xxxxx"+emitter_Ni+"xxxxx"+emitter_V+"xxxxx"+emitter_Zn+"xxxxx"+emitter_DUF+"xxxxx"+emitter_BAP+"xxxxx"+emitter_BENZ+"xxxxx"+emitter_PAK+"xxxxx"+emitter_PM10+"xxxxx"+emitter_Staub+"xxxxx"+emitter_RUSS+"xxxxx"+emitter_Street+"xxxxx"+emitter_ZipCodeCity;
+		    emitter_content=emitter_content.replace(/ /g,'_');
+		    emitter_name = L.marker([parseFloat(emitter_lat), parseFloat(emitter_long)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'blue'})});
+		    emitter_name.bindPopup("<b>"+emitter_name3+"</b><br>Emission Process:</br>"+emitter_emission+'</br><a name='+emitter_content+'   onclick="Emitter_detail_sidebar(name)">See details</a>');
 			markersLayer.addLayer(emitter_name);
-	
-
-	 
-	}}}
+		}
+	  }
+	}
 	
 	// visualize layer containing marker
 			
-			markersLayer.addTo(map);
+	markersLayer.addTo(map);
 
 	//remove Layers
 	map.removeLayer(WL_boundary);
@@ -1198,9 +1312,9 @@
 
 
 		
-		document.getElementById("street").innerHTML=array[27];
-		document.getElementById("name").innerHTML=array[0];
-		document.getElementById("zip").innerHTML=array[28];
+		document.getElementById("street_emit").innerHTML=array[27];
+		document.getElementById("name_emit").innerHTML=array[0];
+		document.getElementById("zip_emit").innerHTML=array[28];
 		document.getElementById("emissionprocess").innerHTML=array[2];
 		document.getElementById("N2O").innerHTML=array[1];
 		document.getElementById("CO2").innerHTML=array[3];
@@ -1231,6 +1345,39 @@
 
 		emitter_detail.show();
 	}
+	
+	
+	
+	function Accident_detail_sidebar (name)
+	{
+	
+	 name=name.replace(/_/g, ' ');
+	 var array = name.split('xxxxx')
+	
+
+
+		
+		document.getElementById("street_acc").innerHTML=array[2];
+		document.getElementById("name_acc").innerHTML=array[0];
+		document.getElementById("zip_acc").innerHTML=array[3];
+		document.getElementById("type").innerHTML=array[1];
+		document.getElementById("municipality").innerHTML=array[5];
+		document.getElementById("faultypart").innerHTML=array[6];
+		document.getElementById("operationprocess").innerHTML=array[7];
+		document.getElementById("cause").innerHTML=array[8];
+		document.getElementById("causestatus").innerHTML=array[9];
+		document.getElementById("eps").innerHTML=array[10];
+		document.getElementById("sdd").innerHTML=array[11];
+		document.getElementById("year").innerHTML=array[12];
+		/*
+		document.getElementById("accident_substance").innerHTML=array[13];
+		document.getElementById("accident_value_kg").innerHTML=array[15];
+		document.getElementById("accident_value_text").innerHTML=array[16];
+		document.getElementById("accident_value_description").innerHTML=array[17];
+		*/
+
+		accident_detail.show();
+	}
 
 
 	//Adding municipality borders
@@ -1248,7 +1395,7 @@
 	})
 	
 	
-var WLBoundaries2=WLBoundaries;
+	var WLBoundaries2=WLBoundaries;
 
 	WL_boundary.addTo(map);
 	WL_boundary2.addTo(map2);
@@ -1287,7 +1434,6 @@ var WLBoundaries2=WLBoundaries;
 				this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
 					'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
 					: 'Hover over a state');
-					
 			};
 			
 			
@@ -1299,26 +1445,24 @@ var WLBoundaries2=WLBoundaries;
 			};
 			
 			
-			
 }
 			//info_check=false;
 			if(info_check==false){
 			info.addTo(map);
 			info2.addTo(map2);
-            info_check=true;}
+			info_check=true;}
 
 			// get color depending on population density value
 			function getColor(d) {
 				return d > 5515000 ? '#3B0B0B' :
 					   d > 5515000 ? '#3B0B0B' :
 					   d > 5515000 ? '#3B0B0B' :
-					   d > 5515000  ? '#3B0B0B' :
-					   d > 5515000   ? '#3B0B0B' :
-					   d > 5514999   ? '#2E64FE' :
-					   d > 5564048  ? '#3B0B0B' :
-								  '#3B0B0B';
+					   d > 5515000 ? '#3B0B0B' :
+					   d > 5515000 ? '#3B0B0B' :
+					   d > 5514999 ? '#2E64FE' :
+					   d > 5564048 ? '#3B0B0B' :
+								    '#3B0B0B';
 			}
-		
 		
 
 			function style(feature) {
@@ -1347,25 +1491,6 @@ var hover_selection
 					layer.bringToFront();
 					
 				}
-                
-				/*
-					L.geoJson(WLBoundaries2, {
-style: function(feature) {
-    switch (feature.properties.Name) {
-        case layer.feature.properties.Name: return {color: '#2E64FE'};
-        
-    }
-}
-}).addTo(map);*/
-				
-				
-				
-				/*geojson2.setStyle({
-					weight: 3,
-					color: '#2E64FE',
-					dashArray: '',
-					fillOpacity: 0.7
-				});*/
 				
 				hover_selection=layer.feature.properties.Name
 				info.update(layer.feature.properties);
@@ -1432,6 +1557,282 @@ style: function(feature) {
 			};
 
 			//legend.addTo(map);
+//////////////////////////////////////////////////////////////////////////////////////////////////////// Test
+		function visualize_accident (results){
+
+	map.removeLayer(SIRLayer);
+	map.removeLayer(WL_boundary);
+	map.removeLayer(WL_boundary2);
+	map.removeLayer(geojsonadd);
+	map.removeLayer(geojson2);
+		
+	map.removeLayer(geojson);
+	// clear Legend
+		div2.innerHTML ="";
+	var markers_accident = [];
+	var marker_accident;
+	
+	
+	// quick version-better style to do this with a loop
+	for(var i=0;i<results.results.bindings.length;i++){
+
+	
+		var accident_name3
+		var accident_name2=results.results.bindings[i].incident.value;
+		accident_name2=accident_name2.replace("http://www.example.org/","");
+		accident_name2=accident_name2.toUpperCase();
+
+	//layergroup delete by closing;map zoom,additional information site
+		var accident_lat=results.results.bindings[i].lat.value;
+		var accident_long=results.results.bindings[i].long.value;
+		var accident_type=results.results.bindings[i].type.value;
+		var accident_street=results.results.bindings[i].street.value;
+		var accident_zipcode=results.results.bindings[i].zipcode.value;
+		var accident_GKZ=results.results.bindings[i].GKZ.value;
+		var accident_municipality=results.results.bindings[i].municipality.value;
+		var accident_faultypart=results.results.bindings[i].faultypart.value;
+		var accident_operationprocess=results.results.bindings[i].operationprocess.value;
+		var accident_cause=results.results.bindings[i].cause.value;
+		var accident_causestatus=results.results.bindings[i].causestatus.value;
+		var accident_eps=results.results.bindings[i].eps.value;
+		var accident_sdd=results.results.bindings[i].sdd.value;
+		var accident_year=results.results.bindings[i].year.value;
+
+		// Dynamic detail view of the emitters
+	
+			
+			var accident_content;
+            accident_content=accident_name2+"xxxxx"+accident_type+"xxxxx"+accident_street+"xxxxx"+accident_zipcode+"xxxxx"+accident_GKZ+"xxxxx"+accident_municipality+"xxxxx"+accident_faultypart+"xxxxx"+accident_operationprocess+"xxxxx"+accident_cause+"xxxxx"+accident_causestatus+"xxxxx"+accident_eps+"xxxxx"+accident_sdd+"xxxxx"+accident_year+"xxxxx"+accident_year;
+			//+"xxxxx"+accident_substance+"xxxxx"+accident_incident+"xxxxx"+accident_value_kg+"xxxxx"+accident_value_text+"xxxxx"+accident_value_description
+			accident_content=accident_content.replace(/ /g,'_');
+			accident_name3 = L.marker([parseFloat(accident_lat), parseFloat(accident_long)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'red'})});
+			
+			accident_name3.bindPopup("<b>"+accident_name2+"</b><hr><b>Type:</b></br>"+accident_type+"</b><br><b>Cause:</b></br>"+accident_cause+"</b><br><b>Environmental Pollution Status:</b></br>"+accident_eps+'</br><a name='+accident_content+'   onclick="Accident_detail_sidebar(name)">See details</a>');
+            
+			
+			markersLayer_accident.addLayer(accident_name3);
+	
+
+	 
+	}
+	
+	// visualize layer containing marker
+			
+			markersLayer_accident.addTo(map);
+
+	//remove Layers
+	map.removeLayer(WL_boundary);
+	map.removeLayer(geojsonadd);
+		
+	map.removeLayer(geojson);
+	// clear Legend
+		div2.innerHTML ="";
+		
+		
+	// set view to Münster
+	map.setView([51.95442, 8.10009], 10);
+
+	// to add an info box.
+		check_detail_view=true;
+		
+	}
+	
+var soildata_X2
+var soildata_Y2	
+var soildata_marker
+var soil_secondquery="false";	
+//////////////////////////////////////////////////////////////////////////////////////////////////////// Test
+		function visualize_soildata (results){
+	
+	map2.removeLayer(geojson2);
+	map2.removeLayer(WL_boundary);
+	map2.removeLayer(WL_boundary2);
+	map2.removeLayer(geojsonadd2);
+	
+	
+	
+	
+	// clear Legend
+		div2.innerHTML ="";
+	var markers_soildata = [];
+	var marker_soildata;
+	var soildata_substance=new Array();
+	
+	// quick version-better style to do this with a loop
+	for(var i=0;i<results.results.bindings.length;i++){
+
+	
+		
+		var soildata_X=results.results.bindings[i].X.value;
+		var soildata_Y=results.results.bindings[i].Y.value;
+		var soildata_unit=results.results.bindings[i].unit.value;
+		var soildata_id=results.results.bindings[i].ID.value;
+		var soildata_coordinates=results.results.bindings[i].Coordinates.value;
+		var soildata_sub=results.results.bindings[i].Substance.value;
+		var soildata_val=results.results.bindings[i].Value.value;
+		
+		var soildata_GKZ=results.results.bindings[i].GKZ.value;
+		
+		
+		
+		soildata_substance[i]=results.results.bindings[i].Substance.value;
+		
+		var soildata_X2=soildata_X
+		var soildata_Y2=soildata_Y
+		
+
+
+
+
+		// Dynamic detail view of the emitters
+	if(soildata_municipality==soildata_GKZ){
+			//if(i==0){
+			var soildata_content
+			var soildata_name
+           // soildata_content=soildata_unit+"xxxxx"+soildata_typeofuse+"xxxxx"+soildata_substance+"xxxxx"+soildata_value+"xxxxx"+soildata_paramnr+"xxxxx"+soildata_GKZ+"xxxxx"+soildata_municipality+"xxxxx"+soildata_probenr+"xxxxx"+soildata_seqnr+"xxxxx"+soildata_probemethod+"xxxxx"+soildata_typeofsoil+"xxxxx"+soildata_soiltype+"xxxxx"+soildata_locationid;
+			//+"xxxxx"+accident_substance+"xxxxx"+accident_incident+"xxxxx"+accident_value_kg+"xxxxx"+accident_value_text+"xxxxx"+accident_value_description
+		//	soildata_content=soildata_content.replace(/ /g,'_');
+		
+			soildata_content=soildata_unit+"xxxxx"+soildata_X+"xxxxx"+soildata_Y+"xxxxx"+soildata_coordinates+"xxxxx"+soildata_id+"xxxxx";
+			soildata_content=soildata_content.replace(/ /g,'_');
+			
+			//alert(soildata_coordinates);
+//alert(soildata_substance);
+			soildata_name = L.marker([parseFloat(soildata_Y), parseFloat(soildata_X)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'red'})});
+			//var ff= soildata_name.getLatLng();
+			var ff=soildata_X+","+soildata_Y+","+soildata_id;
+			//here call new function to work
+			soildata_name.bindPopup("Location ID:<br>"+soildata_id+'<br><a name="'+ff+'"  onclick="soildata_detail_sidebar(name)">See details</a>');
+			
+			
+			//accident_name3.bindPopup("<b>"+accident_name2+"</b><hr><b>Type:<ent_cause+"</b><br><b>Environmental Pollution Status:</b></br>"+accident_eps+'</br><a name='+accident_content+'   onclick="Accident_detail_sidebar(name)">See details</a>');
+            //accident_name3.bindPopup("<b>"+accident_name2+"</b><hr><b>Type:</b></br>"+accident_type+"</b><br><b>Cause:</b></br>"+accident_cause+"</b><br><b>Environmental Pollution Status:</b></br>"+accident_eps+'</br><a name='+accident_content+'   onclick="Accident_detail_sidebar(name)">See details</a>');
+            
+			}
+			
+			//soildata_name.bindPopup("<b>"+soildata_substance+"</b><hr><b>Type:</b></br>xx</b><br><b>Cause:</b></br>xx</b><br><b>Environmental Pollution Status:</b></br>xx</br>");
+            
+			
+			markersLayer.addLayer(soildata_name);
+			var soildata_X_old=soildata_X
+			var soildata_Y_old=soildata_Y
+			
+			//}
+			/*
+			if(i>=0){
+			//alert(soildata_Y);
+			if(soildata_Y_old!=soildata_Y){
+			if(soildata_X_old!=soildata_X){
+			
+			
+            //soildata_content=soildata_unit+"xxxxx"+soildata_typeofuse+"xxxxx"+soildata_substance+"xxxxx"+soildata_value+"xxxxx"+soildata_paramnr+"xxxxx"+soildata_GKZ+"xxxxx"+soildata_municipality+"xxxxx"+soildata_probenr+"xxxxx"+soildata_seqnr+"xxxxx"+soildata_probemethod+"xxxxx"+soildata_typeofsoil+"xxxxx"+soildata_soiltype+"xxxxx"+soildata_locationid;
+			soildata_content=soildata_unit+"xxxxx"+soildata_X+"xxxxx"+soildata_Y+"xxxxx"+soildata_coordinates 	;
+			//+"xxxxx"+accident_substance+"xxxxx"+accident_incident+"xxxxx"+accident_value_kg+"xxxxx"+accident_value_text+"xxxxx"+accident_value_description
+			soildata_content=soildata_content.replace(/ /g,'_');
+			var ff=soildata_X+","+soildata_Y;
+			soildata_name = L.marker([parseFloat(soildata_Y), parseFloat(soildata_X)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'red'})});
+			soildata_name.bindPopup('<a name="'+ff+'"   onclick="soildata_detail_sidebar(name)">See details</a>');
+			//soildata_name.bindPopup("<b>"+soildata_substance+"</b><hr><b>Type:</b></br>xx</b><br><b>Cause:</b></br>xx</b><br><b>Environmental Pollution Status:</b></br>xx</br>");
+            
+			
+			markersLayer.addLayer(soildata_name);
+			
+			soildata_X_old=soildata_X
+			soildata_Y_old=soildata_Y
+			}
+			}
+			}
+	 */
+	 
+	}
+	if (soil_secondquery=="false"){
+	
+	soildata_marker =markersLayer.addTo(map2);
+	soil_secondquery="true";
+	}
+	
+	if (soil_secondquery=="false"){
+	}else{
+	map2.removeLayer(soildata_marker);
+	soildata_marker =markersLayer.addTo(map2);
+	}
+	
+	
+	
+	
+	
+	alert(soil_secondquery);
+	// visualize layer containing marker
+	//if (typeof(soildata_marker)=="undefined"){
+	
+			
+			
+
+	//remove Layers
+	map2.removeLayer(WL_boundary);
+	map2.removeLayer(geojsonadd);
+		
+	map2.removeLayer(geojson);
+	// clear Legend
+		div2.innerHTML ="";
+		
+		
+	// set view to Münster
+	//map.setView([51.95442, 8.10009], 10);
+
+	// to add an info box.
+		check_detail_view=true;
+		
+		info2.update = function (props) {
+				this._div2.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
+					'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
+					: 'Click a marker to get soildata details');
+					
+			};
+		info2.update();
+		
+	}
+	
+	
+function delete_soildata()
+	{
+//markersLayer.removeFrom(map2);	
+if (typeof(soildata_marker)=="undefined"){
+alert("No data chosen");
+}else{
+map2.removeLayer(soildata_marker);
+}
+}
+		
+	
+
+	
+	
+	function accident_detail_func()
+	{
+	
+		var sir_cancer
+		var sir_year
+		var sir_gender
+		var sir_cancer_add
+		var cancer_type_name
+		var check_choice="Accident_detail";
+
+		$(document).ready(function(){
+alert(check_choice);
+			visualize_sir(sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name);
+			
+		});
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 	////////////////////////////////////////////////////	Base&Overlay Layers ///////////////////////////////////////////////////////

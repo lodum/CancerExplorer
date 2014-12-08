@@ -79,7 +79,7 @@ exposed areas, ways of consumption, IARC classification numbers, monography numb
 
 
 
-Moreover, included tooltips help you to understand the context.
+Moreover, included background information helps you to understand the context.
 
 
 
@@ -90,7 +90,7 @@ Moreover, included tooltips help you to understand the context.
 
 
 
-
+* * *
 By providing interactivity, meaningful visualisations to accompany the
 maps, users are supported in making interpretations of maps while reflecting on the underlying
 uncertainty.

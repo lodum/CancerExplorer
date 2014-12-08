@@ -13,9 +13,9 @@ var check_choice2;
 
 // function to visualize chloropleth SIR/CI map
 
-function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name)
+function visualize_soildata_sparql (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name)
 {
-if (check_choice!="Soildata"){
+
 	map.removeLayer(geojson);
 		//check multiple queries
 		if (querynumber==1){
@@ -26,7 +26,6 @@ if (check_choice!="Soildata"){
 			}
 			}
 		}
-}
 		// connect to endpoint and send sparql query
 
 				var endpoint="http://10.10.6.8:8080/openrdf-sesame/repositories/cancerdata";
@@ -84,12 +83,10 @@ if (check_choice!="Soildata"){
 		
 		
 		if(check_choice=="Soildata"){
-		alert(soildata_municipality);
-					//request.query="SELECT ?Instance ?typeofuse ?substance  ?value ?municipality ?GKZ ?paramnr ?probenr ?seqnr ?probemethod ?etrskm32E ?etrskm32N ?X ?Y ?typeofsoil ?soiltype ?locationid ?unit ?municipality WHERE { ?Instance <http://www.example.org/def/UseType> ?typeofuse. ?Instance <http://www.example.org/def/Substance> ?substance.?Instance <http://www.example.org/def/Value> ?value.?Instance <http://www.example.org/def/Municipality> ?municipality.?Instance <http://www.example.org/def/GKZ> ?GKZ.?Instance <http://www.example.org/def/ParamNR> ?paramnr.?Instance <http://www.example.org/def/ProbeNR> ?probenr.?Instance <http://www.example.org/def/SeqNr> ?seqnr.?Instance <http://www.example.org/def/ProbeMethod> ?probemethod.?Instance <http://www.example.org/def/EtrsKm32E> ?etrskm32E.?Instance <http://www.example.org/def/EtrsKm32N> ?etrskm32N.?Instance <http://www.example.org/def/X> ?X.?Instance <http://www.example.org/def/Y> ?Y.?Instance <http://www.example.org/def/TypeOfSoil> ?typeofsoil.?Instance <http://www.example.org/def/SoilType> ?soiltype.?Instance <http://www.example.org/def/LocationID> ?locationid.?Instance <http://www.example.org/def/Unit> ?unit.?Instance <http://www.example.org/def/Municipality> ?municipality}LIMIT 2000";
-		request.query="SELECT ?Instance ?GKZ   ?X ?Y   ?unit ?Coordinates ?Substance ?ID ?Value ?municipality WHERE {?Instance <http://www.example.org/def/GKZ> ?GKZ.FILTER(?GKZ= \""+soildata_municipality+"\"). ?Instance <http://www.example.org/def/X> ?X.?Instance <http://www.example.org/def/Y> ?Y.?Instance <http://www.example.org/def/Unit> ?unit.?Instance <http://www.example.org/def/Coordinates> ?Coordinates.?Instance <http://www.example.org/def/Substance> ?Substance.?Instance <http://www.example.org/def/LocationID> ?ID.?Instance <http://www.example.org/def/Value> ?Value.?Instance <http://www.example.org/def/Municipality> ?municipality.}LIMIT 1000";
-		//request.query="SELECT DISTINCT ?Instance   ?X ?Y   ?unit ?Coordinates ?Substance ?ID ?Value ?municipality WHERE {?Instance <http://www.example.org/def/GKZ> \""+soildata_municipality+"\";<http://www.example.org/def/X> ?X;<http://www.example.org/def/Y> ?Y;<http://www.example.org/def/Unit> ?unit;<http://www.example.org/def/Coordinates> ?Coordinates;<http://www.example.org/def/Substance> ?Substance;<http://www.example.org/def/LocationID> ?ID;<http://www.example.org/def/Value> ?Value;<http://www.example.org/def/Municipality> ?municipality.}LIMIT 1000";
-		check_choice2=check_choice;
 		
+					//request.query="SELECT ?Instance ?typeofuse ?substance  ?value ?municipality ?GKZ ?paramnr ?probenr ?seqnr ?probemethod ?etrskm32E ?etrskm32N ?X ?Y ?typeofsoil ?soiltype ?locationid ?unit ?municipality WHERE { ?Instance <http://www.example.org/def/UseType> ?typeofuse. ?Instance <http://www.example.org/def/Substance> ?substance.?Instance <http://www.example.org/def/Value> ?value.?Instance <http://www.example.org/def/Municipality> ?municipality.?Instance <http://www.example.org/def/GKZ> ?GKZ.?Instance <http://www.example.org/def/ParamNR> ?paramnr.?Instance <http://www.example.org/def/ProbeNR> ?probenr.?Instance <http://www.example.org/def/SeqNr> ?seqnr.?Instance <http://www.example.org/def/ProbeMethod> ?probemethod.?Instance <http://www.example.org/def/EtrsKm32E> ?etrskm32E.?Instance <http://www.example.org/def/EtrsKm32N> ?etrskm32N.?Instance <http://www.example.org/def/X> ?X.?Instance <http://www.example.org/def/Y> ?Y.?Instance <http://www.example.org/def/TypeOfSoil> ?typeofsoil.?Instance <http://www.example.org/def/SoilType> ?soiltype.?Instance <http://www.example.org/def/LocationID> ?locationid.?Instance <http://www.example.org/def/Unit> ?unit.?Instance <http://www.example.org/def/Municipality> ?municipality}LIMIT 2000";
+		request.query="SELECT ?Instance   ?X ?Y   ?unit ?Coordinates ?Substance ?ID WHERE {?Instance <http://www.example.org/defdetail/GKZ> \""+soildata_municipality+"\". ?Instance <http://www.example.org/defdetail/X> ?X.?Instance <http://www.example.org/defdetail/Y> ?Y.?Instance <http://www.example.org/defdetail/Unit> ?unit.?Instance <http://www.example.org/defdetail/Coordinates> ?Coordinates.?Instance <http://www.example.org/defdetail/Substance> ?Substance.?Instance <http://www.example.org/defdetail/LocationID> ?ID}LIMIT 1000";
+		check_choice2=check_choice;
 		}
 		
 		
@@ -143,16 +140,15 @@ if (check_choice!="Soildata"){
 			
 			
 		 visualize_soildata(results);
-		 /*
+		 
 		 info.update = function (props) {
 					this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
 						'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
 						: 'Click a marker for more information');
 			};	
 			info.update();
- 	*/
-		}
-		
+		 }
+		 
 		 
 		 
 			
@@ -403,7 +399,7 @@ var geojson2;
 			
 		
 			
-if(check_choice2!="Soildata"){
+
 			info.onAdd = function (map) {
 			while(secondquery==true){
 				this._div = L.DomUtil.create('div', 'info');
@@ -423,16 +419,14 @@ if(check_choice2!="Soildata"){
 			//if (querynumber==1){
 			if (querynumber==1){
 				if(info_check==false){
-				
 					info.addTo(map);
 					info.check=true;
-				
 				}
 			}
 			
 
 	}
-}
+
 	}
 	
 	
@@ -446,11 +440,5 @@ if(check_choice2!="Soildata"){
 	sir_year="";
 	sir_gender="";
 	sir_cancer_add="";	
-	
-	if (check_choice2=="Soildata"){
-	
-	document.getElementById("soildata_delete").hidden = false;
-	check_choice2=="";
-	}
 	
 };

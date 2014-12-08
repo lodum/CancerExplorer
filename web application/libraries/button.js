@@ -67,4 +67,78 @@ $("#Emitter").mouseenter(function() {
         $(this).css( "background", bg );
     });
 	
+$("#LeaveExplorer").mouseenter(function() {
+        var bg = $(this).attr('data-hover');
+        $(this).css( "background", bg );
+    });
+
+    $("#LeaveExplorer").mouseleave(function() {
+        var bg = $(this).attr('data-color');
+        $(this).css( "background", bg );
+    });
+	
+$("#ExploreAirQuality").mouseenter(function() {
+        var bg = $(this).attr('data-hover');
+        $(this).css( "background", bg );
+    });
+
+    $("#ExploreAirQuality").mouseleave(function() {
+        var bg = $(this).attr('data-color');
+        $(this).css( "background", bg );
+    });
+	
+$("#Accidentdetail").mouseenter(function() {
+        var bg = $(this).attr('data-hover');
+        $(this).css( "background", bg );
+    });
+
+    $("#Accidentdetail").mouseleave(function() {
+        var bg = $(this).attr('data-color');
+        $(this).css( "background", bg );
+    });
+	
+	$("#Accident").mouseenter(function() {
+        var bg = $(this).attr('data-hover');
+        $(this).css( "background", bg );
+    });
+
+    $("#Accident").mouseleave(function() {
+        var bg = $(this).attr('data-color');
+        $(this).css( "background", bg );
+    });
+	
+	$("#exitaccident").mouseenter(function() {
+        var bg = $(this).attr('data-hover');
+        $(this).css( "background", bg );
+    });
+
+    $("#exitaccident").mouseleave(function() {
+        var bg = $(this).attr('data-color');
+        $(this).css( "background", bg );
+    });
+	
+	$("#exitemitter").mouseenter(function() {
+        var bg = $(this).attr('data-hover');
+        $(this).css( "background", bg );
+    });
+
+    $("#exitemitter").mouseleave(function() {
+        var bg = $(this).attr('data-color');
+        $(this).css( "background", bg );
+    });
+	
+	$("#Soildatadeleter").mouseenter(function() {
+        var bg = $(this).attr('data-hover');
+        $(this).css( "background", bg );
+    });
+
+    $("#Soildatadeleter").mouseleave(function() {
+        var bg = $(this).attr('data-color');
+        $(this).css( "background", bg );
+    });
+	
+	
+	
+	
+	
 });	

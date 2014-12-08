@@ -1,17 +1,17 @@
 var AQDLayer = new L.LayerGroup();
 var WLBoundaries_aqd
-var branch_selection
-var substance_selection
-var legendair_check=false;
-function explorer_airquality()
+var branch_selection_sd
+var substance_selection_sd
+
+function explorer_soildata()
 {
 
 
 
 	//alert($('#list_branch option:selected').val());
 	 
-	branch_selection=$('#list_branch').val();
-	substance_selection=$('#list_substance').val();
+	branch_selection_sd=$('#list_typeofuse').val();
+	substance_selection_sd=$('#list_substance_sd').val();
 
 
 
@@ -22,7 +22,7 @@ function explorer_airquality()
 	map2.removeLayer(geojsonadd2);
 		
 	// set variable for sparql queries according the user selection
-	aqd_sparql();  
+	//aqd_sparql();  
 		
 	// connect to endpoint and send sparql query
 
@@ -33,7 +33,7 @@ function explorer_airquality()
 					// gives all industry values
 				//	request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?substance ?municipality ?values WHERE {?substance qb:dataSet ?municipality. ?substance <http://www.example.org/def/Industry> ?values.} LIMIT 1000";
 				//request.query="SELECT ?a  ?b  ?d ?e ?f ?g ?h ?i  WHERE { ?a <http://www.example.org/def/Total> ?b. ?a <http://www.example.org/def/GKZ> ?d. ?a <http://www.w3.org/2000/01/rdf-schema#label> ?e.?a <http://www.example.org/def/Industry> ?f.?a <http://www.example.org/def/SmallCombustionPlant> ?g.?a <http://www.example.org/def/Traffic> ?h. OPTIONAL {?a <http://www.example.org/def/Agriculture> ?i . }}";
-				request.query="SELECT ?Instance  ?Value ?Name ?GKZ WHERE { ?Instance <http://www.w3.org/2000/01/rdf-schema#label> \""+substance_label+"\".?Instance "+aqd_branch+" ?Value.?Instance <http://www.example.org/def/Name> ?Name. ?Instance <http://www.example.org/def/GKZ> ?GKZ}";
+				request.query="SELECT ?Instance ?typeofuse ?substance  ?value ?municipality ?GKZ ? WHERE { ?Instance <http://www.w3.org/2000/01/rdf-schema#label> \""+substance_label+"\".?Instance "+aqd_branch+" ?Value.?Instance <http://www.example.org/def/Name> ?Name. ?Instance <http://www.example.org/def/GKZ> ?GKZ}";
 		// ToDo: check Agriculture issue: if agriculture not exists data isnt displayed!!!-solved?
 
 				
@@ -58,11 +58,6 @@ function explorer_airquality()
 			//handles the ajax response
 		//	$("#aqd_results_sidebar").empty();
 					$("#resultdiv_map2").empty();
-	
-	
-	var beforeSorting=new Array();
-	
-	
 	function callbackFunc(results) {
 				
 				
@@ -129,14 +124,7 @@ function explorer_airquality()
 					
 					}
 	}
-
-	
-	for(var i=0;i<WLBoundaries_aqd.features.length;i++){	
-	
-	beforeSorting[i] = WLBoundaries_aqd.features[i].properties.Values.replace(".","");
-	beforeSorting[i] = beforeSorting[i].replace(".","");
-	
-	 } 			
+			
 			
 
 	//////////////////////////////	Visualization
@@ -154,98 +142,15 @@ function explorer_airquality()
 					};
 		}
 
-		
-
-var afterSorting;
-
-afterSorting = beforeSorting.sort(function(a,b){return a-b});
-alert(afterSorting);
-
-var color_air1=afterSorting[Math.round(afterSorting.length*1/4)];
-var color_air2=afterSorting[Math.round(afterSorting.length*1/2)];
-var color_air3=afterSorting[Math.round(afterSorting.length*3/4)];	
-var color_air4=afterSorting[Math.round(afterSorting.length-1)];	
-
-alert(afterSorting[Math.round(afterSorting.length)]);
-
-
-
-
-		
 	function getColor(d) {
-					return d > color_air4 ? '#993404' :
-						   d > color_air3 ? '#fec44f' :
-						   d > color_air2 ? '#ffffff' :						
-						   d > color_air1 ? '#ffffd4' :			     
-										  '#ffffff';
+					return d > 2.00 ? '#993404' :
+						   d > 1.00 ? '#d95f0e' :
+						   d > 0.70 ? '#fe9929' :
+						   d > 0.50 ? '#fec44f' :
+						   d > 0.30 ? '#fee391' :
+						   d > 0.00 ? '#ffffd4' :			     
+									  '#ffffff';
 		}
-		
-		
-			//Legend
-
-if(legend2==true){
-			//legend2.removeFrom(map2);
-			div3.innerHTML ="";
-			div3.getContainer().innerHTML ="";
-			legendair_check=false;
-			}
-			
-	var legend2 = L.control({position: 'bottomleft'});
-
-	legend2.onAdd = function (map) {
-	var grades2
-	var labels2
-	//alert(color_air2);
-	//alert(color_air3);
-	//alert(color_air1_1);
-				var div3 = L.DomUtil.create('div3', 'info legend'),
-				grades2 = [0,color_air1,color_air2,color_air3,color_air4];
-				labels2 = [];
-				
-				from, to;
-		for (var i2 = 0; i2 < grades2.length; i2++) {
-					var from = grades2[i2];
-					var to = grades2[i2 + 1];
-					
-
-					labels2.push(
-						'<i style="background:' + getColor(from + 1 ) + '"></i> ' +
-						from + (to ? '&ndash;' + to : '+'));
-				}
-				
-				div3.innerHTML = labels2.join('<br>');
-				return div3;
-	}; 
-	
-	// if already exists
-	
-	/*
-	  // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i3 = 0; i3 < grades2.length; i3++) {
-        labels2.push(
-            '<i style="background:' + getColor(grades2[i3]+1) + '"></i> ' +
-            grades2[i3] + (grades2[i3+ 1] ? '&ndash;' + grades2[i3 + 1] + '<br>' : '+'));
-    }
-	div3.innerHTML = labels2.join('<br>');
-    return div3;
-}; 
-*/ 
-	
-	
-	
-	
-			if(legendair_check==false){
-			legend2.addTo(map2);
-			legendair_check=true;
-			}
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 	function style2(feature2) {
@@ -334,21 +239,19 @@ if(legend2==true){
 					this._div2.innerHTML = '<h4> Region Westphalen Lippe</h4>' +  (props ?
 					
 					
-						'<b>Municipality: ' + props.Name + '</b></br><b>Substance:</b></br>'+substance_selection2+'</br><b>Emission branch:</b></br> '+branch_selection+'</br><b> Value:</b></br> ' + props.Values + ''
+						'<b>Municipality: ' + props.Name + '</b></br><b>Substance:</b></br>'+substance_selection_sd2+'</br><b>Emission branch:</b></br> '+branch_selection_sd+'</br><b> Value:</b></br> ' + props.Values + ''
 						: 'Hover over a state');
 				};
 		//}
 
 
-info2.update();
+
 
 		
 		
 		
 		
 	}	
-	
-
 	
 	
 	
