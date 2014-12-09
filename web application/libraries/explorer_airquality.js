@@ -159,14 +159,14 @@ function explorer_airquality()
 var afterSorting;
 
 afterSorting = beforeSorting.sort(function(a,b){return a-b});
-alert(afterSorting);
+//alert(afterSorting);
 
 var color_air1=afterSorting[Math.round(afterSorting.length*1/4)];
 var color_air2=afterSorting[Math.round(afterSorting.length*1/2)];
 var color_air3=afterSorting[Math.round(afterSorting.length*3/4)];	
 var color_air4=afterSorting[Math.round(afterSorting.length-1)];	
 
-alert(afterSorting[Math.round(afterSorting.length)]);
+//alert(afterSorting[Math.round(afterSorting.length)]);
 
 
 

@@ -10,8 +10,8 @@
 	 var LocationID=array2[2];
 	 
 	 var coords=X+","+Y;
-	 alert(X+Y);
-	 alert(coords);
+	 //alert(X+Y);
+	 //alert(coords);
 	 /*
 	 var Coords=X+","+Y;
 	 Coords=Coords.toString();
@@ -60,7 +60,7 @@
 
 		// Special case carcinogen information		
 			
-			alert(results.results.bindings.s);
+			//alert(results.results.bindings.s);
 			
 				//write table head
 				
