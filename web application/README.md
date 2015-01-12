@@ -26,7 +26,7 @@ using the chain linking of different variables that is encoded as linked data.
 * * *  
 ### Status
 
-**Status quo:**
+**Current status:**
 
 This is an early development step version.
 

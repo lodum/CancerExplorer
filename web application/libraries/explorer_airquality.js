@@ -86,7 +86,7 @@ function explorer_airquality()
 					$.each(results.results.bindings, function(index1, value1) { 
 						htmlString+="<tr>";
 						$.each(results.head.vars, function(index2, value2) { 
-							htmlString+="<td>"+value1[value2].value+"</td>";
+							htmlString+="<td>"+decode_utf8(value1[value2].value)+"</td>";
 							
 							//console.log(value1[value2].value)
 						 });

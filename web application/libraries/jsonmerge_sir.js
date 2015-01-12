@@ -9,12 +9,35 @@ info_div = L.DomUtil.create('div', 'info');
 var minimum=0;
 var maximum=230;
 var check_choice2;
+var legend2
+var check_choice_label;
 
-
+ function decode_utf8(utftext) {
+            var plaintext = ""; var i=0; var c=c1=c2=0;
+             // while-Schleife, weil einige Zeichen uebersprungen werden
+             while(i<utftext.length)
+                 {
+                 c = utftext.charCodeAt(i);
+                 if (c<128) {
+                     plaintext += String.fromCharCode(c);
+                     i++;}
+                 else if((c>191) && (c<224)) {
+                     c2 = utftext.charCodeAt(i+1);
+                     plaintext += String.fromCharCode(((c&31)<<6) | (c2&63));
+                     i+=2;}
+                 else {
+                     c2 = utftext.charCodeAt(i+1); c3 = utftext.charCodeAt(i+2);
+                     plaintext += String.fromCharCode(((c&15)<<12) | ((c2&63)<<6) | (c3&63));
+                     i+=3;}
+                 }
+             return plaintext;
+         }
 // function to visualize chloropleth SIR/CI map
 
 function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name)
 {
+
+
 if (check_choice!="Soildata"){
 	map.removeLayer(geojson);
 		//check multiple queries
@@ -38,10 +61,12 @@ if (check_choice!="Soildata"){
 				//get sparql query from textarea
 				//request.query=$("#sparqlQuery").val();
 				if (check_choice=="SIR"){
-					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?SIR ?GKZ WHERE {?Municipality  <http://www.example.org/def/"+sir_cancer+"_"+sir_year+"_"+sir_gender+"_SIR> ?SIR. ?Municipality <http://www.example.org/def/GKZ> ?GKZ.   } "; //Limit 20
+				check_choice_label="SIR";
+					request.query=" Select ?Label ?SIR ?GKZ   WHERE {?Municipality  <http://www.example.org/def/"+sir_cancer+"_"+sir_year+"_"+sir_gender+"_SIR> ?SIR.?Municipality <http://www.example.org/def/MunicipalityName> ?Label. ?Municipality <http://www.example.org/def/GKZ> ?GKZ.}";
 		}
 
 				if (check_choice=="CI_lower_level"){
+				check_choice_label="CI_lower_level";
 				if (sir_cancer=="C00-C14"){
 				sir_cancer="C00C14"
 				}
@@ -49,18 +74,19 @@ if (check_choice!="Soildata"){
 				sir_cancer="C91C95"
 				}
 				
-					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_lower_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_lowerlimit> ?CI_lower_level   } "; //Limit 20
+					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select  ?GKZ ?Label ?CI_lower_level  WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality <http://www.example.org/def/Municipality> ?Label. ?Municipality  <http://www.example.org/def/CI_lowerlimit> ?CI_lower_level   } "; //Limit 20
 		}
 
 				if (check_choice=="CI_upper_level"){
-				
+				check_choice_label="CI_upper_level";
 				if (sir_cancer=="C00-C14"){
 				sir_cancer="C00C14"
 				}
 				if (sir_cancer=="C91-C95"){
 				sir_cancer="C91C95"
 				}
-					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_upper_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" . ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_upperlimit> ?CI_upper_level   } "; //Limit 20
+					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Municipality ?CI_upper_level ?GKZ WHERE {?Municipality <http://www.example.org/def/Cancer> \""+sir_cancer+sir_year+sir_gender+"\" .?GKZURL 	qb:structure ?Municipality. ?Municipality <http://www.example.org/def/GKZ> ?GKZ. ?Municipality  <http://www.example.org/def/CI_upperlimit> ?CI_upper_level   } "; //Limit 20
+		alert(sir_cancer+sir_year+sir_gender);
 		}
 
 				if (check_choice=="Carcinogen"){
@@ -68,13 +94,13 @@ if (check_choice!="Soildata"){
 		}
 
 				if (check_choice=="Emitter"){
-
-					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?a ?b ?c WHERE {?a qb:dataSet <http://www.example.org/dataset/Muenster_IndustryEmitterDataset>. ?a ?b ?c}"; //Limit 20
+// info.removeFrom(map);
+					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?Emitter ?Attribute ?Value WHERE {?Emitter qb:dataSet <http://www.example.org/dataset/Muenster_IndustryEmitterDataset>. ?Emitter ?Attribute ?Value}"; //Limit 20
 		}
 		
 		if (check_choice=="Accident"){
 
-					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?a ?incident ?type ?zipcode ?street ?GKZ ?municipality ?faultypart ?operationprocess ?cause ?causestatus ?eps ?sdd ?year ?lat ?long WHERE {?a <http://www.example.org/def/Incident> ?incident.?a <http://www.example.org/def/Type> ?type.?a <http://www.example.org/def/ZipCode> ?zipcode.?a <http://www.example.org/def/Street> ?street.?a <http://www.example.org/def/GKZ> ?GKZ.?a <http://www.example.org/def/Municipality> ?municipality.?a <http://www.example.org/def/FaultyPart> ?faultypart.?a <http://www.example.org/def/OperationProcess> ?operationprocess.?a <http://www.example.org/def/Cause> ?cause.?a <http://www.example.org/def/CauseStatus> ?causestatus.?a <http://www.example.org/def/EnvironmentalPollutionStatus> ?eps.?a <http://www.example.org/def/StatusDiverseDisturbences> ?sdd.?a <http://www.example.org/def/Year> ?year.?a <http://www.example.org/def/Y> ?lat.?a <http://www.example.org/def/X> ?long.}"; //Limit 20
+					request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select  ?incident ?type ?zipcode ?street ?GKZ ?municipality ?faultypart ?operationprocess ?cause ?causestatus ?eps ?sdd ?year ?lat ?long WHERE {?a <http://www.example.org/def/Incident> ?incident.?a <http://www.example.org/def/Type> ?type.?a <http://www.example.org/def/ZipCode> ?zipcode.?a <http://www.example.org/def/Street> ?street.?a <http://www.example.org/def/GKZ> ?GKZ.?a <http://www.example.org/def/Municipality> ?municipality.?a <http://www.example.org/def/FaultyPart> ?faultypart.?a <http://www.example.org/def/OperationProcess> ?operationprocess.?a <http://www.example.org/def/Cause> ?cause.?a <http://www.example.org/def/CauseStatus> ?causestatus.?a <http://www.example.org/def/EnvironmentalPollutionStatus> ?eps.?a <http://www.example.org/def/StatusDiverseDisturbences> ?sdd.?a <http://www.example.org/def/Year> ?year.?a <http://www.example.org/def/Y> ?lat.?a <http://www.example.org/def/X> ?long.}"; //Limit 20
 		}
 		
 		if (check_choice=="Accident_detail"){
@@ -115,13 +141,13 @@ if (check_choice!="Soildata"){
 			
 			
 		 visualize_emitter(results);
-		 
+		/* 
 		 info.update = function (props) {
 					this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
 						'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
 						: 'Click a marker for more information');
 			};	
-			info.update();
+			info.update();*/
 		 }
 		 
 		 
@@ -189,7 +215,7 @@ if (check_choice!="Soildata"){
 				$.each(results.results.bindings, function(index1, value1) { 
 					htmlString+="<tr>";
 					$.each(results.head.vars, function(index2, value2) { 
-						htmlString+="<td>"+value1[value2].value+"</td>";
+						htmlString+="<td>"+decode_utf8(value1[value2].value)+"</td>";
 						
 						//console.log(value1[value2].value)
 					 });
@@ -269,13 +295,12 @@ if(check_choice!="Accident_detail"){
 
 
 
-	function getColor(d) {
-				return d > 2.00 ? '#993404' :
-					   d > 1.00 ? '#d95f0e' :
-					   d > 0.70 ? '#fe9929' :
-					   d > 0.50 ? '#fec44f' :
-					   d > 0.30 ? '#fee391' :
-					   d > 0.00 ? '#ffffd4' :			     
+	function getColor3(d) {
+				return d > 30 ? '#fe9929' :
+					   d > 20 ? '#fec44f' :
+					   d > 10 ? '#fee391' :
+					   d > 5 ? '#ffffd4' :
+					   d > 0 ? '#ffffff' :
 								  '#ffffff';
 	}
 
@@ -283,7 +308,7 @@ if(check_choice!="Accident_detail"){
 	//Legend
 
 
-	var legend2 = L.control({position: 'bottomright'});
+	legend2 = L.control({position: 'bottomright'});
 
 	legend2.onAdd = function (map) {
 	var grades2
@@ -291,18 +316,20 @@ if(check_choice!="Accident_detail"){
 	
 	
 				div2 = L.DomUtil.create('div2', 'info legend'),
-				grades2 = [0, 0.30, 0.50, 0.70, 1.00, 2.00],
+				grades2 = [0,5,10,20,30],
 				labels2 = [],
 				
 				from, to;
 		for (var i2 = 0; i2 < grades2.length; i2++) {
 					var from = grades2[i2];
 					var to = grades2[i2 + 1];
+					var from2=grades2[i2]/10;
+					var to2=grades2[i2+1]/10;
 					
 
 					labels2.push(
-						'<i style="background:' + getColor(from + 0 ) + '"></i> ' +
-						from + (to ? '&ndash;' + to : '+'));
+						'<i style="background:' + getColor3(from + 1 ) + '"></i> ' +
+						from2 + (to2 ? '&ndash;' + to2 : '+'));
 				}
 				legend_check=true;
 				div2.innerHTML = labels2.join('<br>');
@@ -313,13 +340,20 @@ if(check_choice!="Accident_detail"){
 	
 	if (querynumber>=1){
 	if (legend_check==false){
+	if (check_choice!="Emitter"){
 			legend2.addTo(map);
 			legend_check==true;
 	}
 	}
+	}
 	if (legend_check==false){
 	if (check_choice2!="Soildata"){
+	if (check_choice!="Emitter"){
+	if (check_choice!="Accident"){
 	legend2.addTo(map);
+	legend_check=true;
+	}
+	}
 	}
 	}
 
@@ -332,8 +366,8 @@ if(check_choice!="Accident_detail"){
 					opacity: 1,
 					color: 'white',
 					dashArray: '3',
-					fillOpacity: 0.7,
-					fillColor: getColor(feature2.properties.SIR)
+					fillOpacity: 1,
+					fillColor: getColor3(feature2.properties.SIR*10)
 				};
 			}
 
@@ -413,21 +447,36 @@ if(check_choice2!="Soildata"){
 		}
 			};
 		if(secondquery==true){
+		//if (check_choice!="Emitter"){
 			info.update = function (props) {
 				this._div.innerHTML = '<h4> Region Westphalen Lippe</h4>' +  (props ?
 				
 				
-					'<b>Municipality: ' + props.Name + '</b><br /> Cancer Type:'+cancer_type_name+'<br>'+check_choice+': ' + props.SIR + ''
+					'<b>Municipality: ' + props.Name + '</b><br /> Cancer Type:'+cancer_type_name+'<br>'+check_choice_label+': ' + props.SIR + ''
 					: 'Hover over a state');
 			};
+			//}
 	}
 			//if (querynumber==1){
 			if (querynumber==1){
 				if(info_check==false){
-				
+				if (check_choice!="Emitter"){
 					info.addTo(map);
 					info.check=true;
+				}
 				
+				// Would update the info box for emitter task
+				/*
+				if (check_choice=="Emitter"){
+				info.update = function (props) {
+				this._div.innerHTML = '<h4> Region Westphalen Lippe</h4>' +  (props ?
+				
+				
+					'<b>Municipality: ' + props.Name + '</b><br />'
+					: 'Click a marker for more information');
+			};
+			info.update();
+				}*/
 				}
 			}
 			
@@ -450,7 +499,7 @@ if(check_choice2!="Soildata"){
 	
 	if (check_choice2=="Soildata"){
 	
-	document.getElementById("soildata_delete").hidden = false;
+//	document.getElementById("soildata_delete").hidden = false;
 	check_choice2=="";
 	}
 	
