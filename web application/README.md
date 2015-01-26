@@ -1,10 +1,5 @@
 # `C`ancer`E`xplorer
 
-#!!!! 01-19-2015 UNDER CONSTRUCTION !!!! Queries are at the moment not possible because of installing datasets to a new server!!!!
-
-* * *
-* * *
-* * *
 ## Linked Data-Based Spatial Cause-Effect Relationships Explorer
 * * *
 

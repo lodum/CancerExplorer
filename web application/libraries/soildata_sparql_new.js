@@ -28,7 +28,7 @@ function visualize_soildata_sparql (sir_cancer,sir_cancer_add,sir_year,sir_gende
 		}
 		// connect to endpoint and send sparql query
 
-				var endpoint="http://10.10.6.8:8080/openrdf-sesame/repositories/cancerdata";
+				var endpoint="http://data.uni-muenster.de/cancerdata/sparql";
 				//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
 				var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
 				var request = { accept : 'application/sparql-results+json' };
