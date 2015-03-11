@@ -1,5 +1,6 @@
 # `C`ancer`E`xplorer
 
+* * *
 ## Linked Data-Based Spatial Cause-Effect Relationships Explorer
 * * *
 
@@ -7,6 +8,7 @@
 The project deals with cancer related cause-effect relationships. Moreover, it aims to create a
 web-based assistance system for the exploration of cause-effect relationships of selected cancer
 types in a predefined geographic region.
+The project is part of [LIFE](http://lodum.de/life/ "LIFE project").
 The work is a result of an external semester contribution, which was mainly focused on the modelling part (domain ontology, information aggregation).
 
 The current state is that cancer cause-effect information is available on the web as open data but in most instances nonaggregated
@@ -45,7 +47,7 @@ Issue list:
 
 **Future:**
 
-It is planned that the project is going to be further developed during Friedrich Müller's master thesis.
+It is planned that the project is going to be further developed during [Friedrich Müller's](http://friedrichmueller.github.io "Friedrich's page") master thesis.
 
 
 
@@ -95,9 +97,18 @@ maps, users are supported in making interpretations of maps while reflecting on 
 uncertainty.
 
 * * *
+* * *
+  
+### ->[DEMO](http://www.friedrichmueller-gi.de "Demo Site")<-
+
+
+* * *
+* * *
+
 ### Further information
 - Contact: http://lodum.de/contact/
-- Website: http://lodum.de/about/
+- Website Project: http://lodum.de/about/
+- Website Author: http://friedrichmueller.github.io
 
 -----
 
