@@ -21,8 +21,10 @@
 		<link rel="stylesheet" href="libraries/L.Control.Sidebar.css" />
 		
 		
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		
 		<link rel="stylesheet" href="libraries/ExplorerModus/leaflet.explorermodus.css" />
+		<link rel="stylesheet" href="libraries/BackgroundModus/leaflet.backgroundmodus.css" />
 		
 		<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
 		<script src="libraries/Leaflet.draw/dist/leaflet.draw.js" type="text/javascript"></script>
@@ -30,10 +32,11 @@
 		<script src="libraries/Measure/leaflet.measurecontrol.js" type="text/javascript"></script>
 		<script src="libraries/WL_overview/leaflet.overviewcontrol.js" type="text/javascript"></script>
 		<script src="libraries/ExplorerModus/leaflet.explorermodus.js" type="text/javascript"></script>
+		<script src="libraries/BackgroundModus/leaflet.backgroundmodus.js" type="text/javascript"></script>
 		<script type='text/javascript' src="libraries/GeometryUtil/dist/leaflet.geometryutil.js"></script>
 		<script type='text/javascript' src="libraries/leaflet.almostover.js"></script>
-		
 		<script type="text/javascript" src="libraries/L.Control.Sidebar.js"></script>
+		
 
 	<!-- awesome markers-->
 		<script src="dist/leaflet.awesome-markers.js"></script>
@@ -78,6 +81,7 @@
 	
 	<!--Explorer Modus Functions/>-->
 	<script type="text/javascript" src="libraries/explorer.js"></script>
+	<script type="text/javascript" src="libraries/backgroundmodus.js"></script>
 	<script src="libraries/L.Map.Sync.js"></script>
 	
 	<script src="libraries/explorer_airquality.js"></script>
@@ -86,7 +90,20 @@
 	<script src="libraries/visualize_industrial accidents.js"></script>
 	
 	<script src="libraries/soildata_sparql2.js"></script>
-
+	
+	<script src="libraries/Leaflet.markercluster/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+	<link rel="stylesheet" href="libraries/Leaflet.markercluster/Leaflet.markercluster/dist/MarkerCluster.css"></link>
+    <link rel="stylesheet" href="libraries/Leaflet.markercluster/Leaflet.markercluster/dist/MarkerCluster.Default.css"></link>
+	
+	<!--Dynasty table order,search>-->
+	<script src="libraries/jspkg-archive/jquery.dynatable.js"></script>
+	<link rel="stylesheet" href="libraries/jspkg-archive/jquery.dynatable.css"></link>
+	
+	<script src="libraries/DVF/leaflet-dvf.js"></script>
+	<link rel="stylesheet" href="libraries/DVF/css/dvf.css"></link>
+	<script src="libraries/dvf.js"></script>
+	
+	
 
 	<style>
 	<!--Info from hover box>-->
@@ -254,7 +271,9 @@
 
 	<!-- Main div structure on page style="position:absolute;left:25px; top:51px; width: 40%; height: 80%;"-->
 		
-
+<!-- Div for the backgroundinformation -->
+	<div id='popup_div'></div>
+	
 		<div id="map" style="position:absolute;left:25px; top:51px; width: 97%; height: 80%;" >
 		
 	 
@@ -364,6 +383,7 @@
 				<button type="button" onclick="ini_emitter()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc" id="Emitter">Example emitter Münster </button>
 				<b><font size=2px>Shows a example set for industrial accidents</b></font>
 				<button type="button" onclick="ini_accident()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc" id="Accident">Example industrial accident data </button>
+				<button type="button" onclick="dvf2()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc" id="DVF">DVF </button>
 <!--
 		<button id="ExploreSoildata" type="button" onclick="ini_soildata()" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc">Explore Soil Data</button>
 <!--
@@ -606,7 +626,7 @@
 		<hr>
 		<font size=2px color="white"><b> Soil Data: </b></font><br>
 		<font size=2px color="white">Choose a municipality for soildata exploration</font>
-		<select class="form-control" name="list_soildata" id="list_soildata" onchange="visualize_soildatamarker ();">
+		<select class="form-control" name="list_soildata" id="list_soildata" onchange="visualize_soildatamarker();">
 			<option value="start">Please Select</option>
 		</select>
 		
@@ -686,8 +706,14 @@
 	</div>
 	
 	
+	
+	
+	
+	
+	
 
 	<script>
+
 	
 	var soildata_municipality
 	
@@ -732,10 +758,13 @@
 	//Check the selections, submit parameter to the SPARQL/AJAX function
 
 
+	var cancer_type_name	
 	
 	
 	
-		var cancer_type_name	
+	
+	
+	
 	function ini_sir () {
 
 		var sir_cancer
@@ -954,7 +983,7 @@
 	   
 			info.update = function (props) {
 					this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
-						'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
+						'<b>Municipality: ' + props.Name+ '</b><br />GKZ: ' + props.GKZ + ''
 						: 'Click a marker for more information');
 			};	
 			info.update();
@@ -1250,7 +1279,62 @@ map.removeControl(legend2);
 	
 	// quick version-better style to do this with a loop
 	for(var i=0;i<results.results.bindings.length;i++){
+emitter_N2O=results.results.bindings[i].N2O.value;
+emitter_Lat=results.results.bindings[i].LAT.value;
 
+
+	emitter_name=results.results.bindings[i].Emitter.value;
+	//actually not necessary, Name is an extra property
+		var emitter_name2=emitter_name.substring(23);
+		emitter_name2=emitter_name2.toUpperCase();
+
+
+			
+			emitter_emission=results.results.bindings[i].EmissionProcess.value; 
+
+			emitter_name3=results.results.bindings[i].Name.value; 
+
+		
+		
+			
+		
+		
+			emitter_CO2=results.results.bindings[i].CO2.value;
+			
+	
+			emitter_CH4=results.results.bindings[i].CH4.value;	
+			emitter_NH3=results.results.bindings[i].NH3.value;
+			emitter_HCL=results.results.bindings[i].HCL.value;
+			emitter_HF=results.results.bindings[i].HF.value;
+			emitter_CO=results.results.bindings[i].CO.value;
+			emitter_NMVOC=results.results.bindings[i].NMVOC.value;
+			emitter_SO2=results.results.bindings[i].SO2.value;
+			emitter_NO2=results.results.bindings[i].NO2.value;
+			emitter_As=results.results.bindings[i].As.value;
+			emitter_Pb=results.results.bindings[i].Pb.value;
+			emitter_Cr=results.results.bindings[i].Cr.value;
+			emitter_Cu=results.results.bindings[i].Cu.value;
+			emitter_Cd=results.results.bindings[i].Cd.value;
+			emitter_Ni=results.results.bindings[i].Ni.value;
+			emitter_V=results.results.bindings[i].V.value;
+			emitter_Zn=results.results.bindings[i].Zn.value;
+			emitter_DUF=results.results.bindings[i].DUF.value;
+			emitter_BAP=results.results.bindings[i].BAP.value;
+			emitter_BENZ=results.results.bindings[i].BENZ.value;
+			emitter_PAK=results.results.bindings[i].PAK.value;
+			emitter_PM10=results.results.bindings[i].PM10.value;
+			emitter_Staub=results.results.bindings[i].Staub.value;
+			emitter_RUSS=results.results.bindings[i].RUSS.value;	
+			emitter_Street=results.results.bindings[i].Street.value;		
+			emitter_ZipCodeCity=results.results.bindings[i].Zip.value;
+
+
+
+
+
+
+
+/*
 	if(results.results.bindings[i].Attribute.value=="http://www.example.org/def/Lat"){
 		emitter_name=results.results.bindings[i].Emitter.value;
 	//actually not necessary, Name is an extra property
@@ -1262,15 +1346,27 @@ map.removeControl(legend2);
 	
 	//check the propertys to the belonging emitter_name
 	for(i2=0;i2<results.results.bindings.length;i2++){
+	
 		if(results.results.bindings[i2].Emitter.value==emitter_name){
+	//console.log(results.results.bindings[i2].Attribute.value);
+	
+	console.log(typeof results.results.bindings[i2].Attribute.value);
 		if(results.results.bindings[i2].Attribute.value=="http://www.example.org/def/EmissionProcess"){
+			
 			emitter_emission=results.results.bindings[i2].Value.value; }
 		if(results.results.bindings[i2].Attribute.value=="http://www.example.org/def/Name"){
 			emitter_name3=results.results.bindings[i2].Value.value; }
 		if(results.results.bindings[i2].Attribute.value=="http://www.example.org/def/N2O"){
-			emitter_N2O=results.results.bindings[i2].Value.value;}
+		//console.log('yes');
+			emitter_N2O=results.results.bindings[i2].Value.value;
+			
+			
+			}
+			
 		if(results.results.bindings[i2].Attribute.value=="http://www.example.org/def/CO2"){
+		
 			emitter_CO2=results.results.bindings[i2].Value.value;}
+			
 		if(results.results.bindings[i2].Attribute.value=="http://www.example.org/def/CH4"){
 			emitter_CH4=results.results.bindings[i2].Value.value;}
 		if(results.results.bindings[i2].Attribute.value=="http://www.example.org/def/NH3"){
@@ -1321,28 +1417,29 @@ map.removeControl(legend2);
 			emitter_Street=results.results.bindings[i2].Value.value;}		
 		if(results.results.bindings[i2].Attribute.value=="http://www.example.org/def/ZipCodeCity"){
 			emitter_ZipCodeCity=results.results.bindings[i2].Value.value;}
-
+*/
 
 
 
 		// Dynamic detail view of the emitters
-		if(results.results.bindings[i2].Attribute.value=="http://www.example.org/def/Long"){
-			var emitter_long=results.results.bindings[i2].Value.value;
+		//if(results.results.bindings[i2].Attribute.value=="http://www.example.org/def/Long"){
+			var emitter_long=results.results.bindings[i].Long.value;
 			var emitter_content;
              emitter_content=emitter_name3+"xxxxx"+emitter_N2O+"xxxxx"+emitter_emission+"xxxxx"+emitter_CO2+"xxxxx"+emitter_CH4+"xxxxx"+emitter_NH3+"xxxxx"+emitter_HCL+"xxxxx"+emitter_HF+"xxxxx"+emitter_CO+"xxxxx"+emitter_NMVOC+"xxxxx"+emitter_SO2+"xxxxx"+emitter_NO2+"xxxxx"+emitter_As+"xxxxx"+emitter_Pb+"xxxxx"+emitter_Cr+"xxxxx"+emitter_Cu+"xxxxx"+emitter_Cd+"xxxxx"+emitter_Ni+"xxxxx"+emitter_V+"xxxxx"+emitter_Zn+"xxxxx"+emitter_DUF+"xxxxx"+emitter_BAP+"xxxxx"+emitter_BENZ+"xxxxx"+emitter_PAK+"xxxxx"+emitter_PM10+"xxxxx"+emitter_Staub+"xxxxx"+emitter_RUSS+"xxxxx"+emitter_Street+"xxxxx"+emitter_ZipCodeCity;
-		    emitter_content=emitter_content.replace(/ /g,'_');
+		   // emitter_content=emitter_Lat+"xxxxx"+emitter_N2O;
+			console.log(emitter_content);
+			emitter_content=emitter_content.replace(/ /g,'_');
 			emitter_content=decode_utf8(emitter_content);
 			emitter_content=emitter_content.replace(/ø/g,'ß');
 			
 			emitter_name3=decode_utf8(emitter_name3);
 			emitter_emission=decode_utf8(emitter_emission);
 			emitter_emission=emitter_emission.replace(/ø/g,'ß');
-		    emitter_name = L.marker([parseFloat(emitter_lat), parseFloat(emitter_long)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'blue'})});
+		    emitter_name = L.marker([parseFloat(emitter_Lat), parseFloat(emitter_long)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'blue'})});
 		    emitter_name.bindPopup("<b>"+emitter_name3+"</b><br>Emission Process:</br>"+emitter_emission+'</br><a name='+emitter_content+'   onclick="Emitter_detail_sidebar(name)">See details</a>');
 			markersLayer.addLayer(emitter_name);
-		}
-	  }
 	}
+	
 	
 	// visualize layer containing marker
 			
@@ -1370,7 +1467,7 @@ map.removeControl(legend2);
 	// to add an info box.
 	//	check_detail_view=true;
 		
-	}
+	
 	
 
 		
@@ -1384,15 +1481,13 @@ map.removeControl(legend2);
 
 //emitter_name3,emitter_N2O,emitter_emission,emitter_CO2,emitter_CH4,emitter_NH3,emitter_HCL,emitter_HF,emitter_CO,emitter_NMVOC,emitter_SO2,emitter_NO2,emitter_As,emitter_Pb,emitter_Cr,emitter_Cu,emitter_Cd,emitter_Ni,emitter_V,emitter_Zn,emitter_DUF,emitter_BAP,emitter_BENZ,emitter_PAK,emitter_PM10,emitter_Staub,emitter_RUSS,emitter_Street,emitter_ZipCodeCity
 	
-	function Emitter_detail_sidebar (name)
+	function Emitter_detail_sidebar(name)
 	{
 	
 	 name=name.replace(/_/g, ' ');
 	 //name=decode_utf8(name);
 	 var array = name.split('xxxxx')
 	
-
-
 		
 		document.getElementById("street_emit").innerHTML=array[27];
 		document.getElementById("name_emit").innerHTML=array[0];
@@ -1423,6 +1518,10 @@ map.removeControl(legend2);
 		document.getElementById("PM10").innerHTML=array[24];
 		document.getElementById("Staub").innerHTML=array[25];
 		document.getElementById("RUSS").innerHTML=array[26];
+
+
+
+
 
 
 		emitter_detail.show();
@@ -1480,14 +1579,23 @@ map.removeControl(legend2);
 	
 	var WLBoundaries2=WLBoundaries;
 
-	WL_boundary.addTo(map);
-	WL_boundary2.addTo(map2);
+	//WL_boundary.addTo(map);
+	//WL_boundary2.addTo(map2);
 
-	var geojsonadd=L.geoJson(WLBoundaries, {style: style}).addTo(map);
-	var geojsonadd2=L.geoJson(WLBoundaries2, {style: style}).addTo(map2);
-
-
-
+	//var geojsonadd=L.geoJson(WLBoundaries, {style: style}).addTo(map);
+	//var geojsonadd2=L.geoJson(WLBoundaries2, {style: style}).addTo(map2);
+	var geojson;
+	geojson = L.geoJson(WLBoundaries, {
+				style: style,
+				onEachFeature: onEachFeature
+			}).addTo(map);
+			
+			
+			var geojson2 = L.geoJson(WLBoundaries2, {
+				style: style3,
+				onEachFeature: onEachFeature
+			}).addTo(map2);
+		
 	//Adding map interaction
 	// control that shows state info on hover
 	//var info = L.control();
@@ -1546,7 +1654,13 @@ map.removeControl(legend2);
 					   d > 5564048 ? '#3B0B0B' :
 								    '#3B0B0B';
 			}
-		
+function getColor_air(d) {
+					return d > color_air4 ? '#993404' :
+						   d > color_air3 ? '#fec44f' :
+						   d > color_air2 ? '#ffffff' :						
+						   d > color_air1 ? '#ffffd4' :			     
+										  '#ffffff';
+		}		
 
 			function style(feature) {
 				return {
@@ -1559,9 +1673,11 @@ map.removeControl(legend2);
 				};
 			}
 var hover_selection
+var hover_selection_geometry
 			function highlightFeature(e) {
+			
 				layer = e.target;
-				
+			
 
 				layer.setStyle({
 					weight: 3,
@@ -1574,19 +1690,140 @@ var hover_selection
 					layer.bringToFront();
 					
 				}
-				
+				//*******************************************************************************************************
 				hover_selection=layer.feature.properties.Name
+				//alert (hover_selection);
+				// Check name-->  display selection in parallel window
+			
+if (map2.hasLayer(geojson_aqd)==false){
+if (map2.hasLayer(geojsonadd2)==false){
+			geojson2.eachLayer(function (layer) {  
+  if(layer.feature.properties.Name == hover_selection) { 
+  var old_hover_selection=hover_selection
+    layer.setStyle({weight: 3,
+					color: '#2E64FE',
+					dashArray: '',
+					fillOpacity: 0.7}) 
+					layer.bringToFront();
+  }
+});
+}}
+//if (secondquery==false){
+geojson.eachLayer(function (layer) {  
+  if(layer.feature.properties.Name == hover_selection) { 
+  var old_hover_selection=hover_selection
+    layer.setStyle({weight: 3,
+					color: '#2E64FE',
+					dashArray: '',
+					fillOpacity: 0.7}) 
+					layer.bringToFront();
+  }
+});
+
+if (map2.hasLayer(geojsonadd2)){	
+geojsonadd2.eachLayer(function (layer) {  
+  if(layer.feature.properties.Name == hover_selection) { 
+  var old_hover_selection=hover_selection
+    layer.setStyle({weight: 3,
+					color: '#2E64FE',
+					dashArray: '',
+					fillOpacity: 0.7}) 
+					layer.bringToFront();
+				
+  }
+});				
+}
+
+
+
+if (map2.hasLayer(AQDLayer)){	
+geojson_aqd.eachLayer(function (layer) {  
+  if(layer.feature.properties.Name == hover_selection) { 
+  var old_hover_selection=hover_selection
+    layer.setStyle({weight: 3,
+					color: '#2E64FE',
+					dashArray: '',
+					fillOpacity: 0.7}) 
+					layer.bringToFront();
+				
+  }
+});				
+}
+
+//}
+
+
+			
+				hover_selection_geometry=layer.feature.properties.geometry
 				info.update(layer.feature.properties);
 				info2.update(layer.feature.properties);
+				
+			
+				
 			}
 
-			var geojson;
+		
 
 			function resetHighlight(e) {
 				geojson.resetStyle(e.target);
 				geojson2.resetStyle(e.target);
 				info.update();
 				info2.update();
+				
+				
+				
+				
+if (map2.hasLayer(geojson2)){
+if (map2.hasLayer(geojsonadd2)==false){				
+						geojson2.eachLayer(function (layer) {  
+  layer.setStyle({weight: 2,
+					opacity: 1,
+					color: 'white',
+					dashArray: '3',
+					fillOpacity: 0.7,
+					fillColor: getColor(layer.feature.properties.GKZ)})
+});
+}}
+
+if (map2.hasLayer(geojsonadd2)){				
+					geojsonadd2.eachLayer(function (layer) {  
+   layer.setStyle({weight: 2,
+					opacity: 1,
+					color: 'white',
+					dashArray: '3',
+					fillOpacity: 0.7,
+					fillColor: getColor(layer.feature.properties.GKZ)})
+});
+}
+
+if (map2.hasLayer(AQDLayer)){				
+	geojson_aqd.eachLayer(function (layer) {  
+   layer.setStyle({weight: 2,
+					opacity: 1,
+					color: 'white',
+					dashArray: '3',
+					fillOpacity: 0.7,
+					fillColor: getColor_air(layer.feature.properties.Values)})
+});
+}
+
+
+
+geojson.eachLayer(function (layer) {  
+  layer.setStyle({weight: 2,
+					opacity: 1,
+					color: 'white',
+					dashArray: '3',
+					fillOpacity: 0.7,
+					fillColor: getColor(layer.feature.properties.GKZ)})
+});
+				
+				
+				
+				
+				
+				
+				
 			}
 
 			function zoomToFeature(e) {
@@ -1602,16 +1839,9 @@ var hover_selection
 				});
 			}
 
-			geojson = L.geoJson(WLBoundaries, {
-				style: style,
-				onEachFeature: onEachFeature
-			}).addTo(map);
+		
 			
 			
-			var geojson2 = L.geoJson(WLBoundaries2, {
-				style: style3,
-				onEachFeature: onEachFeature
-			}).addTo(map2);
 
 			map.attributionControl.addAttribution('Text?');
 			map2.attributionControl.addAttribution('Text?');
@@ -1646,7 +1876,10 @@ var hover_selection
 	map.removeLayer(SIRLayer);
 	map.removeLayer(WL_boundary);
 	map.removeLayer(WL_boundary2);
-	map.removeLayer(geojsonadd);
+	//if (map.hasLayer(geojsonadd))
+	//{
+	//map.removeLayer(geojsonadd);
+	//}
 	map.removeLayer(geojson2);
 		
 	map.removeLayer(geojson);
@@ -1706,7 +1939,7 @@ var hover_selection
 
 	//remove Layers
 	map.removeLayer(WL_boundary);
-	map.removeLayer(geojsonadd);
+	//map.removeLayer(geojsonadd);
 		
 	map.removeLayer(geojson);
 	// clear Legend
@@ -1727,19 +1960,19 @@ var soildata_marker
 var soil_secondquery="false";	
 //////////////////////////////////////////////////////////////////////////////////////////////////////// Test
 		function visualize_soildata (results){
-	
+/*	
 	map2.removeLayer(geojson2);
 	map2.removeLayer(WL_boundary);
 	map2.removeLayer(WL_boundary2);
-	map2.removeLayer(geojsonadd2);
+	map2.removeLayer(geojsonadd2);*/
 	
 	
 	
 	
 	// clear Legend
 		div2.innerHTML ="";
-	var markers_soildata = [];
-	var marker_soildata;
+	var markers_soildata =new L.MarkerClusterGroup();
+	
 	var soildata_substance=new Array();
 	
 	// quick version-better style to do this with a loop
@@ -1748,12 +1981,15 @@ var soil_secondquery="false";
 	
 		
 		var soildata_X=results.results.bindings[i].X.value;
+		
 		var soildata_Y=results.results.bindings[i].Y.value;
 		var soildata_unit=results.results.bindings[i].unit.value;
 		var soildata_id=results.results.bindings[i].ID.value;
 		var soildata_coordinates=results.results.bindings[i].Coordinates.value;
+		//alert (soildata_coordinates);
 		var soildata_sub=results.results.bindings[i].Substance.value;
 		var soildata_val=results.results.bindings[i].Value.value;
+		//var soildata_municipality=results.results.bindings[i].Value.value;
 		
 		var soildata_GKZ=results.results.bindings[i].GKZ.value;
 		
@@ -1761,11 +1997,8 @@ var soil_secondquery="false";
 		
 		soildata_substance[i]=results.results.bindings[i].Substance.value;
 		
-		var soildata_X2=soildata_X
-		var soildata_Y2=soildata_Y
 		
-
-
+		
 
 
 		// Dynamic detail view of the emitters
@@ -1773,6 +2006,7 @@ var soil_secondquery="false";
 			//if(i==0){
 			var soildata_content
 			var soildata_name
+			var marker_soildata
            // soildata_content=soildata_unit+"xxxxx"+soildata_typeofuse+"xxxxx"+soildata_substance+"xxxxx"+soildata_value+"xxxxx"+soildata_paramnr+"xxxxx"+soildata_GKZ+"xxxxx"+soildata_municipality+"xxxxx"+soildata_probenr+"xxxxx"+soildata_seqnr+"xxxxx"+soildata_probemethod+"xxxxx"+soildata_typeofsoil+"xxxxx"+soildata_soiltype+"xxxxx"+soildata_locationid;
 			//+"xxxxx"+accident_substance+"xxxxx"+accident_incident+"xxxxx"+accident_value_kg+"xxxxx"+accident_value_text+"xxxxx"+accident_value_description
 		//	soildata_content=soildata_content.replace(/ /g,'_');
@@ -1780,15 +2014,19 @@ var soil_secondquery="false";
 			soildata_content=soildata_unit+"xxxxx"+soildata_X+"xxxxx"+soildata_Y+"xxxxx"+soildata_coordinates+"xxxxx"+soildata_id+"xxxxx";
 			soildata_content=soildata_content.replace(/ /g,'_');
 			
-			//alert(soildata_coordinates);
+			//alert(soildata_Y);
 //alert(soildata_substance);
-			soildata_name = L.marker([parseFloat(soildata_Y), parseFloat(soildata_X)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'red'})});
+			marker_soildata=L.marker([parseFloat(soildata_Y), parseFloat(soildata_X)],{icon: L.AwesomeMarkers.icon({icon: 'building', prefix: 'fa', markerColor: 'red'})});
+			
 			//var ff= soildata_name.getLatLng();
 			var ff=soildata_X+","+soildata_Y+","+soildata_id;
 			//here call new function to work
-			soildata_name.bindPopup("Location ID:<br>"+soildata_id+'<br><a name="'+ff+'"  onclick="soildata_detail_sidebar(name)">See details</a>');
+			marker_soildata.bindPopup("Location ID:<br>"+soildata_id+'<br><a name="'+ff+'"  onclick="soildata_detail_sidebar(name)">See details</a>');
 			
-			
+			if (soildata_X != soildata_X2){
+			 if (soildata_Y != soildata_Y2){
+			markers_soildata.addLayer(marker_soildata);
+			}}
 			//accident_name3.bindPopup("<b>"+accident_name2+"</b><hr><b>Type:<ent_cause+"</b><br><b>Environmental Pollution Status:</b></br>"+accident_eps+'</br><a name='+accident_content+'   onclick="Accident_detail_sidebar(name)">See details</a>');
             //accident_name3.bindPopup("<b>"+accident_name2+"</b><hr><b>Type:</b></br>"+accident_type+"</b><br><b>Cause:</b></br>"+accident_cause+"</b><br><b>Environmental Pollution Status:</b></br>"+accident_eps+'</br><a name='+accident_content+'   onclick="Accident_detail_sidebar(name)">See details</a>');
             
@@ -1796,8 +2034,13 @@ var soil_secondquery="false";
 			
 			//soildata_name.bindPopup("<b>"+soildata_substance+"</b><hr><b>Type:</b></br>xx</b><br><b>Cause:</b></br>xx</b><br><b>Environmental Pollution Status:</b></br>xx</br>");
             
+			map2.addLayer(markers_soildata);
 			
-			markersLayer.addLayer(soildata_name);
+			
+			var soildata_X2=soildata_X;
+			var soildata_Y2=soildata_Y;
+			
+			//markersLayer.addLayer(soildata_name);
 			var soildata_X_old=soildata_X
 			var soildata_Y_old=soildata_Y
 			
@@ -1851,12 +2094,12 @@ var soil_secondquery="false";
 	
 			
 			
-
+/*
 	//remove Layers
 	map2.removeLayer(WL_boundary);
 	map2.removeLayer(geojsonadd);
 		
-	map2.removeLayer(geojson);
+	map2.removeLayer(geojson);*/
 	// clear Legend
 		div2.innerHTML ="";
 		
@@ -2010,6 +2253,9 @@ map2.removeLayer(soildata_marker);
 		
 	// add explorer control
 	L.Control.explorerModus().addTo(map);
+	
+	// add background control
+	L.Control.backgroundModus().addTo(map);
 		
 	//getlocation-- intialise a marker of your current position
 	//map.locate({setView: true, maxZoom: 16});

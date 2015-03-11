@@ -3,8 +3,18 @@ var WLBoundaries_aqd
 var branch_selection
 var substance_selection
 var legendair_check=false;
+var check_choice;
+var geojson_aqd;
+var color_air1;
+var color_air2;
+var color_air3;
+var color_air4;
+
 function explorer_airquality()
 {
+
+
+
 
 
 
@@ -19,23 +29,26 @@ function explorer_airquality()
 	map2.removeLayer(geojson2);
 	map2.removeLayer(WL_boundary);
 	map2.removeLayer(WL_boundary2);
+	if (map2.hasLayer(geojsonadd2)){
 	map2.removeLayer(geojsonadd2);
+	}
+	
 		
 	// set variable for sparql queries according the user selection
 	aqd_sparql();  
 		
 	// connect to endpoint and send sparql query
 
-					var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/CancerData";
+					var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/CancerData2";
 					//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
 					var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
-					var request = { accept : 'application/sparql-results+json' };
+					var request = { accept : 'application/sparql-results2+json' };
 					// gives all industry values
 				//	request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?substance ?municipality ?values WHERE {?substance qb:dataSet ?municipality. ?substance <http://www.example.org/def/Industry> ?values.} LIMIT 1000";
 				//request.query="SELECT ?a  ?b  ?d ?e ?f ?g ?h ?i  WHERE { ?a <http://www.example.org/def/Total> ?b. ?a <http://www.example.org/def/GKZ> ?d. ?a <http://www.w3.org/2000/01/rdf-schema#label> ?e.?a <http://www.example.org/def/Industry> ?f.?a <http://www.example.org/def/SmallCombustionPlant> ?g.?a <http://www.example.org/def/Traffic> ?h. OPTIONAL {?a <http://www.example.org/def/Agriculture> ?i . }}";
-				request.query="SELECT ?Instance  ?Value ?Name ?GKZ WHERE { ?Instance <http://www.w3.org/2000/01/rdf-schema#label> \""+substance_label+"\".?Instance "+aqd_branch+" ?Value.?Instance <http://www.example.org/def/Name> ?Name. ?Instance <http://www.example.org/def/GKZ> ?GKZ}";
+				request.query="PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> SELECT ?Name ?Label ?Value ?GKZ WHERE { ?Instance <http://www.w3.org/2000/01/rdf-schema#label> \""+substance_label+"\".?Instance <http://www.example.org/def/Name> ?Name. ?Instance rdfs:label ?Label. ?Instance "+aqd_branch+" ?Value. ?Instance <http://www.example.org/def/GKZ> ?GKZ}";
 		// ToDo: check Agriculture issue: if agriculture not exists data isnt displayed!!!-solved?
-
+check_choice="AQD";
 				
 
 				
@@ -47,8 +60,8 @@ function explorer_airquality()
 					//sent request
 					$.ajax({
 						dataType: "jsonp",
-						//some sparql endpoints do only support "sparql-results+json" instead of simply "json"
-						beforeSend: function(xhrObj){xhrObj.setRequestHeader("Accept","application/sparql-results+json");},
+						//some sparql endpoints do only support "sparql-results2+json" instead of simply "json"
+						beforeSend: function(xhrObj){xhrObj.setRequestHeader("Accept","application/sparql-results2+json");},
 						data: request,
 						url: queryUrl,
 						success: callbackFunc
@@ -56,36 +69,39 @@ function explorer_airquality()
 
 
 			//handles the ajax response
-		//	$("#aqd_results_sidebar").empty();
+		//	$("#aqd_results2_sidebar").empty();
 					$("#resultdiv_map2").empty();
 	
 	
 	var beforeSorting=new Array();
 	
 	
-	function callbackFunc(results) {
+	function callbackFunc(results2) {
 				
 				
 				//Clear result HTML div
 						   
 					//result is a json object http://de.wikipedia.org/wiki/JavaScript_Object_Notation
-					htmlString="<table class=\"table table-striped\">";
+					htmlString="<table class=\"table table-striped\" id=\"aqd_table\">";
 
 			// Special case carcinogen information		
 				
 					
 					
 					//write table head
+					htmlString+="<thead>";
 					htmlString+="<tr>";
-						$.each(results.head.vars, function(index2, value2) { 
-							htmlString+="<th>?"+value2+"</th>";
+						$.each(results2.head.vars, function(index2, value2) { 
+							htmlString+="<th>"+value2+"</th>";
 						 });
 					htmlString+="</tr>";
+					htmlString+="</thead>";
 					//write table body
+					htmlString+="<tbody>";
 					
-					$.each(results.results.bindings, function(index1, value1) { 
+					$.each(results2.results.bindings, function(index1, value1) { 
 						htmlString+="<tr>";
-						$.each(results.head.vars, function(index2, value2) { 
+						$.each(results2.head.vars, function(index2, value2) { 
 							htmlString+="<td>"+decode_utf8(value1[value2].value)+"</td>";
 							
 							//console.log(value1[value2].value)
@@ -93,12 +109,13 @@ function explorer_airquality()
 						htmlString+="</tr>";
 						
 					});
+					htmlString+="</tbody>";
 
 					htmlString+="</table>";
 					$("#resultdiv_map2").html(htmlString);
 					
-				
-					// show the SPARQL results in a new sidebar
+dyna_aqd ();				
+					// show the SPARQL results2 in a new sidebar
 				 AQDResultsPanel.show();
 				
 					
@@ -118,12 +135,12 @@ function explorer_airquality()
 			
 	for(var i=0;i<WLBoundaries_aqd.features.length;i++){			
 
-					for(var n=0;n<results.results.bindings.length;n++){
+					for(var n=0;n<results2.results.bindings.length;n++){
 	
 					
-						if(WLBoundaries_aqd.features[i].properties.GKZ == results.results.bindings[n].GKZ.value){
+						if(WLBoundaries_aqd.features[i].properties.GKZ == results2.results.bindings[n].GKZ.value){
 						
-							WLBoundaries_aqd.features[i].properties.Values= results.results.bindings[n].Value.value;
+							WLBoundaries_aqd.features[i].properties.Values= results2.results.bindings[n].Value.value;
 						}
 						
 					
@@ -140,6 +157,9 @@ function explorer_airquality()
 			
 
 	//////////////////////////////	Visualization
+	
+	
+	
 
 	// Adding info box, legend, hover functionality
 
@@ -161,13 +181,22 @@ var afterSorting;
 afterSorting = beforeSorting.sort(function(a,b){return a-b});
 //alert(afterSorting);
 
-var color_air1=afterSorting[Math.round(afterSorting.length*1/4)];
-var color_air2=afterSorting[Math.round(afterSorting.length*1/2)];
-var color_air3=afterSorting[Math.round(afterSorting.length*3/4)];	
-var color_air4=afterSorting[Math.round(afterSorting.length-1)];	
+color_air1=afterSorting[Math.round(afterSorting.length*1/4)];
+color_air2=afterSorting[Math.round(afterSorting.length*1/2)];
+color_air3=afterSorting[Math.round(afterSorting.length*3/4)];	
+color_air4=afterSorting[Math.round(afterSorting.length-1)];	
 
 //alert(afterSorting[Math.round(afterSorting.length)]);
-
+function getColor_GKZ(d) {
+				return d > 5515000 ? '#3B0B0B' :
+					   d > 5515000 ? '#3B0B0B' :
+					   d > 5515000 ? '#3B0B0B' :
+					   d > 5515000 ? '#3B0B0B' :
+					   d > 5515000 ? '#3B0B0B' :
+					   d > 5514999 ? '#2E64FE' :
+					   d > 5564048 ? '#3B0B0B' :
+								    '#3B0B0B';
+			}
 
 
 
@@ -235,7 +264,7 @@ if(legend2==true){
 	
 	
 			if(legendair_check==false){
-			legend2.addTo(map2);
+			//legend2.addTo(map2);
 			legendair_check=true;
 			}
 		
@@ -266,9 +295,25 @@ if(legend2==true){
 				
 				
 				
-	var geojson_aqd;
+
+	
+if (map.hasLayer(SIRLayer)==false){	
+	geojson = L.geoJson(WLBoundaries, {
+				style: style,
+				onEachFeature: onEachFeature3
+			}).addTo(map);
+}
 
 
+
+geojson_aqd = L.geoJson(WLBoundaries_aqd, {
+					style: style_new,
+					onEachFeature: onEachFeature3
+				});
+		
+				AQDLayer.addLayer(geojson_aqd);
+				AQDLayer.addTo(map2);
+				geojson_aqd.addTo(map2);
 		
 				function highlightFeature3(e2) {
 					var layer2 = e2.target;
@@ -285,14 +330,110 @@ if(legend2==true){
 					}
 					info.update(layer2.feature.properties);
 					info2.update(layer2.feature.properties);
+					
+					var hover_selection=layer2.feature.properties.Name
+					if (map2.hasLayer(AQDLayer)){
+					//if (map2.hasLayer(geojson_aqd)){
+				geojson_aqd.eachLayer(function (layer) { 
+//alert (layer.feature.properties.Name);				
+  if(layer.feature.properties.Name == hover_selection) { 
+  var old_hover_selection=hover_selection
+    layer.setStyle({weight: 3,
+					color: '#2E64FE',
+					dashArray: '',
+					fillOpacity: 0.7}) 
+					layer.bringToFront();
+  }
+});	
+}	
+
+	
+
+
+if (map.hasLayer(SIRLayer)==false){	
+
+geojson.eachLayer(function (layer) {  
+  if(layer.feature.properties.Name == hover_selection) { 
+  var old_hover_selection=hover_selection
+    layer.setStyle({weight: 3,
+					color: '#2E64FE',
+					dashArray: '',
+					fillOpacity: 0.7}) 
+					layer.bringToFront();
+  }
+});						
+}	
+
+if (map.hasLayer(SIRLayer)){	
+
+geojson22.eachLayer(function (layer) {  
+  if(layer.feature.properties.Name == hover_selection) { 
+  var old_hover_selection=hover_selection
+    layer.setStyle({weight: 3,
+					color: '#2E64FE',
+					dashArray: '',
+					fillOpacity: 0.7}) 
+					layer.bringToFront();
+  }
+});						
+}						
+					
+					
 				}
 
-
+function getColor3(d) {
+				return d > 30 ? '#fe9929' :
+					   d > 20 ? '#fec44f' :
+					   d > 10 ? '#fee391' :
+					   d > 5 ? '#ffffd4' :
+					   d > 0 ? '#ffffff' :
+								  '#ffffff';
+	}
 				
 				function resetHighlight3(e2) {
 					geojson_aqd.resetStyle(e2.target);
 					info2.update();
 					info.update();
+					
+				
+									geojson_aqd.eachLayer(function (layer) {  
+   layer.setStyle({weight: 2,
+					opacity: 1,
+					color: 'white',
+					dashArray: '3',
+					fillOpacity: 0.7,
+					fillColor: getColor(layer.feature.properties.Values)})
+});
+
+
+//if (map.hasLayer(SIRLayer)){
+if (map.hasLayer(SIRLayer)==false){
+geojson.eachLayer(function (layer) {  
+  layer.setStyle({weight: 2,
+					opacity: 1,
+					color: 'white',
+					dashArray: '3',
+					fillOpacity: 0.7,
+					fillColor: getColor_GKZ(layer.feature.properties.GKZ)})
+});
+}
+//}	
+if (map.hasLayer(SIRLayer)){
+geojson22.eachLayer(function (layer) {  
+  layer.setStyle({weight: 2,
+					opacity: 1,
+					color: 'white',
+					dashArray: '3',
+					fillOpacity: 0.7,
+					fillColor: getColor3(layer.feature.properties.SIR*10)})
+});
+}					
+					
+					
+					
+					
+					
+					
 				}
 
 				function zoomToFeature3(e2) {
@@ -311,14 +452,7 @@ if(legend2==true){
 
 
 
-		geojson_aqd = L.geoJson(WLBoundaries_aqd, {
-					style: style_new,
-					onEachFeature: onEachFeature3
-				});
 		
-				AQDLayer.addLayer(geojson_aqd);
-				AQDLayer.addTo(map2);
-				geojson_aqd.addTo(map2);
 				map2.attributionControl.addAttribution('Text?');
 		
 	
@@ -342,7 +476,16 @@ if(legend2==true){
 
 info2.update();
 
-		
+function dyna_aqd (){
+
+				$("#aqd_table").dynatable({
+  features: {
+    paginate: false,
+    recordCount: true,
+    sorting: true
+  }});
+
+ }		
 		
 		
 		

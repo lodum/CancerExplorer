@@ -1,6 +1,12 @@
-function explorer_modus (){
 
+function background_modus (){
+sir_sidebar.show();
+//document.getElementById("sir_sidebar").innerHTML='<object type="text/html" data="background.html" ></object>';
+ $("#sir_sidebar").load("background_spatial.html");
 
+//window.open("background_spatial.html"); 
+
+/*
 //document.getElementById("container_main").style.width = "40% ";
 //document.getElementById("map2").style.width = "40% ";
 document.getElementById("map2").style.width = "42% ";
@@ -256,7 +262,7 @@ var geojson2 = L.geoJson(WLBoundaries2, {
 				onEachFeature: onEachFeature
 			}).addTo(map2);
 }
-*/
+
 if (map.hasLayer(SIRLayer)){
 map.removeLayer(SIRLayer);
 map.removeLayer(geojson22);
@@ -300,5 +306,5 @@ info2.update = function (props) {
 			};	
 			info.update();
 	   }	
-
+*/
 }

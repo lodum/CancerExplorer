@@ -3,7 +3,7 @@ function sparql(){
 	//author: Johannes Trame Code: https://github.com/lodum/BiographicalThesaurus/blob/master/examples/jquery_sparql_sesame.html
 	
 //	function submitQuery(){
-		var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/CancerData";
+		var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/CancerData2";
 		//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
 		var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
 		var request = { accept : 'application/sparql-results+json' };
@@ -107,7 +107,7 @@ function SPedit(){
 	//author: Johannes Trame Code: https://github.com/lodum/BiographicalThesaurus/blob/master/examples/jquery_sparql_sesame.html
 	
 //	function submitQuery(){
-		var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/CancerData";
+		var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/CancerData2";
 		//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
 		var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
 		var request = { accept : 'application/sparql-results_edit+json' };

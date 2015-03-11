@@ -59,6 +59,7 @@ function get_overview (){
 	if(markersLayer != undefined){
 			markersLayer.clearLayers();
 			map.removeLayer(markersLayer);
+			//map.removeLayer(geojson22);
 			}
 			if (map.hasLayer(SIRLayer)){
 				map.removeLayer(SIRLayer);
@@ -87,10 +88,16 @@ function get_overview (){
 			
 
 	}
+	map.removeLayer(geojson);
 // Add municipality geometry layer and set map view
-	geojson.addTo(map);			
+	geojson = L.geoJson(WLBoundaries, {
+				style: style,
+				onEachFeature: onEachFeature
+			}).addTo(map);
+	
+	
 	map.setView([51.95442, 7.62709], 7);
-
+reset_explorer();
 
 }
 

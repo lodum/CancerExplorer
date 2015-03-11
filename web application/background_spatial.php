@@ -1,3 +1,4 @@
+<?php
 <!DOCTYPE html>
 	 <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"> 
 	<html>
@@ -37,7 +38,7 @@
 				<script type='text/javascript' src="libraries/GeometryUtil/dist/leaflet.geometryutil.js"></script>
 				<script type='text/javascript' src="libraries/leaflet.almostover.js"></script>
 				<script type="text/javascript" src="libraries/L.Control.Sidebar.js"></script>
-						
+				<script type="text/javascript" src="libraries/background.js"></script>				
 
 						<!-- awesome markers-->
 				<script src="dist/leaflet.awesome-markers.js"></script>
@@ -417,4 +418,5 @@ $(function() {
 	</script>
 	
 </html>
+?>
 	
