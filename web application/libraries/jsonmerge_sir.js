@@ -15,6 +15,15 @@ var geojson22;
 var geojsonadd2;
 
 
+
+function precise_round(num, decimals) {
+var t=Math.pow(10, decimals);   
+ return (Math.round((num * t) + (decimals>0?1:0)*(Math.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
+    }
+
+
+
+
  function decode_utf8(utftext) {
             var plaintext = ""; var i=0; var c=c1=c2=0;
              // while-Schleife, weil einige Zeichen uebersprungen werden
@@ -37,12 +46,12 @@ var geojsonadd2;
          }
 // function to visualize chloropleth SIR/CI map
 
-function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name)
+function visualize_sir (sir_cancer,sir_cancer_add,sir_year,sir_gender,check_choice,cancer_type_name,mapname,search_substance)
 {
 
-
+//alert(sir_cancer+" "+sir_cancer_add+" "+sir_year+" "+sir_gender+" "+check_choice+" "+cancer_type_name+" "+mapname+" "+search_substance);
 if (check_choice!="Soildata"){
-	map.removeLayer(geojson);
+	//map.removeLayer(electoralVotesLayer);
 		//check multiple queries
 		if (querynumber==1){
 			if (secondquery==true){
@@ -98,6 +107,7 @@ var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/Can
 		}
 
 				if (check_choice=="Emitter"){
+			
 // info.removeFrom(map);
 					//request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select DISTINCT  ?Emitter ?Attribute ?Value WHERE {?Emitter qb:dataSet <http://www.example.org/dataset/Muenster_IndustryEmitterDataset>. ?Emitter ?Attribute ?Value}"; //Limit 20
 					//emitter_content=emitter_name3+"xxxxx"+emitter_N2O+"xxxxx"+emitter_emission+"xxxxx"+emitter_CO2+"xxxxx"+emitter_CH4+"xxxxx"+emitter_NH3+"xxxxx"+emitter_HCL+"xxxxx"+emitter_HF+"xxxxx"+emitter_CO+"xxxxx"+emitter_NMVOC+"xxxxx"+emitter_SO2+"xxxxx"+emitter_NO2+"xxxxx"+emitter_As+"xxxxx"+emitter_Pb+"xxxxx"+emitter_Cr+"xxxxx"+emitter_Cu+"xxxxx"+emitter_Cd+"xxxxx"+emitter_Ni+"xxxxx"+emitter_V+"xxxxx"+emitter_Zn+"xxxxx"+emitter_DUF+"xxxxx"+emitter_BAP+"xxxxx"+emitter_BENZ+"xxxxx"+emitter_PAK+"xxxxx"+emitter_PM10+"xxxxx"+emitter_Staub+"xxxxx"+emitter_RUSS+"xxxxx"+emitter_Street+"xxxxx"+emitter_ZipCodeCity;
@@ -119,9 +129,11 @@ var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/Can
 		
 		//alert(soildata_municipality); 
 					//request.query="SELECT ?Instance ?typeofuse ?substance  ?value ?municipality ?GKZ ?paramnr ?probenr ?seqnr ?probemethod ?etrskm32E ?etrskm32N ?X ?Y ?typeofsoil ?soiltype ?locationid ?unit ?municipality WHERE { ?Instance <http://www.example.org/def/UseType> ?typeofuse. ?Instance <http://www.example.org/def/Substance> ?substance.?Instance <http://www.example.org/def/Value> ?value.?Instance <http://www.example.org/def/Municipality> ?municipality.?Instance <http://www.example.org/def/GKZ> ?GKZ.?Instance <http://www.example.org/def/ParamNR> ?paramnr.?Instance <http://www.example.org/def/ProbeNR> ?probenr.?Instance <http://www.example.org/def/SeqNr> ?seqnr.?Instance <http://www.example.org/def/ProbeMethod> ?probemethod.?Instance <http://www.example.org/def/EtrsKm32E> ?etrskm32E.?Instance <http://www.example.org/def/EtrsKm32N> ?etrskm32N.?Instance <http://www.example.org/def/X> ?X.?Instance <http://www.example.org/def/Y> ?Y.?Instance <http://www.example.org/def/TypeOfSoil> ?typeofsoil.?Instance <http://www.example.org/def/SoilType> ?soiltype.?Instance <http://www.example.org/def/LocationID> ?locationid.?Instance <http://www.example.org/def/Unit> ?unit.?Instance <http://www.example.org/def/Municipality> ?municipality}LIMIT 2000";
-		console.log(soildata_municipality);
+		//console.log(soildata_municipality);
+		
 		request.query="SELECT DISTINCT  ?Instance ?GKZ   ?X ?Y   ?unit ?Coordinates ?Substance ?ID ?Value ?municipality FROM <http://www.friedrichmueller-gi.de:8080/context/cancerdata/Soildata>   WHERE {?Instance <http://www.example.org/def/GKZ> ?GKZ.FILTER(?GKZ= \""+soildata_municipality+"\"). ?Instance <http://www.example.org/def/X> ?X.?Instance <http://www.example.org/def/Y> ?Y.?Instance <http://www.example.org/def/Unit> ?unit.?Instance <http://www.example.org/def/Coordinates> ?Coordinates.?Instance <http://www.example.org/def/Substance> ?Substance.?Instance <http://www.example.org/def/LocationID> ?ID.?Instance <http://www.example.org/def/Value> ?Value.?Instance <http://www.example.org/def/Municipality> ?municipality.}LIMIT 1000";
 		//request.query="SELECT DISTINCT ?Instance   ?X ?Y   ?unit ?Coordinates ?Substance ?ID ?Value ?municipality WHERE {?Instance <http://www.example.org/def/GKZ> \""+soildata_municipality+"\";<http://www.example.org/def/X> ?X;<http://www.example.org/def/Y> ?Y;<http://www.example.org/def/Unit> ?unit;<http://www.example.org/def/Coordinates> ?Coordinates;<http://www.example.org/def/Substance> ?Substance;<http://www.example.org/def/LocationID> ?ID;<http://www.example.org/def/Value> ?Value;<http://www.example.org/def/Municipality> ?municipality.}LIMIT 1000";
+		
 		check_choice2=check_choice;
 		
 		}
@@ -150,7 +162,7 @@ var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/Can
 			alert(results.results.bindings[i].Attribute.value);
 			}
 			*/
-		 visualize_emitter(results);
+		 visualize_emitter(results,search_substance);
 		/* 
 		 info.update = function (props) {
 					this._div.innerHTML = '<h4>Region Westphalen Lippe</h4>' +  (props ?
@@ -171,7 +183,7 @@ var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/Can
 						'<b>Municipality: ' + props.Name + '</b><br />GKZ: ' + props.GKZ + ''
 						: 'Click a marker for more information');
 			};	
-			info.update();
+			//info.update();
 		 }
 		 
 		 
@@ -255,6 +267,14 @@ var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/Can
 				}
 
 test_dyna ();
+
+
+
+
+
+
+
+
 							
 if(check_choice!="Accident_detail"){
 		// functionalities which are not necessary for carcinogen information
@@ -284,12 +304,18 @@ if(check_choice!="Accident_detail"){
 					}
 					
 				if(check_choice=="CI_lower_level"){
-					WLBoundaries_new.features[i].properties.SIR= results.results.bindings[randomnumber].CI_lower_level.value; // value from variable ?c see sparql query
+				var cilower_toround=results.results.bindings[randomnumber].CI_lower_level.value;
+				cilower_toround=parseFloat(cilower_toround);
+				cilower_toround=precise_round(cilower_toround,3);
+					WLBoundaries_new.features[i].properties.SIR= cilower_toround; // value from variable ?c see sparql query
 					sir_check=true;
 				}
 				
 				if(check_choice=="CI_upper_level"){
-					WLBoundaries_new.features[i].properties.SIR= results.results.bindings[randomnumber].CI_upper_level.value; // value from variable ?c see sparql query
+				var ciupper_toround=results.results.bindings[randomnumber].CI_upper_level.value;
+				ciupper_toround=parseFloat(ciupper_toround);
+				ciupper_toround=precise_round(ciupper_toround,3);
+					WLBoundaries_new.features[i].properties.SIR= ciupper_toround; // value from variable ?c see sparql query
 					sir_check=true;
 				}
 			
@@ -380,7 +406,7 @@ sir_legend();
 	if (querynumber>=1){
 	if (legend_check==false){
 	if (check_choice!="Emitter"){
-			legend2.addTo(map);
+			//legend2.addTo(map);
 			legend_check==true;
 	}
 	}
@@ -389,7 +415,7 @@ sir_legend();
 	if (check_choice2!="Soildata"){
 	if (check_choice!="Emitter"){
 	if (check_choice!="Accident"){
-	legend2.addTo(map);
+	//legend2.addTo(map);
 	legend_check=true;
 	}
 	}
@@ -616,15 +642,55 @@ geojson2.eachLayer(function (layer) {
 				onEachFeature:onEachFeature2
 			});
  if (map2.hasLayer(AQDLayer)==false){
-			map2.removeLayer(geojson2);
-			geojsonadd2=L.geoJson(WLBoundaries2, {style: style, onEachFeature:onEachFeature2 }).addTo(map2);
+			//map2.removeLayer(geojson2);
+			//geojsonadd2=L.geoJson(WLBoundaries2, {style: style, onEachFeature:onEachFeature2 }).addTo(map2);
 			
 }		
 });
       
-			SIRLayer.addLayer(geojson22);
-				SIRLayer.addTo(map);
-				map.removeLayer(geojson);
+	//alert(mapname+"jsonmerge_sir"); 
+	if (check_choice=="SIR"){
+	
+	  var remember = document.getElementById('SIR_check');
+	  var remember_map2 = document.getElementById('SIR_check_map2');
+	  }
+	  if (check_choice=="CI_lower_level"){
+	
+	  var remember = document.getElementById('CIlower_check');
+	  var remember_map2 = document.getElementById('CIlower_check_map2');
+	  }
+	  if (check_choice=="CI_upper_level"){
+	
+	  var remember = document.getElementById('CIupper_check');
+	  var remember_map2 = document.getElementById('CIupper_check_map2');
+	  }
+if (mapname=='map'){
+					if (remember.checked){
+					//if (check_map_sir<2){
+						dvf2(WLBoundaries_new,"properties","SIR",map,"map",check_choice);
+						//alert("jsonmergesir");
+						//}
+					}
+}
+if (mapname=='map2'){
+					if (remember_map2.checked){
+					//if (check_map2_sir<2){
+						dvf4(WLBoundaries_new,"properties","SIR",map2,"map2",check_choice);
+						
+						//}
+					}	
+}
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+			//SIRLayer.addLayer(geojson22);
+				//SIRLayer.addTo(map);
+				//dvf2(WLBoundaries_new,"properties","SIR",map,"map");
+				//map.removeLayer(geojson);
 			map.attributionControl.addAttribution('Text?');
 			map2.attributionControl.addAttribution('Text?');
 			}
@@ -694,8 +760,11 @@ if(check_choice2!="Soildata"){
 
 	};
      if (check_choice2!="Soildata"){
+	 if (check_choice!="Emitter"){
+	  if (check_choice!="Accident"){
+	 
 	Sparql_panel();
-	}
+	}}}
 	sir_cancer="";
 	sir_year="";
 	sir_gender="";
@@ -711,6 +780,10 @@ if(check_choice2!="Soildata"){
 	
 	
 	
+
+
+	
+};
 // Sort and search function for resultsets
 function test_dyna (){
 
@@ -722,6 +795,3 @@ function test_dyna (){
   }});
 
  }
-
-	
-};

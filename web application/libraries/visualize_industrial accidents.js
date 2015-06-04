@@ -115,13 +115,13 @@ var accident_year
 var doubleentry_accident=false;
 
 function accident_details_display (results){
-alert("test");
+//alert("test");
 $("#resultdiv").empty();
 var name_sidebar=document.getElementById("name_acc").innerHTML.replace("http://www.example.org/","")
 for(var n=0;n<results.results.bindings.length;n++){
 var name_result=results.results.bindings[n].incident.value.replace("http://www.example.org/","")
-alert(name_sidebar);
-alert(name_result);
+//alert(name_sidebar);
+//alert(name_result);
 for(var n2=0;n2<results.results.bindings.length;n2++){
 if (accident_substance==results.results.bindings[n].substance.value){
 doubleentry_accident=true;

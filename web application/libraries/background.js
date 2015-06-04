@@ -1,5 +1,3 @@
-		 
-var carcinogen_subject
 var cancer_type_bg
 var cancer_carcinogen
 var carcinogen_subject=[];
@@ -11,9 +9,27 @@ var amount2=0;
 
 
 function background_information2()
-	{
+{
 
-			cancer_type_bg = $("input:radio[name ='BGType3']:checked").val()
+	
+	if ($("input:radio[name='BGType3']:checked").val() == "C34"){ // lung cancer
+		
+			
+	}
+
+	if ($("#carcinogen").val()=='Air pollution'){
+	}
+
+
+	if ($("#emission_source").val()=='Industry')
+	 {
+	 showPopupIARC ();
+	 map.removeLayer(geojson);
+		console.log("works");
+	}
+	
+	
+		cancer_type_bg = $("input:radio[name ='BGType3']:checked").val()
 					if (cancer_type_bg=="C67"){
 						
 						cancer_carcinogen="<http://www.example.org/Carcinogenes_BladderCancer>";
@@ -70,7 +86,7 @@ function background_information2()
 						//handles the ajax response
 					
 							
-				function callbackFunc(results) {
+					function callbackFunc(results) {
 							
 							
 							//Clear result HTML div
@@ -78,7 +94,7 @@ function background_information2()
 								//result is a json object http://de.wikipedia.org/wiki/JavaScript_Object_Notation
 								htmlString="<table id=\"test\">";
 
-						// Special case carcinogen information		
+							// Special case carcinogen information		
 							
 								
 								
@@ -130,7 +146,7 @@ function background_information2()
 							}
 					});
 
-			$("#carcinogen").empty()
+				$("#carcinogen").empty()
 			
 
 			var sel = document.getElementById('carcinogen');
@@ -156,7 +172,6 @@ function background_information2()
 
 	var carcinogen_subject_element
 	function carcinogen_info2()
-
 	{
 				var doubleentry=false;
 
@@ -164,14 +179,14 @@ function background_information2()
 
 					if ($('#carcinogen').val()== carcinogen_list_value[i]){
 
-				carcinogen_subject_element=carcinogen_subject[i];
+						carcinogen_subject_element=carcinogen_subject[i];
 
 
-					var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/CancerData2";
-									//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
-									var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
-									var request = { accept : 'application/sparql-results+json' };
-									// gives all industry values
+						var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/CancerData2";
+								//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
+								var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
+								var request = { accept : 'application/sparql-results+json' };
+								// gives all industry values
 								//	request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?substance ?municipality ?values WHERE {?substance qb:dataSet ?municipality. ?substance <http://www.example.org/def/Industry> ?values.} LIMIT 1000";
 								//request.query="SELECT ?a  ?b  ?d ?e ?f ?g ?h ?i  WHERE { ?a <http://www.example.org/def/Total> ?b. ?a <http://www.example.org/def/GKZ> ?d. ?a <http://www.w3.org/2000/01/rdf-schema#label> ?e.?a <http://www.example.org/def/Industry> ?f.?a <http://www.example.org/def/SmallCombustionPlant> ?g.?a <http://www.example.org/def/Traffic> ?h. OPTIONAL {?a <http://www.example.org/def/Agriculture> ?i . }}";
 								request.query="SELECT ?a WHERE { <"+carcinogen_subject_element+">  <http://www.example.org/#hasEmissionSource> ?a}";
@@ -193,80 +208,80 @@ function background_information2()
 
 
 							//handles the ajax response
-						//	$("#aqd_results_sidebar").empty();
+							//	$("#aqd_results_sidebar").empty();
 								
 					function callbackFunc(results) {
 								
 									//alert(results);
-								//Clear result HTML div
+									//Clear result HTML div
 										   
 									//result is a json object http://de.wikipedia.org/wiki/JavaScript_Object_Notation
 									htmlString="<table id=\"test2\">";
 
-							// Special case carcinogen information		
+									// Special case carcinogen information		
 								
 									
 									
 									//write table head
 									htmlString+="<tr>";
-										$.each(results.head.vars, function(index2, value2) { 
-											htmlString+="<th>?"+value2+"</th>";
-										 });
+									$.each(results.head.vars, function(index2, value2) { 
+									htmlString+="<th>?"+value2+"</th>";
+									});
 									htmlString+="</tr>";
 									//write table body
 									
 									$.each(results.results.bindings, function(index1, value1) { 
 										htmlString+="<tr>";
 										$.each(results.head.vars, function(index2, value2) { 
-										
-											htmlString+="<td>"+value1[value2].value+"</td>";
 											
-											//console.log(value1[value2].value)
-										 });
-										//htmlString+="</tr>";
+											htmlString+="<td>"+value1[value2].value+"</td>";
+												
+												//console.log(value1[value2].value)
+										});
+											//htmlString+="</tr>";
 										
 									});
 
 									htmlString+="</table>";
 									$("#resultdiv2").html(htmlString);	
 
-				$("#emission_source").empty()
+									$("#emission_source").empty()
 
 
 
-				var sel2 = document.getElementById('emission_source');
-				for(var n=0;n<results.results.bindings.length;n++){
-					if (typeof(results.results.bindings[n].a)=='undefined'){	
-						}else{
-							var text_label=results.results.bindings[n].a.value.replace("http://www.example.org/#", "");
-							text_label=text_label.replace("http://www.example.org/", "");
-							text_label=text_label.replace("_", " ");
-							text_label=text_label.replace("_", " ");
-							text_label=text_label.replace("_", " ");
-							var opt4 = document.createElement('option');
+								var sel2 = document.getElementById('emission_source');
+								for(var n=0;n<results.results.bindings.length;n++){
+									if (typeof(results.results.bindings[n].a)=='undefined'){	
+									}else{
+										var text_label=results.results.bindings[n].a.value.replace("http://www.example.org/#", "");
+										text_label=text_label.replace("http://www.example.org/", "");
+										text_label=text_label.replace("_", " ");
+										text_label=text_label.replace("_", " ");
+										text_label=text_label.replace("_", " ");
+										var opt4 = document.createElement('option');
 							
-							$("#emission_source > option").each(function() {	
-								if (this.value==text_label){
-									doubleentry=true;
+										$("#emission_source > option").each(function() {	
+											if (this.value==text_label){
+												doubleentry=true;
+											}
+										});
+										if(doubleentry==false){
+							
+									
+										opt4.innerHTML = text_label;
+										opt4.value = text_label;
+										sel2.appendChild(opt4);
+										}
+										doubleentry=false;
+									}
 								}
-							});
-							if(doubleentry==false){
-							
-							
-								opt4.innerHTML = text_label;
-								opt4.value = text_label;
-								sel2.appendChild(opt4);
-							}
-							doubleentry=false;
-						}
-				}
 
-				if( $('#emission_source').has('option').length == 0 )  { 
-					var opt4 = document.createElement('option');
-					opt4.value ="No info yet";
-					opt4.innerHTML ="No info yet";
-					sel2.appendChild(opt4);
-				}
+								if( $('#emission_source').has('option').length == 0 )  { 
+									var opt4 = document.createElement('option');
+									opt4.value ="No info yet";
+									opt4.innerHTML ="No info yet";
+									sel2.appendChild(opt4);
+								}
 
 
 
@@ -274,8 +289,8 @@ function background_information2()
 
 									
 							
-				}					
-	} // End function	
+								}					
+					} // End function	
 
 
 
@@ -291,13 +306,13 @@ function background_information2()
 		
 
 			var endpoint="http://friedrichmueller-gi.de:8080/openrdf-sesame/repositories/CancerData2";
-							//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
-							var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
-							var request = { accept : 'application/sparql-results+json' };
-							// gives all industry values
-						//	request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?substance ?municipality ?values WHERE {?substance qb:dataSet ?municipality. ?substance <http://www.example.org/def/Industry> ?values.} LIMIT 1000";
-						//request.query="SELECT ?a  ?b  ?d ?e ?f ?g ?h ?i  WHERE { ?a <http://www.example.org/def/Total> ?b. ?a <http://www.example.org/def/GKZ> ?d. ?a <http://www.w3.org/2000/01/rdf-schema#label> ?e.?a <http://www.example.org/def/Industry> ?f.?a <http://www.example.org/def/SmallCombustionPlant> ?g.?a <http://www.example.org/def/Traffic> ?h. OPTIONAL {?a <http://www.example.org/def/Agriculture> ?i . }}";
-						request.query="SELECT ?process ?group ?area  ?transport ?consumption ?member ?no ?cas  WHERE { <"+carcinogen_subject_element+">  <http://www.example.org/hasEmissionProcess> ?process.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/#hasExposedGroup> ?group}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/#hasExposedArea> ?area}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/#hasSubstanceTransport> ?transport}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/hasConsumption> ?consumption}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/IARC_Group_Member> ?member}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/#IARC_monography_no> ?no}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/#CAS> ?cas} }";
+			//sent request over jsonp proxy (some endpoints are not cors enabled http://en.wikipedia.org/wiki/Same_origin_policy)
+			var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint;
+			var request = { accept : 'application/sparql-results+json' };
+			// gives all industry values
+			//	request.query="PREFIX qb:<http://purl.org/linked-data/cube#> Select ?substance ?municipality ?values WHERE {?substance qb:dataSet ?municipality. ?substance <http://www.example.org/def/Industry> ?values.} LIMIT 1000";
+			//request.query="SELECT ?a  ?b  ?d ?e ?f ?g ?h ?i  WHERE { ?a <http://www.example.org/def/Total> ?b. ?a <http://www.example.org/def/GKZ> ?d. ?a <http://www.w3.org/2000/01/rdf-schema#label> ?e.?a <http://www.example.org/def/Industry> ?f.?a <http://www.example.org/def/SmallCombustionPlant> ?g.?a <http://www.example.org/def/Traffic> ?h. OPTIONAL {?a <http://www.example.org/def/Agriculture> ?i . }}";
+			request.query="SELECT ?process ?group ?area  ?transport ?consumption ?member ?no ?cas  WHERE { <"+carcinogen_subject_element+">  <http://www.example.org/hasEmissionProcess> ?process.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/#hasExposedGroup> ?group}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/#hasExposedArea> ?area}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/#hasSubstanceTransport> ?transport}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/hasConsumption> ?consumption}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/IARC_Group_Member> ?member}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/#IARC_monography_no> ?no}.OPTIONAL{<"+carcinogen_subject_element+">  <http://www.example.org/#CAS> ?cas} }";
 	
 							
 							//sent request
@@ -311,36 +326,36 @@ function background_information2()
 							});
 
 
-					//handles the ajax response
-				//	$("#aqd_results_sidebar").empty();
+			//handles the ajax response
+			//	$("#aqd_results_sidebar").empty();
 						
 			function callbackFunc(results) {
 
 								   
-							//result is a json object http://de.wikipedia.org/wiki/JavaScript_Object_Notation
-							htmlString="<table id=\"test3\">";
+				//result is a json object http://de.wikipedia.org/wiki/JavaScript_Object_Notation
+				htmlString="<table id=\"test3\">";
 
 					
 
-		$("#emission_process").empty()
+				$("#emission_process").empty()
 
-		var myTableArray3 = [];
-		$( document ).ready(function() {
-				$("table#test3 tr").each(function() {
-					var arrayOfThisRow = [];
-					var tableData = $(this).find('td');
-					if (tableData.length > 0) {
-						var text3=$(this).text();
-						//carcinogen_subject=text2;
-						text3=text3.replace("http://www.example.org/", "");
-						text3=text3.replace("_", " ");
-						text3=text3.replace("__", " ");	
-						text3=text3.replace("#", "");
-						tableData.each(function() { arrayOfThisRow.push(text3); });
-						//tableData.each(function() { alert($(this).text2().replace("http://www.example.org/", "")); });
-							myTableArray3.push(arrayOfThisRow);
-						//alert (myTableArray3);
-					}
+				var myTableArray3 = [];
+				$( document ).ready(function() {
+					$("table#test3 tr").each(function() {
+						var arrayOfThisRow = [];
+						var tableData = $(this).find('td');
+							if (tableData.length > 0) {
+								var text3=$(this).text();
+								//carcinogen_subject=text2;
+								text3=text3.replace("http://www.example.org/", "");
+								text3=text3.replace("_", " ");
+								text3=text3.replace("__", " ");	
+								text3=text3.replace("#", "");
+								tableData.each(function() { arrayOfThisRow.push(text3); });
+								//tableData.each(function() { alert($(this).text2().replace("http://www.example.org/", "")); });
+								myTableArray3.push(arrayOfThisRow);
+								//alert (myTableArray3);
+							}
 				});
 			
 		
@@ -356,27 +371,27 @@ function background_information2()
 
 		var sel3 = document.getElementById('emission_process');
 		for(var n=0;n<results.results.bindings.length;n++){
-		if (typeof(results.results.bindings[n].process)=='undefined'){	
-			}else{
-		var text_label=results.results.bindings[n].process.value.replace("http://www.example.org/#", "");
-			text_label=text_label.replace("http://www.example.org/", "");
-			text_label=text_label.replace("_", " ");
-			text_label=text_label.replace("_", " ");
-			text_label=text_label.replace("_", " ");
-			var opt4 = document.createElement('option');
+			if (typeof(results.results.bindings[n].process)=='undefined'){	
+				}else{
+					var text_label=results.results.bindings[n].process.value.replace("http://www.example.org/#", "");
+					text_label=text_label.replace("http://www.example.org/", "");
+					text_label=text_label.replace("_", " ");
+					text_label=text_label.replace("_", " ");
+					text_label=text_label.replace("_", " ");
+					var opt4 = document.createElement('option');
+					
+					$("#emission_process > option").each(function() {	
+						if (this.value==text_label){
+							doubleentry=true;
+						}
+					});
+				if(doubleentry==false){
 			
-			$("#emission_process > option").each(function() {	
-			if (this.value==text_label){
-			doubleentry=true;
-			}
-			});
-			if(doubleentry==false){
-			
-			opt4.innerHTML = text_label;
-			opt4.value = text_label;
-			sel3.appendChild(opt4);
-			}
-			doubleentry=false;
+				opt4.innerHTML = text_label;
+				opt4.value = text_label;
+				sel3.appendChild(opt4);
+				}
+				doubleentry=false;
 			}
 		}
 
@@ -399,18 +414,18 @@ function background_information2()
 					text_label=text_label.replace("_", " ");
 					var opt4 = document.createElement('option');
 			
-				$("#exposed_group > option").each(function() {	
-					if (this.value==text_label){
-					doubleentry=true;
-					}
-				});
-				if(doubleentry==false){
+					$("#exposed_group > option").each(function() {	
+						if (this.value==text_label){
+						doubleentry=true;
+						}
+					});
+					if(doubleentry==false){
 				
-					opt4.innerHTML = text_label;
-					opt4.value = text_label;
-					sel4.appendChild(opt4);
-				}
-			doubleentry=false;
+						opt4.innerHTML = text_label;
+						opt4.value = text_label;
+						sel4.appendChild(opt4);
+					}
+					doubleentry=false;
 			}
 		}
 
@@ -424,7 +439,7 @@ function background_information2()
 
 		var sel5 = document.getElementById('exposed_area');
 		for(var n=0;n<results.results.bindings.length;n++){
-		if (typeof(results.results.bindings[n].area)=='undefined'){	
+			if (typeof(results.results.bindings[n].area)=='undefined'){	
 			}else{
 					var text_label=results.results.bindings[n].area.value.replace("http://www.example.org/#", "");
 					text_label=text_label.replace("http://www.example.org/", "");
@@ -434,9 +449,9 @@ function background_information2()
 					var opt4 = document.createElement('option');
 					
 					$("#exposed_area > option").each(function() {	
-					if (this.value==text_label){
-						doubleentry=true;
-					}
+						if (this.value==text_label){
+							doubleentry=true;
+						}
 					});
 					if(doubleentry==false){
 						
@@ -445,7 +460,7 @@ function background_information2()
 						sel5.appendChild(opt4);
 					}
 					doubleentry=false;
-				}
+			}
 		}
 
 		if( $('#exposed_area').has('option').length == 0 )  { 

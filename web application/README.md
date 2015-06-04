@@ -1,4 +1,4 @@
-# `C`ancer`E`xplorer
+# `C`ancer`E`xplorer-Prototype
 
 * * *
 ## Linked Data-Based Spatial Cause-Effect Relationships Explorer
@@ -29,25 +29,14 @@ using the chain linking of different variables that is encoded as linked data.
 
 **Current status:**
 
-This is an early development step version.
 
 Presented statistical epidemiological values (SIR and CI values):
 For demonstration purpose only random example values are integrated.
 Random values of the municipalities are uploaded. In addition, these values are distributed randomly among all municipalities for each new query.
 
 
-This brings along:
-
-- First insights of possibilities of the CancerExplorer
-- Limited information retrieval (for development purposes only a test RDF repository can be queried) 
-- Long list of issues (refresh your browser view after broken queries)
-
 Issue list:
 (https://github.com/lodum/CancerExplorer/issues)
-
-**Future:**
-
-It is planned that the project is going to be further developed during [Friedrich Müller's](http://friedrichmueller.github.io "Friedrich's page") master thesis.
 
 
 
@@ -79,12 +68,29 @@ exposed areas, ways of consumption, IARC classification numbers, monography numb
 ![CancerExplorer application][4]
 
 
-
 Moreover, included background information helps you to understand the context.
 
-
-
 ![CancerExplorer application][5]
+
+
+#### Spatial queries of IARC related information:
+Carcinogens of certain cancer types can be queried in context of spatial areas like municipalities.
+E.g. available data sets that include information about the selected carcinogen and region can be shown.
+
+![CancerExplorer application][6]
+
+
+#### Access to further linked information:
+It is possible to gain further knowledge about included data like about a specific carcinogen e.g. arsen or emission processes like air pollution.
+This is realized through integration of descriptive information and further links by live queries from external sources like DBpedia.
+Furthermore, links from ontology or RDF data sets are explorable.
+
+![CancerExplorer application][7]
+
+
+
+
+
 
 
 
@@ -96,11 +102,12 @@ By providing interactivity, meaningful visualisations to accompany the
 maps, users are supported in making interpretations of maps while reflecting on the underlying
 uncertainty.
 
-* * *
-* * *
-  
-### ->[DEMO](http://www.friedrichmueller-gi.de "Demo Site")<-
 
+
+* * *
+* * *
+A running demo of the application you find here:
+###<div align="center">   [DEMO](http://www.friedrichmueller-gi.de "Demo Site")</div>
 
 * * *
 * * *
@@ -117,3 +124,5 @@ uncertainty.
 [3]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/explorer.gif
 [4]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/background_details.png
 [5]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/background_tooltips.png
+[6]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/Animation_IARCSpatial.gif
+[7]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/Animation_Linkedinfo.gif

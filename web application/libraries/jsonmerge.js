@@ -206,7 +206,7 @@ function resetHighlight2(e) {
 			return div2;
 		};
 
-		legend2.addTo(map);
+		legend2.addTo(map2);
 
 
 

@@ -8,7 +8,7 @@ function explorer_soildata()
 
 
 
-	//alert($('#list_branch option:selected').val());
+	
 	 
 	branch_selection_sd=$('#list_typeofuse').val();
 	substance_selection_sd=$('#list_substance_sd').val();
@@ -227,22 +227,22 @@ function explorer_soildata()
 				map2.attributionControl.addAttribution('Text?');
 		
 	
-	info2.onAdd = function (map2) {
-				//while(secondquery==false){
+		info2.onAdd = function (map2) {
+				
 					this._div = L.DomUtil.create('div', 'info');
 					this.update();
 					return this._div;
-			//}
+			
 				};
-			//if(secondquery==false){
+			
 				info2.update = function (props) {
 					this._div2.innerHTML = '<h4> Region Westphalen Lippe</h4>' +  (props ?
 					
 					
 						'<b>Municipality: ' + props.Name + '</b></br><b>Substance:</b></br>'+substance_selection_sd2+'</br><b>Emission branch:</b></br> '+branch_selection_sd+'</br><b> Value:</b></br> ' + props.Values + ''
 						: 'Hover over a state');
-				};
-		//}
+		};
+		
 
 
 

@@ -364,17 +364,7 @@ including organic and inorganic compounds, minerals, isotopes, alloys and nonstr
 						<div id="resultdiv" style="display:none;"></div>
 						<br/>
 				</div>
-				<form action="index.html">	
-					<input id="Exit" type="submit" class="btnStyle span3" data-color="#00aff0" data-hover="#0cbbfc" value="Go to map view [X]" style="background-color: #4D90FE; 
-								background-image: -moz-linear-gradient(center top , #4D90FE, #4787ED); 
-								border: 1px solid #3079ED; 
-								color: #FFFFFF;
-								padding: 4px;
-								margin-top: 4px;
-								margin-bottom: 4px;
-								width:30%">	
-				  
-				</form>	
+			
 		
 		</body >
 		
@@ -385,17 +375,17 @@ including organic and inorganic compounds, minerals, isotopes, alloys and nonstr
  
 
 	
-$(function() {
-    $("#Exit").mouseenter(function() {
-        var bg = $(this).attr('data-hover');
-        $(this).css( "background", bg );
-    });
+	$(function() {
+		$("#Exit").mouseenter(function() {
+			var bg = $(this).attr('data-hover');
+			$(this).css( "background", bg );
+		});
 
-    $("#Exit").mouseleave(function() {
-        var bg = $(this).attr('data-color');
-        $(this).css( "background", bg );
-    });
-});
+		$("#Exit").mouseleave(function() {
+			var bg = $(this).attr('data-color');
+			$(this).css( "background", bg );
+		});
+	});
 
 
 	

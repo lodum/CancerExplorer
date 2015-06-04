@@ -4,6 +4,7 @@
 */;/*
  * Class for interpolating values along a line using a linear equation
  */
+ // Line 6916: removelayer, if !=null added.
 L.LinearFunction = L.Class.extend({
 	options: {
 		constrainX: false
@@ -6913,10 +6914,15 @@ L.arcedPolyline = function (latlngs, options) {
 
 		if (layer.getLegend) {
 			var element = document.getElementById(id);
-			element.parentNode.removeChild(element);
+			// FM: avoid to get error with null element.
+			if (element!=null){
+			
+			element.remove(element);
+			}
 
 			layer.off('legendChanged');
 		}
+		
 	},
 
 	addLegend: function (id, html) {

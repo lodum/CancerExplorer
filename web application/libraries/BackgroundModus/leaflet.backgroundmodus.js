@@ -33,6 +33,8 @@ L.Control.BackgroundModus = L.Control.extend({
                         .addListener(link, 'click', function(){
                             
 							background_modus();
+							alert('Ask for data works at the moment for Arsenic,Nickel,Air pollution in combination with Münster');
+							causeeffectbutton=1;
                         }, context);
                 return link;
         }
@@ -43,3 +45,10 @@ L.Control.backgroundModus = function (options) {
     return new L.Control.BackgroundModus(options);
 };
 
+
+function close_background_modus (){
+	background_modus();
+	Cause_Effect_Panel.hide();
+							alert('Ask for data works at the moment for Arsenic,Nickel,Air pollution in combination with Münster');
+							causeeffectbutton=1;
+}

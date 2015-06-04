@@ -1,7 +1,7 @@
 L.Control.OverviewControl = L.Control.extend({
         options: {
                 position: 'topleft',
-                title: 'Shows you an overview of municipalities of Westphalen-Lippe'
+                title: 'Overview of municipalities of Westphalen-Lippe//Deletes Marker'
                 //forceSeparateButton: false,
                
 				
@@ -32,7 +32,9 @@ L.Control.OverviewControl = L.Control.extend({
                         
                         .addListener(link, 'click', function(){
                             
-							get_overview ()
+							get_overview_WL ();
+							map.setView([51.95442, 7.62709],7);
+							map2.setView([51.95442, 7.62709],7);
                         }, context);
                 return link;
         }
