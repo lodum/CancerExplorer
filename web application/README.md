@@ -98,7 +98,7 @@ Moreover, query results of epidemiological and environmental information can be 
 
 #### Reusability of data:
 The application allows to access the used RDF data.
-Further CSV and JSON file format are supported.
+Further, CSV and JSON file format are supported.
 
 ![CancerExplorer application][9]
 
