@@ -88,6 +88,19 @@ Furthermore, links from ontology or RDF data sets are explorable.
 ![CancerExplorer application][7]
 
 
+#### Supportive graph visualizations:
+It is possible to display the cancer related cause-effect relationships of a chosen cancer type and carcinogen. The arrangement of the nodes can be edited.
+This allows to explore the relations, besides a table view, in a  graphical way.
+Moreover, query results of epidemiological and environmental information can be displayed in a chart for a better overview.
+
+![CancerExplorer application][8]
+
+
+#### Reusability of data:
+The application allows to access the used RDF data.
+Further CSV and JSON file format are supported.
+
+![CancerExplorer application][9]
 
 
 
@@ -126,3 +139,5 @@ A running demo of the application you find here:
 [5]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/background_tooltips.png
 [6]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/Animation_IARCSpatial.gif
 [7]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/Animation_Linkedinfo.gif
+[8]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/Graphics.png
+[9]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/download.png
