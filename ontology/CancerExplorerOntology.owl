@@ -1,0 +1,2265 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:p3="http://www.example.org/ontology/Semustine_(methyl-CCNU)"
+    xmlns="http://www.example.org/ontology/"
+    xmlns:p2="http://www.example.org/ontology/Chromium(VI)"
+    xmlns:p4="http://www.example.org/ontology/1,3-"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:www2="http://www.example.org/ontology/#"
+    xmlns:p6="http://dbpedia.org/resource/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:p1="http://www.example.org/ontology/Fission_products,"
+    xmlns:www="http://www.example.org/ontology/"
+    xmlns:p5="http://dbpedia.org/resource/Category:"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.example.org/ontology/">
+  <owl:Ontology rdf:about="http://www.example.org/ontology/"/>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Events">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Events</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Different situations are described in events. It has to be differentiated between events where an exposure of carcinogens without the occurence of a cancer incident take place and events where a cancer incident can be recognized</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Exposed_area">
+    <rdfs:label xml:lang="en">Exposed area</rdfs:label>
+    <rdfs:comment xml:lang="en">Region where specific carcinogens are likely to occure</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Fibres_and_dust">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/resource/Dust</rdfs:seeAlso>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Carcinogene"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#City">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/page/City</rdfs:seeAlso>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >City</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Considered_area"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Reference_area">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Defined Area that is used for calculating the SIR value</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Considered_area"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Reference area</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Surveillanced_area">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Specific region where cancer incidents are surveilled</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Considered_area"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Surveillanced area</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Anthropogenic_Source">
+    <rdfs:comment xml:lang="en">Emission sources that are human-made like factories. </rdfs:comment>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Anthropogenic sources</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Emission_source"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Personal_behaviour">
+    <rdfs:seeAlso xml:lang="en">http://dbpedia.org/page/Human_behavior</rdfs:seeAlso>
+    <rdfs:label xml:lang="en">Personal behaviour</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Anthropogenic_Source"/>
+    <rdfs:comment xml:lang="en">Emission sources that are dependent on individual's use of certain products</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Exposed_gender">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.ICPS/ontologies/Person#Gender</rdfs:seeAlso>
+    <rdfs:comment xml:lang="en">A gender where a specific cancer type is predominantly.</rdfs:comment>
+    <rdfs:label xml:lang="en">Exposed gender</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Industry">
+    <rdfs:label xml:lang="en">Industry</rdfs:label>
+    <rdfs:seeAlso xml:lang="en">http://dbpedia.org/page/Industry</rdfs:seeAlso>
+    <rdfs:comment xml:lang="en">Human-made sources of carcinogen emission with focus on industry branches</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Anthropogenic_Source"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Metal">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C637
+http://dbpedia.org/page/Metal</rdfs:seeAlso>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Carcinogene"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Metal</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Radiation">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://purl.bioontology.org/ontology/SNOMEDCT/256242009
+http://dicom.nema.org/resources/ontology/DCM/113921
+</rdfs:seeAlso>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Radiation</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Carcinogene"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Natural_events">
+    <rdfs:comment xml:lang="en">Can be events like air, fire and natural products that contain carcinogens</rdfs:comment>
+    <rdfs:label xml:lang="en">Non-biological sources</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Natural_source"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Parasit">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Natural_source"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Biological sources</rdfs:label>
+    <rdfs:comment xml:lang="en">Carcinogens that are produced by organisms</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Ground_data">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Environmental_data"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Ground data</rdfs:label>
+    <rdfs:comment xml:lang="en">Ground dataset that contain relevant information like chemical components or land use</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Emission_process">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The way emissions spread in environment</rdfs:comment>
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://de.dbpedia.org/page/Emission_%28Umwelt%29</rdfs:seeAlso>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Emission process</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Natural_source">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Emission_source"/>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">Emission sources that occur naturally in environment</rdfs:comment>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Natural source</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Female">
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Exposed_gender"/>
+    <rdfs:label xml:lang="en">Female</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Incident_events">
+    <rdfs:comment xml:lang="en">Events where a cancer incident takes place</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Events"/>
+    <rdfs:label xml:lang="en">Incident events</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Vehicles">
+    <rdfs:seeAlso xml:lang="en">http://dbpedia.org/page/Vehicle</rdfs:seeAlso>
+    <rdfs:comment xml:lang="en">Human-made transport objects that emitts carcinogens</rdfs:comment>
+    <rdfs:label xml:lang="en">Vehicles</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Anthropogenic_Source"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Group_1">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IARC Group 1</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Carcinogene"/>
+    </rdfs:subClassOf>
+    <rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Category:IARC_Group_1_carcinogens"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Carcinogenic to humans</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Medical_application">
+    <rdfs:label xml:lang="en">Medical application</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Anthropogenic_Source"/>
+    <rdfs:comment xml:lang="en">Applications that use carcinogens for medical treatment</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Carcinogene">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Substances that cause cancer.</rdfs:comment>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Carcinogenes</rdfs:label>
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/resource/Category:Carcinogens
+http://purl.bioontology.org/ontology/MSH/D002273</rdfs:seeAlso>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Municipality">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Considered_area"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Municipality</rdfs:label>
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/page/Municipality</rdfs:seeAlso>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Cancer_incident">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cancer incident</rdfs:label>
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C16726
+http://purl.bioontology.org/ontology/MSH/D015994
+http://dbpedia.org/resource/Cancer_incidence
+</rdfs:seeAlso>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Human cancer occurance</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/Industrial_accident_data">
+    <rdfs:label xml:lang="en">Industrial accident data</rdfs:label>
+    <rdfs:comment xml:lang="en">Dataset that contain spatio temporal information about substances that are revelead during an industrial accident.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Environmental_data"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/Carcinogenes_LungCancer">
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Carcinogens with sufficient human evidence that cause lung cancer</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Emission_source">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Emission source</rdfs:label>
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://de.dbpedia.org/page/Emission_%28Umwelt%29</rdfs:seeAlso>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Emission sources are the starting point of carcinogenes. The sources can be of anthropogenic or natural source.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Transport">
+    <rdfs:comment xml:lang="en">Transport of carcinogens by different mediums</rdfs:comment>
+    <rdfs:label xml:lang="en">Transport</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/Carcinogenes_Nasal_cavity_and_paranasal_sinus">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Carcinogens with sufficient human evidence that cause nasal cavity and paranasal sinus</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Nasal_cavity_and_paranasal_sinus">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/page/Nasal%20cavity
+http://dbpedia.org/page/Paranasal_sinuses</rdfs:seeAlso>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Cancer_incident"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Nasal cavity and paranasal sinus</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Exposure_events">
+    <rdfs:label xml:lang="en">Exposure events</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Events"/>
+    <rdfs:comment xml:lang="en">Events where an exposure of carcinogens without the occurence of a cancer incident take place</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Industrial_chemicals">
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Industrial chemicals</rdfs:seeAlso>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Group_4">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Probably not carcinogenic to humans</rdfs:comment>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IARC Group 4</rdfs:label>
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/page/IARC</rdfs:seeAlso>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Group_2B">
+    <rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Category:IARC_Group_2B_carcinogens"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IARC Group 2B</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Possibly carcinogenic to humans</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Lung_cancer">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/page/Lung_cancer</rdfs:seeAlso>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Cancer_incident"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Lung cancer</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Exposed_groups">
+    <rdfs:label xml:lang="en">Exposed groups</rdfs:label>
+    <rdfs:comment xml:lang="en">Group of individuals that have an increased risk to come in contact with carcinogens</rdfs:comment>
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C71551</rdfs:seeAlso>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Considered_area">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Considered area</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Area that is used in a query- ' The area of interest'</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Industrial_application">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/page/List_of_industrial_processes</rdfs:seeAlso>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Industrial application</rdfs:label>
+    <rdfs:comment xml:lang="en">Human-made sources of carcinogen emission</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Anthropogenic_Source"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Air_quality_data">
+    <rdfs:comment xml:lang="en">Datasets of different spatial areas regarding air quality </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.example.org/ontology/#Environmental_data"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Air quality data</rdfs:label>
+    <rdfs:seeAlso xml:lang="en">http://dbpedia.org/page/Air_pollution</rdfs:seeAlso>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/IARC_Group">
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Environmental_data">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/page/Environmental_data</rdfs:seeAlso>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Environmental data</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Measured environmental values that contains carcinogens and non-carcinogens.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Group_3">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Not classifiable as to its carcinogenicity to humans</rdfs:comment>
+    <rdfs:seeAlso>
+      <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:IARC_Group_3_carcinogens"/>
+    </rdfs:seeAlso>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IARC Group 3</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Different_Anthropogenic_Sources">
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Anthropogenic_Source"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/Carcinogenes_BladderCancer">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Carcinogens with sufficient human evidence that cause bladder cancer</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Male">
+    <rdfs:label xml:lang="en">Male</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Exposed_gender"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/Carcinogenes_Leukemia">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Carcinogens with sufficient human evidence that cause leukemia</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Bladder_cancer">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/page/Bladder_cancer</rdfs:seeAlso>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bladder cancer</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Cancer_incident"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.example.org/ontology/#Group_2A">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IARC Group 2A</rdfs:label>
+    <rdfs:seeAlso rdf:resource="http://dbpedia.org/resource/Category:IARC_Group_2A_carcinogens"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Probably carcinogenic to humans</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#hasCasNumber">
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#hasCasNumber"/>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+      </owl:Restriction>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/hasEmissionProcess">
+    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#emitts">
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Emission_source"/>
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#hasSIR">
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Incident_events"/>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Cancer_incident"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/hasConsumption"/>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#hasEmissionSource">
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Emission_source"/>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Events"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#hasSubstanceTransport">
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#hasSubstance"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Events"/>
+      </owl:Restriction>
+    </rdfs:domain>
+    <rdfs:range>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#hasSubstance"/>
+      </owl:Restriction>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/canCauseLeukemiaCancer">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#canCauseCancer"/>
+    </rdfs:subPropertyOf>
+    <rdfs:range>
+      <www:Leukemia rdf:about="http://www.example.org/ontology/Leukemia">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+        <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >http://dbpedia.org/page/Leukemia</rdfs:seeAlso>
+        <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Cancer_incident"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Leukemia</rdfs:label>
+        <www:ICD10 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >C91-C95</www:ICD10>
+      </www:Leukemia>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/Carcinogenes_Leukemia"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#isIarcGroupMember">
+    <rdfs:range>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#isIarcGroupMember"/>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Group_3"/>
+      </owl:Restriction>
+    </rdfs:range>
+    <rdfs:range>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Group_4"/>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#isIarcGroupMember"/>
+      </owl:Restriction>
+    </rdfs:range>
+    <rdfs:range>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Group_1"/>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#isIarcGroupMember"/>
+      </owl:Restriction>
+    </rdfs:range>
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#isIarcGroupMember"/>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Radiation"/>
+      </owl:Restriction>
+    </rdfs:domain>
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Pesticide">
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Pesticide</rdfs:label>
+            <rdfs:subClassOf rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+            <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+            <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >http://dbpedia.org/resource/Pesticide
+http://dbpedia.org/resource/Pesticide_application
+http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C737
+http://purl.obolibrary.org/obo/CHEBI_25944</rdfs:seeAlso>
+          </www2:Industrial_application>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#isIarcGroupMember"/>
+      </owl:Restriction>
+    </rdfs:domain>
+    <rdfs:range>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#isIarcGroupMember"/>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Group_2B"/>
+      </owl:Restriction>
+    </rdfs:range>
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Industrial_chemicals"/>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#isIarcGroupMember"/>
+      </owl:Restriction>
+    </rdfs:domain>
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Metal"/>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#isIarcGroupMember"/>
+      </owl:Restriction>
+    </rdfs:domain>
+    <rdfs:range>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.example.org/ontology/#isIarcGroupMember"/>
+        <owl:someValuesFrom rdf:resource="http://www.example.org/ontology/#Group_2A"/>
+      </owl:Restriction>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#hasExposedGender">
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Incident_events"/>
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Exposed_gender"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/isLocated"/>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/canCauseBladderCancer">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#canCauseCancer"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Bladder_cancer"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#isCarcinogeneType"/>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#hasExposedArea">
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Exposed_area"/>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Events"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#possibleCausedBy">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#canCauseCancer"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#hasSpatialResolution"/>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#canCauseCancer">
+    <owl:inverseOf rdf:resource="http://www.example.org/ontology/#possibleCausedBy"/>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Cancer_incident"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/canCauseNasalCavityAndParanasalSinusCancer">
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/Carcinogenes_Nasal_cavity_and_paranasal_sinus"/>
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Nasal_cavity_and_paranasal_sinus"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.example.org/ontology/#canCauseCancer"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#hasExposedGroup">
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Exposed_groups"/>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Emission_source"/>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Emission_process"/>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/#hasCancerTyp">
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Cancer_incident"/>
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Nasal_cavity_and_paranasal_sinus"/>
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Lung_cancer"/>
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Bladder_cancer"/>
+    <rdfs:range rdf:resource="http://www.example.org/ontology/Leukemia"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.example.org/ontology/canCauseLungCancer">
+    <rdfs:subPropertyOf rdf:resource="http://www.example.org/ontology/#canCauseCancer"/>
+    <rdfs:range rdf:resource="http://www.example.org/ontology/#Lung_cancer"/>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://www.example.org/ontology/ICD10"/>
+  <owl:DatatypeProperty rdf:about="http://www.example.org/ontology/#IARC_monography_no"/>
+  <owl:DatatypeProperty rdf:about="http://www.example.org/ontology/GKZ"/>
+  <owl:DatatypeProperty rdf:about="http://www.example.org/ontology/#CAS">
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Industrial_chemicals"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >CAS number</rdfs:label>
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://dbpedia.org/resource/CAS_Registry_number
+http://edamontology.org/data_3102</rdfs:seeAlso>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    > Chemical Abstracts Service number. A value that identifies a chemical substance</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.example.org/ontology/IARC_Group_Member"/>
+  <owl:DatatypeProperty rdf:about="http://www.example.org/ontology/#SIR_value">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:domain rdf:resource="http://www.example.org/ontology/#Incident_events"/>
+  </owl:DatatypeProperty>
+  <www2:Personal_behaviour rdf:about="http://www.example.org/ontology/#Hair_dyes">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Industrial_application"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Personal_behaviour>
+  <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Consumer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_groups>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_001317-60-8"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000542-88-1"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Diesel_and_gasoline_engines"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_007440-41-7"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Tobacco_smoke____Secondhand_Tobacco_smoking">
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Nasal_cavity_and_paranasal_sinus"/>
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Discotheque_worker">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www2:hasSubstanceTransport>
+      <www2:Transport rdf:about="http://www.example.org/ontology/#Aerosol">
+        <rdf:type>
+          <www2:Transport rdf:about="http://www.example.org/ontology/#Consumption">
+            <rdf:type rdf:resource="http://www.example.org/ontology/#Consumption"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+            <rdfs:comment xml:lang="en">Ways how individuals can come in contact with carcinogens</rdfs:comment>
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Ways of contact</rdfs:label>
+          </www2:Transport>
+        </rdf:type>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Transport>
+    </www2:hasSubstanceTransport>
+    <www2:hasExposedArea>
+      <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Microenvironmental_spaces">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_area>
+    </www2:hasExposedArea>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >83</www2:IARC_monography_no>
+    <www2:hasEmissionSource>
+      <www2:Personal_behaviour rdf:about="http://www.example.org/ontology/#Active_smoking">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Personal_behaviour>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Passive_Smoking"/>
+    </www2:hasEmissionSource>
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Bar_worker">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www:hasConsumption>
+      <www2:Consumption rdf:about="http://www.example.org/ontology/#Inhalation">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Consumption>
+    </www:hasConsumption>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Smoker">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www2:hasExposedArea>
+      <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Smoking_houshold">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_area>
+    </www2:hasExposedArea>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Leukemia"/>
+  </owl:NamedIndividual>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Fuel_generator">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000107-30-2"/>
+  <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Harbour">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_area>
+  <www:IARC_Group rdf:about="http://www.example.org/ontology/IARC_Group_4">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Probably not carcinogenic to humans</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:IARC_Group>
+  <www2:Consumption rdf:about="http://www.example.org/ontology/#Wounds">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Consumption>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Arsenic_and_inorganic_arsenic_compounds">
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Consumer"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www:hasEmissionProcess>
+      <www2:Emission_process rdf:about="http://www.example.org/ontology/#Exhaust">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Emission_process>
+    </www:hasEmissionProcess>
+    <www2:hasExposedArea>
+      <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Industry_area">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_area>
+    </www2:hasExposedArea>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Mining">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Soil_sterilant">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Exhaust"/>
+    <www2:hasSubstanceTransport>
+      <www2:Transport rdf:about="http://www.example.org/ontology/#Aquatic">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Consumption"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Transport>
+    </www2:hasSubstanceTransport>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Herbicide">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Defoliant">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Industry_worker">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www:hasEmissionProcess>
+      <www2:Emission_process rdf:about="http://www.example.org/ontology/#Land_pollution">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Emission_process>
+    </www:hasEmissionProcess>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100C</www2:IARC_monography_no>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Metal"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Land_pollution"/>
+    <www:hasEmissionProcess>
+      <www2:Emission_process rdf:about="http://www.example.org/ontology/#Water_pollution">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Emission_process>
+    </www:hasEmissionProcess>
+    <www:hasConsumption>
+      <www2:Consumption rdf:about="http://www.example.org/ontology/#Ingestion_of_drinking">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Consumption>
+    </www:hasConsumption>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Pesticide"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Insecticide">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >007440-38-2</www2:CAS>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Water_pollution"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Burning_of_fossil_fuels">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Smelting_of_non-ferrous_metals">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Cotton_desiccant">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Carcinogene"/>
+  </www:Carcinogenes_LungCancer>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_006055-19-2"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Painting">
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Auto-mobile_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Construction_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >98</www2:IARC_monography_no>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Metal_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Fibres_and_dust rdf:about="http://www.example.org/ontology/#Wood_dust">
+        <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >100C-15</www2:IARC_monography_no>
+        <www:hasEmissionProcess>
+          <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Production_and_use"/>
+        </www:hasEmissionProcess>
+        <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Construction_industry"/>
+        <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Wood_dust"/>
+        <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1</www:IARC_Group_Member>
+        <www2:hasExposedArea>
+          <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Sawmills">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+          </www2:Exposed_area>
+        </www2:hasExposedArea>
+        <www2:hasEmissionSource>
+          <www2:Industry rdf:about="http://www.example.org/ontology/#Wood_industry">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+          </www2:Industry>
+        </www2:hasEmissionSource>
+        <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+        <www2:hasExposedArea>
+          <www2:Industry rdf:about="http://www.example.org/ontology/#Paper_industry">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+          </www2:Industry>
+        </www2:hasExposedArea>
+        <www2:hasExposedArea>
+          <www2:Industry rdf:about="http://www.example.org/ontology/#Furniture_industry">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+          </www2:Industry>
+        </www2:hasExposedArea>
+        <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Nasal_cavity_and_paranasal_sinus"/>
+      </www2:Fibres_and_dust>
+    </www2:hasEmissionSource>
+    <www:hasEmissionProcess>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Industrial_processes"/>
+    </www:hasEmissionProcess>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Furniture_industry"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Paint_worker">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <www2:hasSubstanceTransport>
+      <www2:Transport rdf:about="http://www.example.org/ontology/#Dermal_contact">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Consumption"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Transport>
+    </www2:hasSubstanceTransport>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Plastic_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+  </owl:NamedIndividual>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Coating_and_compound">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Mixed_oxide_fuels_production">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Industrial_chemicals rdf:about="http://www.example.org/ontology/#_4-chloro-ortho-Toluidine">
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Production_of_azo_dyes">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasSubstanceTransport>
+      <www2:Transport rdf:about="http://www.example.org/ontology/#Soil">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Consumption"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Transport>
+    </www2:hasSubstanceTransport>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Consumer"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aquatic"/>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Dyes_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Manufacture_of_chlordimeform"/>
+    </www2:hasEmissionSource>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasEmissionSource>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Pigment_production"/>
+    </www2:hasEmissionSource>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2A</www:IARC_Group_Member>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000095-69-2
+</www2:CAS>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Production_and_use"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >77-12</www2:IARC_monography_no>
+  </www2:Industrial_chemicals>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Suppl7-86"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_014808-60-7"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Vehicles"/>
+  <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Hairdresser">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_groups>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Benzidine">
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Consumer"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >99</www2:IARC_monography_no>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_drinking"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Production_of_azo_dyes"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000492-80-8
+</www2:CAS>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Rubber-compounding_agent">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Production_and_use"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www:hasEmissionProcess>
+      <www2:Transport rdf:about="http://www.example.org/ontology/#Occupational_exposure">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Transport>
+    </www:hasEmissionProcess>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-22</www2:IARC_monography_no>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <www2:hasExposedGroup>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/People_live_near_disposal_sites"/>
+    </www2:hasExposedGroup>
+    <www:hasConsumption>
+      <www2:Consumption rdf:about="http://www.example.org/ontology/#Ingestion_of_food">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Consumption>
+    </www:hasConsumption>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Industrial_chemicals"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Sulfur_mustard">
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000505-60-2
+</www2:CAS>
+    <www2:hasExposedGroup>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/War_places"/>
+    </www2:hasExposedGroup>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Mustard_gas_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+    <www2:hasEmissionSource>
+      <www:IARC_Group rdf:about="http://www.example.org/ontology/IARC_Group_1">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Carcinogenic to humans</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www:IARC_Group>
+    </www2:hasEmissionSource>
+    <www:hasEmissionProcess>
+      <www2:Natural_events rdf:about="http://www.example.org/ontology/#Air">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Natural_events>
+    </www:hasEmissionProcess>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Soil"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-30</www2:IARC_monography_no>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <www2:hasExposedGroup>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Soldiers"/>
+    </www2:hasExposedGroup>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000092-67-1"/>
+  <www:Carcinogenes_BladderCancer rdf:about="http://www.example.org/ontology/#_4-Aminobiphenyl">
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Rubber_antioxidant">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-6,99</www2:IARC_monography_no>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Smoker"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Dye_intermediate">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Microenvironmental_spaces"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Dyes_industry"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Active_smoking"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Industrial_chemicals"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Passive_Smoking"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Passive_smoker">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Detection_of_sulfates">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000092-67-1
+
+</www2:CAS>
+  </www:Carcinogenes_BladderCancer>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Busulfan">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Chlorambucil">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Radiation"/>
+  <www2:Transport rdf:about="http://www.example.org/ontology/#Infection">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Consumption"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Transport>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Boiler__tank__and_container_manufacturing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Dental_offices">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_area>
+  <www2:Different_Anthropogenic_Sources rdf:about="http://www.example.org/ontology/#lndustrial_sand_and_grevel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Different_Anthropogenic_Sources>
+  <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Mechanics">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_groups>
+  <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Laboratories">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_area>
+  <www2:Transport rdf:about="http://www.example.org/ontology/#Weathering_of_rocks">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Exposed_area"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Transport>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000632-99-5"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_018540-29-9"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Not_known_to_be_used"/>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Combustion_or_pyrolysis_of_any_kind_of_carbon-containing_material">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_012001-29-5"/>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Sporting_goods_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#X-radiation___gamma-radiation">
+    <www2:hasEmissionSource>
+      <www2:Natural_events rdf:about="http://www.example.org/ontology/#Rocks">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Natural_events>
+    </www2:hasEmissionSource>
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Radiation_worker">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100D</www2:IARC_monography_no>
+    <www2:hasEmissionSource>
+      <www2:Medical_application rdf:about="http://www.example.org/ontology/#Medical_use">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Medical_application>
+    </www2:hasEmissionSource>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Leukemia"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/Radiation"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Radiation"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Radioactive_material">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Nuclear_facilities">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_area>
+    </www2:hasEmissionSource>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Radiation"/>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Nuclear_weapon_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+  </www:Carcinogenes_LungCancer>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Demolition_of_asbestos_containing_buildings"/>
+  <www2:Lung_cancer rdf:about="http://www.example.org/ontology/Lung_cancer">
+    <www:ICD10 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >C34</www:ICD10>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Lung_cancer>
+  <www2:Natural_events rdf:about="http://www.example.org/ontology/#Residential_radon">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Natural_events>
+  <www2:Metal rdf:about="http://www.example.org/ontology/#Hematite_mining__underground_">
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www:hasEmissionProcess>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Exposure_to_radon_daughters"/>
+    </www:hasEmissionProcess>
+    <www2:hasExposedGroup>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Underground_haematite_miners"/>
+    </www2:hasExposedGroup>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Suppl7-86
+</www2:IARC_monography_no>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Hematite_mining__underground_"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >001317-60-8
+</www2:CAS>
+  </www2:Metal>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Aerospace_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Metalworking_machinery_manufacturing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Catalytic_hydrogenation_of_acetone">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Printing_and_support_activities">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Consumers"/>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Tanned_cotton">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/1,3-Butadiene">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Airport">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_area>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Energy_and_electrical_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Oils_and_waxes">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Manufacturing">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Cyclosporine">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Silk"/>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Ballpoint_paste">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Water-repellent_materials_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Azathioprine">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Food-irradiation__dosimeter">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_013982-63-3"/>
+  <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Urban_area">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_area>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Packaging_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Outdoor"/>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Chlordimeform_manufacture">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Cancer_sufferer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_groups>
+  <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Military_bases">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_area>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Mobilization_of_soils">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www:IARC_Group rdf:about="http://www.example.org/ontology/IARC_Group_3">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Not classifiable as to its carcinogenicity to humans</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:IARC_Group>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Formaldehyde">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Thiotepa">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Silica_dust___crystalline">
+    <www2:isIarcGroupMember>
+      <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Silica-bearing_deposit">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_area>
+    </www2:isIarcGroupMember>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasEmissionSource>
+      <www2:Natural_events rdf:about="http://www.example.org/ontology/#Diatomaceous_earth">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Natural_events>
+    </www2:hasEmissionSource>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <www2:hasExposedArea>
+      <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Agriculture_area">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_area>
+    </www2:hasExposedArea>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Soil"/>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Agriculture">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/Industrial_processes"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Mills___refractory_brick_work">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100C-14</www2:IARC_monography_no>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Soil"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Construction_industry"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Industrial_processes"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Silica_dust___crystalline"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Manufacturing"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Auto-mobile_industry"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Agriculture"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >014808-60-7
+</www2:CAS>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Fibres_and_dust"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Mining"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Foundry">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Industry"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000505-60-2"/>
+  <www2:Fibres_and_dust rdf:about="http://www.example.org/ontology/#Leather_dust">
+    <www2:hasEmissionSource>
+      <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Shoe_repair_shop">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_area>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Leather_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Leather_tanning">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100C-13</www2:IARC_monography_no>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Nasal_cavity_and_paranasal_sinus"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Textile_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Leather_tanning_and_processing_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Shoe_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasExposedArea>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Manufactures"/>
+    </www2:hasExposedArea>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Occupational_exposure"/>
+  </www2:Fibres_and_dust>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_010043-92-2"/>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Carbon_paper">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Hepatitis_C_virus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_001332-21-4"/>
+  <www:Carcinogenes_BladderCancer rdf:about="http://www.example.org/ontology/#Schistosoma_haematobium">
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Infection"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100B-14</www2:IARC_monography_no>
+    <www2:hasEmissionSource>
+      <www2:Parasit rdf:about="http://www.example.org/ontology/Parasit">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Parasit>
+    </www2:hasEmissionSource>
+    <www2:hasExposedArea>
+      <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Water_area">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_area>
+    </www2:hasExposedArea>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+  </www:Carcinogenes_BladderCancer>
+  <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Roadside">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_area>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Mastic">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_007440-38-2"/>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Ceramic_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_012172-73-5"/>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Treosulfan">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Miners">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_groups>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Fission_products,_including_Strontium-90"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Open_pit_mining"/>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Human_immunodeficiency_virus_type_1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_105"/>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Phosphorus-32">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Combustion_of_wood_or_coal">
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Firefighters">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Exhaust"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Fibres_and_dust"/>
+    <www2:hasEmissionSource>
+      <www2:Natural_events rdf:about="http://www.example.org/ontology/#Fire">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Natural_events>
+    </www2:hasEmissionSource>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Industry"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2A</www:IARC_Group_Member>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Urban_area"/>
+  </www:Carcinogenes_LungCancer>
+  <www2:Industrial_chemicals rdf:about="http://www.example.org/ontology/#Chlornaphazine">
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000494-03-1
+</www2:CAS>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_food"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_drinking"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100A-21</www2:IARC_monography_no>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Not_known_to_be_used"/>
+  </www2:Industrial_chemicals>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Benzene">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www2:Medical_application rdf:about="http://www.example.org/ontology/#Chemotherapy_regimen">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Medical_application>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Storage_of_nuclear_weapons_waste">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Transport_of_nuclear_weapons_waste">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Gasket">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Steel_product_manufacturing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Logging_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_017068-78-9"/>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Kaposi_sarcoma_herpes_virus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Isopropyl_alcohol_production">
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Production_and_use"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Catalytic_hydrogenation_of_acetone"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Isopropyl_alcohol-manufacturing_Workers">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Direct_hydration_of_propylene">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-32</www2:IARC_monography_no>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000067-63-0
+</www2:CAS>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Indirect_hydration_of_propylene">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Nasal_cavity_and_paranasal_sinus"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Industrial_chemicals"/>
+  </owl:NamedIndividual>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Scrap_recovery_and_recycling_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#MOPP__vincristine-prednisone-nitrogen_mustard-procarbazine_mixture_">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Industrial_chemicals"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Chemotherapy_regimen"/>
+    <www:hasConsumption>
+      <www2:Transport rdf:about="http://www.example.org/ontology/#Intravenously_medication">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Consumption"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Transport>
+    </www:hasConsumption>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Medical_use"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Leukemia"/>
+    <www2:hasSubstanceTransport>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/intravenously_taking"/>
+    </www2:hasSubstanceTransport>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100A-12</www2:IARC_monography_no>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Cancer_sufferer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_LungCancer>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Waste_incineration"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Iron_and_steel_founding_worker"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_012001-28-4"/>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Ionizing_radiation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Fishing">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Bis_chloromethyl_ether_chloromethyl_methyl_ether__technical_grade_">
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Water-repellent_materials_industry"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Land_pollution"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aquatic"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Polymer">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-25</www2:IARC_monography_no>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Industrial_chemicals"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Water_pollution"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Industry"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000542-88-1
+000107-30-2
+</www2:CAS>
+  </www:Carcinogenes_LungCancer>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_007440-43-9"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Air_pollution">
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Traffic_police">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >109</www2:IARC_monography_no>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Firefighters"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Roadside"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Street_vendor">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Vehicles"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Exhaust"/>
+    <www2:hasEmissionSource>
+      <www2:Vehicles rdf:about="http://www.example.org/ontology/#Ship">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Vehicles>
+    </www2:hasEmissionSource>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Mechanics"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Airport"/>
+    <www2:hasEmissionSource>
+      <www2:Vehicles rdf:about="http://www.example.org/ontology/#Airplane">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <www2:emitts rdf:resource="http://www.example.org/ontology/#Air_pollution"/>
+      </www2:Vehicles>
+    </www2:hasEmissionSource>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/Industry"/>
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Professional_drivers">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Harbour"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Urban_area"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Diesel_and_gasoline_engines"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Industry"/>
+  </owl:NamedIndividual>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Friction_material">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_109"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Iron_and_steel_founding">
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Iron_and_steel_founding"/>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Iron_and_steel_industry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-34</www2:IARC_monography_no>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/Iron_and_steel_founding_worker"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Metal"/>
+  </owl:NamedIndividual>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Dye_components_in_inking_ribbons">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Fibres_and_dust rdf:about="http://www.example.org/ontology/#Coal_gasification">
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Fibres_and_dust>
+  <www2:Natural_events rdf:about="http://www.example.org/ontology/#Volcanic_activity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Natural_events>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Indoor"/>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Biomedical_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Diesel_and_gasoline_engine_exhaust">
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Traffic_police"/>
+    <www2:hasExposedGroup>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Auto_repair">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasExposedGroup>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Vehicles"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Airplane"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >105</www2:IARC_monography_no>
+    <www2:isIarcGroupMember>
+      <www:IARC_Group rdf:about="http://www.example.org/ontology/IARC_Group_2B">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Possibly carcinogenic to humans</rdfs:comment>
+      </www:IARC_Group>
+    </www2:isIarcGroupMember>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Professional_drivers"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Ship"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Exhaust"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Roadside"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Street_vendor"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Urban_area"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Diesel_and_gasoline_engines"/>
+  </owl:NamedIndividual>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Jewellery_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Asbestos__all_forms_">
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >012001-28-4</www2:CAS>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Paper_industry"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >001332-21-4</www2:CAS>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Thermal_and_electrical_insulation">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Natural_events rdf:about="http://www.example.org/ontology/#Asbestos_minerals">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Exposed_area"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Natural_events>
+    </www2:hasEmissionSource>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Fibre_jointing">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >013768-00-8</www2:CAS>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Mastic"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >012001-29-5</www2:CAS>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Cement_pipe_and_sheets">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Consumer"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_drinking"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Plastic_industry"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Open_pit_mining"/>
+    <www2:hasEmissionSource>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Manufacturing_asbestos_products"/>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Flooring">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Textile_industry"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Millboard">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Roofing">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >012172-73-5</www2:CAS>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Coating_and_compound"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100C-11</www2:IARC_monography_no>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Fibres_and_dust"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aquatic"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >017068-78-9</www2:CAS>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >014567-73-8</www2:CAS>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Soil"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Friction_material"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Gasket"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_LungCancer>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Etylene_oxide">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Coke_production">
+    <www2:hasExposedGroup>
+      <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Coke-oven_worker">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Exposed_groups>
+    </www2:hasExposedGroup>
+    <www2:hasSubstanceTransport>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Exposure_to_coke_oven_emissions"/>
+    </www2:hasSubstanceTransport>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Fibres_and_dust"/>
+    <www:hasEmissionProcess>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Coke_oven_working">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www:hasEmissionProcess>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Coke_production"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-18</www2:IARC_monography_no>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+  </owl:NamedIndividual>
+  <www2:Personal_behaviour rdf:about="http://www.example.org/ontology/#Fumes_from_cooking_oil">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Industrial_application"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Personal_behaviour>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_77"/>
+  <www2:Natural_events rdf:about="http://www.example.org/ontology/#Sediments">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Natural_events>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Cyclophosphamide">
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Cancer_sufferer"/>
+    <www2:hasEmissionSource>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Cancer_regimens"/>
+    </www2:hasEmissionSource>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100A-9</www2:IARC_monography_no>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Leukemia"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/intravenously_taking"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >006055-19-2</www2:CAS>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000050-18-0</www2:CAS>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Intravenously_medication"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Industrial_chemicals"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Medical_use"/>
+  </owl:NamedIndividual>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Radon-222_and_its_decay_products">
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100D</www2:IARC_monography_no>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Miners"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Mining"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Rocks"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Residential_radon"/>
+    <www2:hasEmissionSource>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Underground_mining"/>
+    </www2:hasEmissionSource>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Radiation"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >010043-92-2
+</www2:CAS>
+  </www:Carcinogenes_LungCancer>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_49"/>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Etoposide_with_cisplatin_and_bleomycin">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Melphalan">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Rural_area">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_area>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Carbon_containing_material"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/transport_and_disposal_of_asbestos_waste"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_78"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_99"/>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Dyeing_of_leather">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Natural_events rdf:about="http://www.example.org/ontology/#Sedimentary_rocks">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Natural_events>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000050-18-0"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_065996-93-2"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Combustion_of_fossil_fuels"/>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Thorium-232_and_its_decay_products">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_98"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Smoking"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000067-63-0"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Fireplaces"/>
+  <www2:Natural_events rdf:about="http://www.example.org/ontology/#Deposition_of_atmospheric__fall-out">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Natural_events>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Resin">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <www2:Industrial_chemicals rdf:about="http://www.example.org/ontology/#Auramine_production">
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Auramine_production"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Dye_components_in_inking_ribbons"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_food"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Ballpoint_paste"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_drinking"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Paper_industry"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-12,99
+</www2:IARC_monography_no>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Paper_industry"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000492-80-8
+
+</www2:CAS>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Dyeing_of_leather"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Auramine_production"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Tanned_cotton"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Carbon_paper"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_chemicals>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Telecommunication_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Beryllium_alloy_and_chemical_use"/>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Architectural_structure_metal_manufacturing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Cadmium_and_cadmium_compounds">
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_drinking"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Combustion_of_fossil_fuels"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Deposition_of_atmospheric__fall-out"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Weathering_of_rocks"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100C</www2:IARC_monography_no>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Volcanic_activity"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Smoker"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Deposition_of_atmospheric__fall-out"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Metal"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >007440-43-9
+</www2:CAS>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Soil"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Waste_incineration"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Weathering_of_rocks"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_food"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/Smoking"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aquatic"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Soil"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Mining"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+  </www:Carcinogenes_LungCancer>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Nickel_compounds">
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Metal_industry"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_food"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Mining"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >49-7</www2:IARC_monography_no>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Deposition_of_atmospheric__fall-out"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_drinking"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Nasal_cavity_and_paranasal_sinus"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Weathering_of_rocks"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Soil"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Metal"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Metalworking_machinery_manufacturing"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Waste_incineration"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aquatic"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Architectural_structure_metal_manufacturing"/>
+  </www:Carcinogenes_LungCancer>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Tire_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Semustine_(methyl-CCNU)">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000092-87-5"/>
+  <www2:Bladder_cancer rdf:about="http://www.example.org/ontology/Bladder_cancer">
+    <www:ICD10 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >C67</www:ICD10>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Bladder_cancer>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000492-80-8"/>
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Cancer_incidence"/>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Defence_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <www2:Nasal_cavity_and_paranasal_sinus rdf:about="http://www.example.org/ontology/Nasal_cavity_and_paranasal_sinus">
+    <www:ICD10 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >C00-C14</www:ICD10>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Nasal_cavity_and_paranasal_sinus>
+  <www2:Exposed_area rdf:about="http://www.example.org/ontology/#Sea_spray">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_area>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Helicobacter_pylori">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Rubber_production_industry">
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-36</www2:IARC_monography_no>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Tire_industry"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Leukemia"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+  </www:Carcinogenes_LungCancer>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Coal-tar_pitch">
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aquatic"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Fibres_and_dust"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >065996-93-2
+</www2:CAS>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-17</www2:IARC_monography_no>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Painting"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Paint_worker"/>
+  </www:Carcinogenes_LungCancer>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Industrial_machinery_repair">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_100F"/>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Luminizing_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_100C"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Paint"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_83"/>
+  <www2:Vehicles rdf:about="http://www.example.org/ontology/Motorcycles">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Vehicles>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Plutonium">
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Mixed_oxide_fuels_production"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1
+</www:IARC_Group_Member>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Rocks"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Radiation"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >007440-07-5
+</www2:CAS>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Nuclear_weapon_industry"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Wounds"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+  </www:Carcinogenes_LungCancer>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Soot">
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Carbon_containing_material"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Fibres_and_dust"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Fire"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >35</www2:IARC_monography_no>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Firefighters"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/Fireplaces"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_100D"/>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Rubber_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_2-Naphthylamine">
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Tobacco_smoke____Secondhand_Tobacco_smoking"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100F-10</www2:IARC_monography_no>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000091-59-8
+</www2:CAS>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Industrial_chemicals"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Laboratories"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Microenvironmental_spaces"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Consumer"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Dyes_industry"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Fumes_from_cooking_oil"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Rubber_production_industry"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Occupational_exposure"/>
+  </owl:NamedIndividual>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Epstein-Barr_virus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_100A"/>
+  <www2:Fibres_and_dust rdf:about="http://www.example.org/ontology/#Coal__indoor_emissions_from_household_combustion_coal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Fibres_and_dust>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000091-59-8"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/Chromium(VI)_compounds">
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Dermal_contact"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100C</www2:IARC_monography_no>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Construction_industry"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Waste_incineration"/>
+    <www2:hasEmissionSource>
+      <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Aluminium_production">
+        <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_drinking"/>
+        <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+        <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >100C</www2:IARC_monography_no>
+        <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Water_pollution"/>
+        <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Auto-mobile_industry"/>
+        <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Packaging_industry"/>
+        <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Land_pollution"/>
+        <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_food"/>
+        <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+        <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1</www:IARC_Group_Member>
+        <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Metal"/>
+        <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+        <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Consumer"/>
+        <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aquatic"/>
+      </owl:NamedIndividual>
+    </www2:hasEmissionSource>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Wood_industry"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Weathering_of_rocks"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Auto_repair"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >018540-29-9
+</www2:CAS>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/Smoking"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Industrial_machinery_repair"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Soil"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Auto_repair"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Mining"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Agriculture"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/Semustine_(methyl-CCNU)"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Metalworking_machinery_manufacturing"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aquatic"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Metal_industry"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Deposition_of_atmospheric__fall-out"/>
+    <www2:hasEmissionSource>
+      <www2:Industry rdf:about="http://www.example.org/ontology/#Machinery_manufacturing">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industry>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Printing_and_support_activities"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Architectural_structure_metal_manufacturing"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Steel_product_manufacturing"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_LungCancer"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#_4-chloro-ortho-Toluidine"/>
+  </owl:NamedIndividual>
+  <www:Carcinogenes_LungCancer rdf:about="http://www.example.org/ontology/#Beryllium_and_beryllium_compounds">
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Manufacturing"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Aerospace_industry"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Auto-mobile_industry"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Deposition_of_atmospheric__fall-out"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Fire_prevention">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Scrap_recovery_and_recycling_industry"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Biomedical_industry"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Soil"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Telecommunication_industry"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Energy_and_electrical_industry"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100C</www2:IARC_monography_no>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Defence_industry"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Metal"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Industry"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Sporting_goods_industry"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Weathering_of_rocks"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Jewellery_industry"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Consumer"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >007440-41-7
+</www2:CAS>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aquatic"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_food"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Beryllium_alloy_and_chemical_use"/>
+  </www:Carcinogenes_LungCancer>
+  <www:IARC_Group rdf:about="http://www.example.org/ontology/IARC_Group_2A">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Probably carcinogenic to humans</rdfs:comment>
+  </www:IARC_Group>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_100B"/>
+  <www2:Exposed_groups rdf:about="http://www.example.org/ontology/#Radium-dial_worker">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Exposed_groups>
+  <www:Carcinogenes_Leukemia rdf:about="http://www.example.org/ontology/Human_T-cell_lymphotropic_virus_type_1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www:Carcinogenes_Leukemia>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Cosmetic_industry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/resource/Category:Carcinogens"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Magenta_production">
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Inhalation"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >000632-99-5</www2:CAS>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_drinking"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_food"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Hairdresser"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/Production_and_use"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Magenta_production"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Food-irradiation__dosimeter"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aquatic"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Industry_worker"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_BladderCancer"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >99</www2:IARC_monography_no>
+    <www2:hasEmissionSource>
+      <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Meat-marking_color">
+        <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+      </www2:Industrial_application>
+    </www2:hasEmissionSource>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Hair_dyes"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Consumer"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Dyes_industry"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Occupational_exposure"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Cosmetic_industry"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Dye_intermediate"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Paper_industry"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/Paint"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Industrial_chemicals"/>
+    <www2:hasSubstanceTransport rdf:resource="http://www.example.org/ontology/#Aerosol"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Laboratories"/>
+  </owl:NamedIndividual>
+  <www2:Industrial_application rdf:about="http://www.example.org/ontology/#Landfills">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Different_Anthropogenic_Sources"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industrial_application>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000494-03-1"/>
+  <www2:Vehicles rdf:about="http://www.example.org/ontology/#Car">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Vehicles>
+  <www2:Different_Anthropogenic_Sources rdf:about="http://www.example.org/ontology/#Involuntary_smoking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Different_Anthropogenic_Sources>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#Radium-226_and_its_decay_products">
+    <rdf:type rdf:resource="http://www.example.org/ontology/#Radiation"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_food"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_drinking"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >78</www2:IARC_monography_no>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Nasal_cavity_and_paranasal_sinus"/>
+    <www2:CAS rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >013982-63-3
+</www2:CAS>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Radium-dial_worker"/>
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Luminizing_industry"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Occupational_exposure"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_014567-73-8"/>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_000095-69-2"/>
+  <www2:Radiation rdf:about="http://www.example.org/ontology/#Radium-228_and_its_decay_products">
+    <www2:hasEmissionSource rdf:resource="http://www.example.org/ontology/#Luminizing_industry"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_food"/>
+    <www:hasEmissionProcess rdf:resource="http://www.example.org/ontology/#Occupational_exposure"/>
+    <www:hasConsumption rdf:resource="http://www.example.org/ontology/#Ingestion_of_drinking"/>
+    <rdf:type rdf:resource="http://www.example.org/ontology/Carcinogenes_Nasal_cavity_and_paranasal_sinus"/>
+    <www:IARC_Group_Member rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</www:IARC_Group_Member>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <www2:hasExposedArea rdf:resource="http://www.example.org/ontology/#Industry_area"/>
+    <www2:hasExposedGroup rdf:resource="http://www.example.org/ontology/#Radium-dial_worker"/>
+    <www2:IARC_monography_no rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >78</www2:IARC_monography_no>
+  </www2:Radiation>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_013768-00-8"/>
+  <www2:Industry rdf:about="http://www.example.org/ontology/#Glass_manufacture">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </www2:Industry>
+  <owl:NamedIndividual rdf:about="http://www.example.org/ontology/#_007440-07-5"/>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.3.1, Build 430)  http://protege.stanford.edu -->
