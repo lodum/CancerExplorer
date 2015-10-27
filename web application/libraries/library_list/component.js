@@ -99,9 +99,7 @@ document.write("		<script src=\"libraries\/Leaflet.markercluster\/Leaflet.marker
 document.write("		<link rel=\"stylesheet\" href=\"libraries\/Leaflet.markercluster\/Leaflet.markercluster\/dist\/MarkerCluster.css\"><\/link>");
 document.write("		<link rel=\"stylesheet\" href=\"libraries\/Leaflet.markercluster\/Leaflet.markercluster\/dist\/MarkerCluster.Default.css\"><\/link>");
 document.write("	");
-document.write("	<!--Dynasty table order,search>-->");
-document.write("		<script src=\"libraries\/jspkg-archive\/jquery.dynatable.js\"><\/script>");
-document.write("		<link rel=\"stylesheet\" href=\"libraries\/jspkg-archive\/jquery.dynatable.css\"><\/link>");
+
 document.write("	");
 document.write("		");
 document.write("	");
@@ -164,8 +162,10 @@ document.write("		<script src=\"libraries\/L.GeoSearch\/src\/js\/l.control.geose
 document.write("		<script src=\"libraries\/L.GeoSearch\/src\/js\/l.geosearch.provider.openstreetmap.js\"><\/script>")
 document.write("		<link rel=\"stylesheet\" href=\"libraries\/L.GeoSearch\/src\/css\/l.geosearch.css\"><\/link>");
 
-
-
+// data tables for sort and search function for tables
+document.write("<link rel=\"stylesheet\" type=\"text\/css\" href=\"https:\/\/cdn.datatables.net\/r\/dt\/dt-1.10.9\/datatables.min.css\"\/>");
+ 
+document.write("<script type=\"text\/javascript\" src=\"https:\/\/cdn.datatables.net\/r\/dt\/dt-1.10.9\/datatables.min.js\"><\/script>");
 
 
 document.write("	");

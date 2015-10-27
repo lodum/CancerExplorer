@@ -190,7 +190,7 @@ list_text2[text2number]=list_text;
 				$("#resultdiv_map2").html(htmlString);
 				}
 
-test_dyna ();
+
 
 */
 
@@ -358,7 +358,7 @@ list_text2[text2number]=list_text;
 				$("#resultdiv_map2").html(htmlString);
 				}
 
-test_dyna ();
+
 
 */
 

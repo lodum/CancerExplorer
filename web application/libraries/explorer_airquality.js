@@ -139,7 +139,11 @@ function explorer_airquality(mapname)
 					htmlString+="</table>";
 					$("#resultdiv_map2").html(htmlString);
 					
-			dyna_aqd ();
+			//Sort and search function for table
+$(document).ready(function() {
+    $("#aqd_table").DataTable();
+} );
+
 			
 				// show the SPARQL results2 in a new sidebar
 				 AQDResultsPanel.show();
@@ -196,16 +200,7 @@ function explorer_airquality(mapname)
 	}	
 	
 
-function dyna_aqd (){
-
-	$("#aqd_table").dynatable({
-	  features: {
-		paginate: false,
-		recordCount: true,
-		sorting: true
-	   }});
-
-	  }		
+	
 		
 		
 		

@@ -1,0 +1,57 @@
+Copyright (C) 2014 - 2015 Friedrich Müller
+
+
+The CancerExplorer app is licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+This project further includes:
+	
+	Bootstrap under MIT License
+	Canvas2image under MIT License
+	D3 under individual licence see source code folder
+	DataTables (Source:https://www.datatables.net) under MIT License 
+	FileSaver under individual licence see source code folder
+	Font-awesome under MIT License 
+	Graph Dracula under individual licence see source code folder
+	IntroJS under individual licence see source code folder 
+	JqPlot under MIT License
+	Jquery v.1.10.2  under MIT License
+	Jquery-ui v.1.10.3 under MIT License
+	Jquery-migrate under MIT License
+	Leaflet v.0.7 under individual licence see source code folder
+	Leaflet Draw under MIT License
+	Leaflet MiniMap under individual licence see source code folder
+	Leaflet Measure under individual licence see source code folder
+	Leaflet Sidebar under under MIT license
+	Leaflet GeometryUtil under individual licence see source code folder
+	Leaflet Markercluster under under MIT license
+	Leaflet Awesomemarker under individual licence see source code folder
+	Leaflet Loading under individual licence see source code folder
+	Leaflet Sync  none license, Source: https://github.com/turban/Leaflet.Sync by  Bjorn Sandvik aka turban 
+	Leaflet DVF under individual licence see source code folder
+	Leaflet Search under MIT License
+	Leaflet GeoSearch under individual licence see source code folder
+	Magna Charta under individual licence see source code folder
+	RequireJS under MIT License
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

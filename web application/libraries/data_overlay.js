@@ -115,7 +115,11 @@ var data_csv = "text/csv;charset=utf-8," + encodeURIComponent(obj_csv);
 
 $('<a href="data:' + data_csv + '" download="data.csv"><button type="submit" style="width:130px;" class="btn btn-primary">Download_CSV</button></a>').appendTo('#container_csv_pop');
 
-			test_dyna ();
+			//Sort and search function for table
+$(document).ready(function() {
+    $("#jsonmerge_sir_table").DataTable();
+} );
+
 							
 
 			WLBoundaries_new = WLBoundaries;

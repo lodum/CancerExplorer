@@ -93,7 +93,9 @@ function SPedit(){
 
 	
 	
-dyna_sparql ();
+$(document).ready(function() {
+    $("#sparql_table").DataTable();
+} );
 		
 		
 		
@@ -147,16 +149,7 @@ return results_edit ;
 	
 }	
 	
-function dyna_sparql (){
-
-	$("#sparql_table").dynatable({
-	  features: {
-		paginate: false,
-		recordCount: true,
-		sorting: true
-	   }});
-
-	  }		
+		
 		
 		
 		

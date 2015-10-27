@@ -489,9 +489,11 @@ $('<a href="data:' + data_csv + '" download="data.csv"><button style="width:130p
 
 	
 	
-test_dyna ();
 
-
+//Sort and search function for table
+$(document).ready(function() {
+    $("#jsonmerge_sir_table").DataTable();
+} );
 
 
 
@@ -1036,17 +1038,6 @@ if(check_choice2!="Soildata"){
 
 	
 };
-// Sort and search function for resultsets
-function test_dyna (){
-
-				$("#jsonmerge_sir_table").dynatable({
-  features: {
-    paginate: false,
-    recordCount: true,
-    sorting: true
-  }});
-
- }
  
  
  

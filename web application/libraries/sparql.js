@@ -195,19 +195,11 @@ function SPedit(){
 
 	$('<a href="data:' + data_sparql2 + '" download="data.csv"><button type="submit" style="width:130px;" class="btn btn-primary">Download_CSV</button></a>').appendTo('#container_sparql');
 	
-function dyna_sparql (){
 
-	$("#sparql_table2").dynatable({
-	  features: {
-		paginate: false,
-		recordCount: true,
-		sorting: true
-	   }});
+$(document).ready(function() {
+    $("#sparql_table2").DataTable();
+} );	
 
-	  }		
-	
-	
-dyna_sparql ();
 
 // Handling of Json results_edit set See: http://www.w3.org/TR/rdf-sparql-json-res/
 

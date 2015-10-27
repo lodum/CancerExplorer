@@ -1,5 +1,7 @@
 /*
  * Extends L.Map to synchronize the interaction on one map to one or more other maps.
+ Source Code from: https://github.com/turban/Leaflet.Sync by user Bjorn Sandvik aka turban.
+ 
  */
 
 (function () {
