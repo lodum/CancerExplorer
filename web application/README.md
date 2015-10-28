@@ -116,7 +116,7 @@ maps, users are supported in making interpretations of maps while reflecting on 
 uncertainty.
 
 
-Information about how to start and background of the app you can find in a small wiki:
+Information about how to start and background of the app you can find in a small wiki: <br />                     
 https://github.com/lodum/CancerExplorer/wiki/
 * * *
 * * *

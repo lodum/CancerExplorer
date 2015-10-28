@@ -17,30 +17,30 @@ This project further includes:
 	
 	Bootstrap under MIT License
 	Canvas2image under MIT License
-	D3 under individual licence see source code folder
+	D3 under individual license see source code folder
 	DataTables (Source:https://www.datatables.net) under MIT License 
-	FileSaver under individual licence see source code folder
+	FileSaver under individual license see source code folder
 	Font-awesome under MIT License 
-	Graph Dracula under individual licence see source code folder
-	IntroJS under individual licence see source code folder 
+	Graph Dracula under individual license see source code folder
+	IntroJS under individual license see source code folder 
 	JqPlot under MIT License
 	Jquery v.1.10.2  under MIT License
 	Jquery-ui v.1.10.3 under MIT License
 	Jquery-migrate under MIT License
-	Leaflet v.0.7 under individual licence see source code folder
+	Leaflet v.0.7 under individual license see source code folder
 	Leaflet Draw under MIT License
-	Leaflet MiniMap under individual licence see source code folder
-	Leaflet Measure under individual licence see source code folder
-	Leaflet Sidebar under under MIT license
-	Leaflet GeometryUtil under individual licence see source code folder
-	Leaflet Markercluster under under MIT license
-	Leaflet Awesomemarker under individual licence see source code folder
-	Leaflet Loading under individual licence see source code folder
+	Leaflet MiniMap under individual license see source code folder
+	Leaflet Measure under individual license see source code folder
+	Leaflet Sidebar under MIT license
+	Leaflet GeometryUtil under individual license see source code folder
+	Leaflet Markercluster under MIT license
+	Leaflet Awesomemarker under individual license see source code folder
+	Leaflet Loading under individual license see source code folder
 	Leaflet Sync  none license, Source: https://github.com/turban/Leaflet.Sync by  Bjorn Sandvik aka turban 
-	Leaflet DVF under individual licence see source code folder
+	Leaflet DVF under individual license see source code folder
 	Leaflet Search under MIT License
-	Leaflet GeoSearch under individual licence see source code folder
-	Magna Charta under individual licence see source code folder
+	Leaflet GeoSearch under individual license see source code folder
+	Magna Charta under individual license see source code folder
 	RequireJS under MIT License
 	
 	
