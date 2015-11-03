@@ -131,6 +131,12 @@ A running demo of the application you find here:
 - Website Project: http://lodum.de/about/
 - Website Author: http://friedrichmueller.github.io
 
+* * *
+* * *
+
+### License
+- The CancerExplorer app is licensed under the Apache License, Version 2.0
+
 -----
 
 [1]: https://github.com/lodum/CancerExplorer/blob/master/web%20application/libraries/Images/screenshot_overview.png 
